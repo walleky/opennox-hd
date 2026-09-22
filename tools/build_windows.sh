@@ -24,7 +24,11 @@ cp "$sdl/bin/SDL2.dll" "$out/SDL2.dll"
 cp "$al/bin/Win32/soft_oal.dll" "$out/OpenAL32.dll"
 go version -m "$out/opennox-hd-texture2x.exe" > "$out/go-build-info.txt"
 {
-  git -C "$root" rev-parse HEAD
+  if [[ -f "$root/SOURCE-MANIFEST.json" ]]; then
+    python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["commit"])' "$root/SOURCE-MANIFEST.json"
+  else
+    git -C "$root" rev-parse HEAD
+  fi
   go version
   "$CC" --version
   for file in "$out"/*.exe "$out"/*.dll; do
@@ -36,8 +40,14 @@ python3 - "$root" "$out" <<'PY'
 import hashlib, json, pathlib, subprocess, sys
 root, out = map(pathlib.Path, sys.argv[1:])
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
-names = subprocess.check_output(['git', '-C', str(root / 'engine'), 'ls-files', '-z']).decode().split('\0')
-record = {'format': 'opennox-hd-build-v1', 'commit': subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD']).decode().strip(),
+if (root / 'SOURCE-MANIFEST.json').is_file():
+    source = json.loads((root / 'SOURCE-MANIFEST.json').read_text())
+    names = [f['path'] for f in source['files']]
+    commit = source['commit']
+else:
+    names = subprocess.check_output(['git', '-C', str(root / 'engine'), 'ls-files', '-z']).decode().split('\0')
+    commit = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD']).decode().strip()
+record = {'format': 'opennox-hd-build-v1', 'commit': commit,
           'engine': {n: sha(root / 'engine' / n) for n in names if n},
           'binaries': {p.name: sha(p) for p in out.iterdir() if p.suffix in ('.exe', '.dll')}}
 (out / 'build-manifest.json').write_text(json.dumps(record, indent=2) + '\n')

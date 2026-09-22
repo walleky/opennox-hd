@@ -16,7 +16,7 @@ function FullPath([string]$Path) {
 }
 function IsWithin([string]$Child, [string]$Parent) {
     $Child.Equals($Parent, [StringComparison]::OrdinalIgnoreCase) -or
-        $Child.StartsWith($Parent + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)
+        $Child.StartsWith($Parent.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)
 }
 function Assert-NoLinks([string]$Path) {
     $current = $Path

@@ -22,8 +22,10 @@ Package using the exact command in `distribution/ci.yml`. The builder verifies
 creating an installable ZIP and matching source ZIP. Its `--module-cache` must
 contain the modules recorded by `go version -m` for that client. Dependency
 sources and available license notices are bundled, including OpenAL source.
-The source archive records all engine files; it is not a replacement for the
-complete public repository's build/installer tooling.
+The source archive contains all engine files and the Windows build script. Run
+`bash tools/build_windows.sh` from its extracted root to rebuild the client;
+the SDKs and Go modules download as needed. Use the public Git repository for
+the installer/package tooling and its automated tests.
 
 Optional `--overlay` and `--fonts` inputs produce a local full-artwork candidate.
 Keep that separate from public runtime-only artifacts until redistribution

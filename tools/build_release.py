@@ -143,12 +143,13 @@ def source_snapshot(source: Path, target: Path, modules: list[tuple[str, str, Pa
                 raise ValueError(f"Source snapshot contains linked content: {name}")
             if path.suffix.lower() in {".exe", ".dll", ".bag", ".idx", ".pem", ".key", ".pfx"}:
                 raise ValueError(f"Unexpected binary/private file in source snapshot: {name}")
-            archive.write(path, "opennox/" + name)
+            archive.write(path, "engine/" + name)
             records.append({"path": name, "sha256": sha256(path)})
         evidence = {"upstream": "https://github.com/opennox/opennox", "commit": git(source, "rev-parse", "HEAD"),
                     "working_tree_included": True, "files": records}
         archive.writestr("SOURCE-MANIFEST.json", json.dumps(evidence, indent=2) + "\n")
-        archive.write(ROOT / "docs/RELEASING.md", "RELEASING.md")
+        archive.write(ROOT / "docs/RELEASING.md", "docs/RELEASING.md")
+        archive.write(ROOT / "tools/build_windows.sh", "tools/build_windows.sh")
         for name, version, directory in modules:
             for path in sorted(directory.rglob("*")):
                 if path.is_file():
