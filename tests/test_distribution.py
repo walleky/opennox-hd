@@ -85,7 +85,7 @@ class WindowsInstallerTests(unittest.TestCase):
             (self.game / name).write_bytes(b"must not import")
         for name in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll"):
             (self.payload / name).write_bytes(b"fixture runtime - never executed")
-        for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd"):
+        for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd"):
             shutil.copyfile(ROOT / "runtime-profiles" / name, self.payload / name)
         shutil.copyfile(ROOT / "distribution/opennox.yml", self.payload / "opennox.yml")
         shutil.copyfile(ROOT / "distribution/Install-OpenNoxHD.ps1", self.package / "Install-OpenNoxHD.ps1")
@@ -97,11 +97,69 @@ class WindowsInstallerTests(unittest.TestCase):
     def write_manifest(self):
         (self.package / "package-manifest.json").write_text(json.dumps(self.manifest), encoding="utf-8")
 
-    def run_installer(self, destination=None):
+    def run_installer(self, destination=None, upgrade=False):
         return subprocess.run(["powershell.exe", "-NoLogo", "-NoProfile", "-NonInteractive",
                                "-ExecutionPolicy", "Bypass", "-File", str(self.package / "Install-OpenNoxHD.ps1"),
                                "-GamePath", str(self.game), "-Destination", str(destination or self.destination),
-                               "-NoShortcut"], capture_output=True, text=True, timeout=45)
+                               "-NoShortcut"] + (["-Upgrade"] if upgrade else []), capture_output=True, text=True, timeout=45)
+
+    def launch_settings(self, *args):
+        return subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File",
+                               str(self.destination / "OpenNox-Launcher.ps1"), "-NoLaunch", *args],
+                              capture_output=True, text=True, timeout=30)
+
+    def test_saved_launcher_choices_and_unchanged_config_do_not_create_backups(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        result = self.launch_settings("-Resolution", "1440p", "-SpriteMode", "original")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        before = list(self.destination.glob("opennox-user.yml.before-*"))
+        result = self.launch_settings()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["selection"], "1440p")
+        self.assertEqual(report["sprite_mode"], "original")
+        self.assertEqual(before, list(self.destination.glob("opennox-user.yml.before-*")))
+
+    def test_upgrade_preserves_saves_settings_custom_files_and_complete_rollback(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        (self.destination / "NoxData/Save").mkdir()
+        (self.destination / "NoxData/Save/player.plr").write_bytes(b"new campaign")
+        (self.destination / "custom.txt").write_bytes(b"personal file")
+        result = self.launch_settings("-Resolution", "1440p", "-SpriteMode", "original")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        before = {p.relative_to(self.destination): p.read_bytes() for p in self.destination.rglob("*") if p.is_file()}
+        (self.payload / "SDL2.dll").write_bytes(b"updated library")
+        for file in self.manifest["files"]:
+            file["sha256"] = release.sha256(self.payload / file["path"])
+        self.write_manifest()
+        result = self.run_installer(upgrade=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual((self.destination / "SDL2.dll").read_bytes(), b"updated library")
+        for name in ("NoxData/Save/player.plr", "custom.txt", "launcher-settings.json", "opennox-user.yml", "NoxData/nox.cfg"):
+            self.assertEqual((self.destination / name).read_bytes(), before[Path(name)], name)
+        backups = list(self.root.glob("new game.previous-*"))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(before, {p.relative_to(backups[0]): p.read_bytes() for p in backups[0].rglob("*") if p.is_file()})
+
+    def test_failed_upgrade_leaves_existing_install_unchanged(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        before = {p.relative_to(self.destination): p.read_bytes() for p in self.destination.rglob("*") if p.is_file()}
+        (self.payload / "SDL2.dll").write_bytes(b"corruption")
+        result = self.run_installer(upgrade=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(before, {p.relative_to(self.destination): p.read_bytes() for p in self.destination.rglob("*") if p.is_file()})
+        self.assertFalse(list(self.root.glob("new game.previous-*")))
+
+    def test_upgrade_rejects_unrecognized_folder(self):
+        self.destination.mkdir()
+        (self.destination / "keep.txt").write_text("keep")
+        result = self.run_installer(upgrade=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("existing OpenNox HD", result.stderr)
+        self.assertEqual((self.destination / "keep.txt").read_text(), "keep")
 
     def test_clean_install_is_portable_preserves_source_and_bootstraps_both_settings(self):
         before = {p.relative_to(self.game): release.sha256(p) for p in self.game.rglob("*") if p.is_file()}

@@ -15,7 +15,7 @@ sdl="$sdk/SDL2-2.0.20/i686-w64-mingw32"
 al="$sdk/openal-soft-1.20.1-bin"
 export GOOS=windows GOARCH=386 CGO_ENABLED=1 GOTOOLCHAIN=local
 export CC=i686-w64-mingw32-gcc CXX=i686-w64-mingw32-g++
-export CGO_CFLAGS="-I$sdl/include/SDL2 -I$al/include -Wno-error=stringop-overflow"
+export CGO_CFLAGS="-I$sdl/include -I$sdl/include/SDL2 -I$al/include -Wno-error=stringop-overflow"
 export CGO_CFLAGS_ALLOW='(-fshort-wchar)|(-fno-strict-aliasing)|(-fno-strict-overflow)'
 export CGO_LDFLAGS="-L$sdl/lib -L$al/libs/Win32 -static-libgcc"
 cd "$root/engine/src"

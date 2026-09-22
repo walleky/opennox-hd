@@ -1,9 +1,9 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('prompt', 'auto', 'last', '1080p', '1440p', '4k', 'original')]
-    [string]$Resolution = 'prompt',
-    [ValidateSet('upscaled', 'original', 'prompt')]
-    [string]$SpriteMode = 'upscaled',
+    [ValidateSet('saved', 'prompt', 'auto', 'last', '1080p', '1440p', '4k', 'original')]
+    [string]$Resolution = 'saved',
+    [ValidateSet('saved', 'upscaled', 'original', 'prompt')]
+    [string]$SpriteMode = 'saved',
     [string]$ConfigPath = '',
     [switch]$NoLaunch
 )
@@ -112,6 +112,8 @@ function Set-VideoSize {
         [Parameter(Mandatory)][int]$Width,
         [Parameter(Mandatory)][int]$Height
     )
+    $currentSize = Get-VideoSize -Path $Path
+    if ($currentSize.Width -eq $Width -and $currentSize.Height -eq $Height) { return }
     $lines = [System.IO.File]::ReadAllLines($Path)
     $inVideo = $false
     $inSize = $false
@@ -285,6 +287,22 @@ function Stage-OriginalSpriteComparisonAssets {
 if (Get-Process -Name 'opennox', 'opennox-hd', 'opennox-hd-texture2x' -ErrorAction SilentlyContinue) {
     throw 'OpenNox is already running. Close it before changing settings or starting another session.'
 }
+$preferencesPath = Join-Path $runtimeRoot 'launcher-settings.json'
+$savedResolution = 'auto'
+$savedSprites = 'upscaled'
+if (Test-Path -LiteralPath $preferencesPath -PathType Leaf) {
+    try {
+        $preferences = Get-Content -LiteralPath $preferencesPath -Raw | ConvertFrom-Json
+        if ($preferences.resolution -notin @('auto', 'last', '1080p', '1440p', '4k', 'original') -or
+            $preferences.sprites -notin @('upscaled', 'original')) { throw 'Unknown setting' }
+        $savedResolution = $preferences.resolution
+        $savedSprites = $preferences.sprites
+    } catch {
+        Write-Warning 'Saved launcher settings could not be read. Using automatic resolution and upgraded sprites.'
+    }
+}
+if ($Resolution -eq 'saved') { $Resolution = $savedResolution }
+if ($SpriteMode -eq 'saved') { $SpriteMode = $savedSprites }
 if (-not (Test-Path -LiteralPath $ConfigPath -PathType Leaf)) {
     $baseConfig = Join-Path $runtimeRoot 'opennox.yml'
     if (-not (Test-Path -LiteralPath $baseConfig -PathType Leaf)) {
@@ -380,6 +398,12 @@ if (-not (Test-Path -LiteralPath $legacyConfig -PathType Leaf)) {
 Set-LegacyVideoMode -Path $legacyConfig -Width $requested.Width -Height $requested.Height
 Set-LegacyIntegerOption -Path $legacyConfig -Name 'Stretched' -Value 1
 Set-LegacyIntegerOption -Path $legacyConfig -Name 'TexturedFloors' -Value 1
+$settingsJson = @{ resolution = $Resolution; sprites = $SpriteMode } | ConvertTo-Json
+$settingsStage = $preferencesPath + '.stage'
+[IO.File]::WriteAllText($settingsStage, $settingsJson, [Text.UTF8Encoding]::new($false))
+if (Test-Path -LiteralPath $preferencesPath) {
+    [IO.File]::Replace($settingsStage, $preferencesPath, [NullString]::Value)
+} else { [IO.File]::Move($settingsStage, $preferencesPath) }
 $targetDisplay = switch ($Resolution) {
     '1080p' { [pscustomobject]@{ Width = 1920; Height = 1080 } }
     '1440p' { [pscustomobject]@{ Width = 2560; Height = 1440 } }

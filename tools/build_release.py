@@ -181,7 +181,7 @@ def build(args) -> Path:
     validate_client(packaged_client, sha256(packaged_client))
     for name in ("SDL2.dll", "OpenAL32.dll"):
         copy(args.runtime / name, name)
-    for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd"):
+    for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd"):
         copy(ROOT / "runtime-profiles" / name, name)
     copy(ROOT / "distribution/opennox.yml", "opennox.yml")
     copy(ROOT / "LICENSE", "licenses/OpenNox-GPL-3.0.txt")
@@ -201,7 +201,7 @@ def build(args) -> Path:
             copy(args.fonts / name, "NoxData/" + name)
         copy(args.overlay, "NoxData/video.bag.zip")
         write_json(payload / "overlay-manifest.json", overlay)
-    for name in ("INSTALL.cmd", "Install-OpenNoxHD.ps1", "README.txt"):
+    for name in ("INSTALL.cmd", "UPDATE.cmd", "Install-OpenNoxHD.ps1", "README.txt"):
         shutil.copyfile(ROOT / "distribution" / name, package / name)
     files = [{"path": p.relative_to(payload).as_posix(), "bytes": p.stat().st_size, "sha256": sha256(p)}
              for p in sorted(payload.rglob("*")) if p.is_file()]

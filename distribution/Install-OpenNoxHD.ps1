@@ -3,13 +3,16 @@
 param(
     [string]$GamePath = '',
     [string]$Destination = '',
-    [switch]$NoShortcut
+    [switch]$NoShortcut,
+    [switch]$Upgrade
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 function FullPath([string]$Path) {
-    [IO.Path]::GetFullPath($Path).TrimEnd([IO.Path]::DirectorySeparatorChar)
+    $full = [IO.Path]::GetFullPath($Path)
+    if ($full -eq [IO.Path]::GetPathRoot($full)) { return $full }
+    $full.TrimEnd([IO.Path]::DirectorySeparatorChar)
 }
 function IsWithin([string]$Child, [string]$Parent) {
     $Child.Equals($Parent, [StringComparison]::OrdinalIgnoreCase) -or
@@ -51,6 +54,33 @@ function Copy-Verified([string]$Source, [string]$Target, [string]$Sha256) {
         throw "Copy verification failed: $Target"
     }
 }
+function Select-Folder([string]$Description, [string]$Initial = '') {
+    Add-Type -AssemblyName System.Windows.Forms
+    $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
+    $dialog.Description = $Description
+    $dialog.SelectedPath = $Initial
+    try {
+        if ($dialog.ShowDialog() -ne [Windows.Forms.DialogResult]::OK) { throw 'Installation cancelled.' }
+        $dialog.SelectedPath
+    } finally { $dialog.Dispose() }
+}
+function Find-NoxInstall {
+    $candidates = [Collections.Generic.List[string]]::new()
+    foreach ($base in @($env:ProgramFiles, ${env:ProgramFiles(x86)}, 'C:\GOG Games', 'C:\Games')) {
+        if ($base) { $candidates.Add((Join-Path $base 'Nox')); $candidates.Add((Join-Path $base 'GOG Galaxy\Games\Nox')) }
+    }
+    foreach ($registry in @('HKLM:\SOFTWARE\GOG.com\Games', 'HKLM:\SOFTWARE\WOW6432Node\GOG.com\Games', 'HKCU:\SOFTWARE\GOG.com\Games')) {
+        foreach ($key in @(Get-ChildItem -LiteralPath $registry -ErrorAction SilentlyContinue)) {
+            $values = Get-ItemProperty -LiteralPath $key.PSPath
+            if ($values.PSObject.Properties['path'] -and $values.path) { $candidates.Add([string]$values.path) }
+        }
+    }
+    foreach ($path in $candidates) {
+        if ((Test-Path -LiteralPath (Join-Path $path 'video.bag')) -or
+            (Test-Path -LiteralPath (Join-Path $path 'NoxData\video.bag'))) { return $path }
+    }
+    return ''
+}
 
 $packageRoot = FullPath $PSScriptRoot
 $payload = Join-Path $packageRoot 'payload'
@@ -75,15 +105,30 @@ foreach ($required in @('opennox-hd-texture2x.exe', 'SDL2.dll', 'OpenAL32.dll', 
     if (-not $seen.ContainsKey((Safe-PayloadPath $payload $required))) { throw "Package is incomplete: $required" }
 }
 
+if ($Upgrade) {
+    if (Get-Process -Name 'opennox', 'opennox-hd', 'opennox-hd-texture2x' -ErrorAction SilentlyContinue) {
+        throw 'Close OpenNox before updating so saves and settings can be preserved.'
+    }
+    if ([string]::IsNullOrWhiteSpace($Destination)) {
+        $Destination = Select-Folder 'Select the OpenNox HD folder to update' (Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'OpenNox-HD')
+    }
+    $Destination = FullPath $Destination
+    Assert-NoLinks $Destination
+    $installedMarker = Join-Path $Destination 'package-manifest.json'
+    if (-not (Test-Path -LiteralPath $installedMarker -PathType Leaf)) { throw 'Update requires an existing OpenNox HD installation with package-manifest.json.' }
+    $installed = Get-Content -LiteralPath $installedMarker -Raw | ConvertFrom-Json
+    if ($installed.format -ne 'opennox-hd-package-v1' -or $installed.scale -ne 2) { throw 'Unrecognized installation; choose an OpenNox HD 2x folder.' }
+    $comparisonStage = Join-Path $Destination 'CodexBackups\original-sprite-comparison\staged'
+    if ((Test-Path -LiteralPath $comparisonStage) -and @(Get-ChildItem -LiteralPath $comparisonStage -Recurse -File).Count) {
+        throw 'An interrupted sprite comparison needs recovery. Start and close the installed game before updating.'
+    }
+    $GamePath = Join-Path $Destination 'NoxData'
+}
 if ([string]::IsNullOrWhiteSpace($GamePath)) {
     Write-Host 'Select your installed copy of Nox (the folder containing video.bag).'
-    Add-Type -AssemblyName System.Windows.Forms
-    $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
-    $dialog.Description = 'Select your Nox installation or its NoxData folder'
-    try {
-        if ($dialog.ShowDialog() -ne [Windows.Forms.DialogResult]::OK) { throw 'Installation cancelled.' }
-        $GamePath = $dialog.SelectedPath
-    } finally { $dialog.Dispose() }
+    $detected = Find-NoxInstall
+    if ($detected) { Write-Host "Found Nox: $detected" }
+    $GamePath = Select-Folder 'Select your Nox installation or its NoxData folder' $detected
 }
 $GamePath = FullPath $GamePath
 if (-not (Test-Path -LiteralPath (Join-Path $GamePath 'video.bag') -PathType Leaf) -and
@@ -112,16 +157,25 @@ if ([string]::IsNullOrWhiteSpace($Destination)) {
 $Destination = FullPath $Destination
 Assert-NoLinks $Destination
 foreach ($protected in @($GamePath, $packageRoot)) {
+    if ($Upgrade -and $protected -eq $GamePath) { continue }
     if ((IsWithin $Destination $protected) -or (IsWithin $protected $Destination)) {
         throw 'Choose a separate install folder outside both the original game and the extracted download.'
     }
 }
-if (Test-Path -LiteralPath $Destination) {
+if (-not $Upgrade -and (Test-Path -LiteralPath $Destination)) {
     throw "Install folder already exists: $Destination. Choose a new folder; existing games and saves are never overwritten."
 }
 
 # Import only game content; exclude saves, configs, keys, logs, launchers and DLLs.
 $imports = [Collections.Generic.List[object]]::new()
+if ($Upgrade) {
+    # Clone the complete existing installation, including saves and custom files.
+    # Keep the old directory intact until the replacement is fully verified.
+    foreach ($item in @(Get-ChildItem -LiteralPath $Destination -Recurse -Force)) {
+        if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw "Linked installation content is not supported: $($item.FullName)" }
+        if (-not $item.PSIsContainer) { $imports.Add($item) }
+    }
+} else {
 Get-ChildItem -LiteralPath $GamePath -File | Where-Object {
     $_.Extension.ToLowerInvariant() -in @('.bag', '.idx', '.bin', '.csf', '.fnt', '.pal', '.rul') -and
     $_.Name -notlike '*.hd2.fnt'
@@ -139,33 +193,54 @@ foreach ($folder in @('maps', 'Dialog', 'MOVIES', 'MUSIC', 'window', 'data', 'im
         }
     }
 }
+}
 foreach ($item in $imports) { Assert-NoLinks $item.FullName }
 $bytes = ($imports | Measure-Object -Property Length -Sum).Sum + ($manifest.files | Measure-Object -Property bytes -Sum).Sum
 $drive = New-Object IO.DriveInfo ([IO.Path]::GetPathRoot($Destination))
 if ($drive.AvailableFreeSpace -lt ($bytes + 256MB)) { throw 'Not enough free space on the installation drive.' }
 
 $stage = $Destination + '.install-' + [Guid]::NewGuid().ToString('N')
+$backup = $Destination + '.previous-' + (Get-Date).ToString('yyyyMMdd-HHmmss') + '-' + [Guid]::NewGuid().ToString('N').Substring(0, 8)
+$oldMoved = $false
 try {
     [void][IO.Directory]::CreateDirectory($stage)
     Write-Host 'Copying and verifying Nox data. This can take several minutes...'
+    $completed = 0
+    $total = $imports.Count + @($manifest.files).Count
     foreach ($item in $imports) {
-        $relative = $item.FullName.Substring($GamePath.Length).TrimStart('\', '/')
-        $target = Safe-PayloadPath (Join-Path $stage 'NoxData') $relative
+        $importRoot = if ($Upgrade) { $Destination } else { $GamePath }
+        $targetRoot = if ($Upgrade) { $stage } else { Join-Path $stage 'NoxData' }
+        $relative = $item.FullName.Substring($importRoot.Length).TrimStart('\', '/')
+        $target = Safe-PayloadPath $targetRoot $relative
         Copy-Verified $item.FullName $target (File-Sha256 $item.FullName)
+        $completed++
+        Write-Progress -Activity 'Installing OpenNox HD' -Status "$completed of $total files: $relative" -PercentComplete (100 * $completed / $total)
     }
     Write-Host 'Installing OpenNox HD...'
     foreach ($file in $manifest.files) {
         Copy-Verified (Safe-PayloadPath $payload $file.path) (Safe-PayloadPath $stage $file.path) $file.sha256
+        $completed++
+        Write-Progress -Activity 'Installing OpenNox HD' -Status "$completed of $total files: $($file.path)" -PercentComplete (100 * $completed / $total)
     }
     Copy-Item -LiteralPath (Join-Path $packageRoot 'package-manifest.json') -Destination (Join-Path $stage 'package-manifest.json')
     # Validate real first-run settings before making the install visible.
-    & (Join-Path $stage 'OpenNox-Launcher.ps1') -Resolution auto -SpriteMode upscaled -NoLaunch | Out-Null
+    & (Join-Path $stage 'OpenNox-Launcher.ps1') -NoLaunch | Out-Null
+    if ($Upgrade) {
+        if (Get-Process -Name 'opennox', 'opennox-hd', 'opennox-hd-texture2x' -ErrorAction SilentlyContinue) { throw 'OpenNox was started during the update. Close it and retry.' }
+        # Both rename targets are validated siblings of the selected install.
+        if ((Split-Path -Parent $backup) -ne (Split-Path -Parent $Destination) -or (Test-Path -LiteralPath $backup)) { throw 'Invalid rollback location.' }
+        [IO.Directory]::Move($Destination, $backup)
+        $oldMoved = $true
+    }
     [IO.Directory]::Move($stage, $Destination)
 } catch {
+    if ($oldMoved -and -not (Test-Path -LiteralPath $Destination)) { [IO.Directory]::Move($backup, $Destination) }
     # Preserve a failed stage for diagnosis; never recursively delete a computed path.
     throw "Installation failed: $($_.Exception.Message) No existing installation was changed. Incomplete staging folder: $stage"
 }
-if (-not $NoShortcut) {
+Write-Progress -Activity 'Installing OpenNox HD' -Completed
+if ($Upgrade) { Write-Host "Update complete. Saves and settings preserved. Rollback copy: $backup" }
+if (-not $NoShortcut -and -not $Upgrade) {
     try {
         $desktop = [Environment]::GetFolderPath('DesktopDirectory')
         $shortcutPath = Join-Path $desktop 'OpenNox HD.lnk'
@@ -180,4 +255,5 @@ if (-not $NoShortcut) {
 }
 Write-Host "Installed successfully: $Destination"
 Write-Host 'Start with START-OPENNOX.cmd or the desktop shortcut.'
+Write-Host 'Change resolution and sprite choices with SETTINGS.cmd.'
 Write-Host 'To uninstall, close the game and delete this separate folder and its shortcut. Back up NoxData\Save first.'
