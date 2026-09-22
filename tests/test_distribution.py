@@ -8,6 +8,7 @@ import struct
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("build_release", ROOT / "tools/build_release.py")
@@ -16,6 +17,26 @@ SPEC.loader.exec_module(release)
 
 
 class ReleaseValidationTests(unittest.TestCase):
+    def test_source_provenance_rejects_changed_source_and_binaries(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "main.go").write_text("package main")
+            for name in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll"):
+                (root / name).write_bytes(b"build artifact")
+            record = {"format": "opennox-hd-build-v1", "commit": "test", "engine": {"main.go": release.sha256(root / "main.go")},
+                      "binaries": {n: release.sha256(root / n) for n in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll")}}
+            manifest = root / "build-manifest.json"
+            manifest.write_text(json.dumps(record))
+            with patch.object(release, "git", return_value="main.go"):
+                release.verify_build_manifest(manifest, root, root / "opennox-hd-texture2x.exe", root)
+                (root / "main.go").write_text("changed source")
+                with self.assertRaisesRegex(ValueError, "Source files"):
+                    release.verify_build_manifest(manifest, root, root / "opennox-hd-texture2x.exe", root)
+                (root / "main.go").write_text("package main")
+                (root / "SDL2.dll").write_bytes(b"different library")
+                with self.assertRaisesRegex(ValueError, "binary mismatch"):
+                    release.verify_build_manifest(manifest, root, root / "opennox-hd-texture2x.exe", root)
+
     def test_laa_fix_changes_only_flag_and_rejects_signed_client(self):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "client.exe"
@@ -85,7 +106,7 @@ class WindowsInstallerTests(unittest.TestCase):
             (self.game / name).write_bytes(b"must not import")
         for name in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll"):
             (self.payload / name).write_bytes(b"fixture runtime - never executed")
-        for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd"):
+        for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd", "DIAGNOSTICS.cmd", "Collect-Diagnostics.ps1"):
             shutil.copyfile(ROOT / "runtime-profiles" / name, self.payload / name)
         shutil.copyfile(ROOT / "distribution/opennox.yml", self.payload / "opennox.yml")
         shutil.copyfile(ROOT / "distribution/Install-OpenNoxHD.ps1", self.package / "Install-OpenNoxHD.ps1")
@@ -160,6 +181,33 @@ class WindowsInstallerTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("existing OpenNox HD", result.stderr)
         self.assertEqual((self.destination / "keep.txt").read_text(), "keep")
+
+    def test_failed_staging_leaves_old_install_available(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        before = {p.relative_to(self.destination): p.read_bytes() for p in self.destination.rglob("*") if p.is_file()}
+        (self.payload / "OpenNox-Launcher.ps1").write_text("throw 'staging validation failed'")
+        for file in self.manifest["files"]:
+            file["sha256"] = release.sha256(self.payload / file["path"])
+        self.write_manifest()
+        result = self.run_installer(upgrade=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("staging validation failed", result.stderr)
+        self.assertEqual(before, {p.relative_to(self.destination): p.read_bytes() for p in self.destination.rglob("*") if p.is_file()})
+        self.assertFalse(list(self.root.glob("new game.previous-*")))
+
+    def test_diagnostics_omit_raw_logs_and_private_data(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        (self.destination / "logs").mkdir()
+        (self.destination / "logs/opennox.log").write_text("player private-name from private-address\n[bandwidth] [hdperf] frames=10 p95=5ms\n")
+        result = subprocess.run(["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                                 str(self.destination / "Collect-Diagnostics.ps1")], capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        report = next(self.destination.glob("diagnostics-*.json")).read_text()
+        self.assertNotIn("private-", report)
+        self.assertNotIn(str(self.destination), report)
+        self.assertEqual(json.loads(report)["performance"], ["[hdperf] frames=10 p95=5ms"])
 
     def test_clean_install_is_portable_preserves_source_and_bootstraps_both_settings(self):
         before = {p.relative_to(self.game): release.sha256(p) for p in self.game.rglob("*") if p.is_file()}

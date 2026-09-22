@@ -1,54 +1,55 @@
 # OpenNox HD
 
-A Windows launcher and installer for the experimental Hybrid 2x OpenNox client.
-Requires your own installed copy of Nox. This is an unofficial community project.
+An experimental Windows client and installer for Nox, with a Hybrid 2x renderer.
+Requires your own complete installed copy of Nox. Unofficial community project.
 
-**Status: preview in preparation. There is no public player download yet.**
-The installer passes automated Windows tests and a real-data installation check.
-The client still needs a verified source rebuild, interactive acceptance and signing.
+## Download and install
 
-## Install a player release
-
-When a preview is published, download the **windows-x86.zip** asset from
+Download the **windows-x86.zip** asset from
 [Releases](https://github.com/walleky/opennox-hd/releases), extract it completely,
-and double-click `INSTALL.cmd`. Select your Nox installation and a new destination.
-Start the game from the desktop shortcut; Enter selects the recommended options.
-The install needs no Python, Go, administrator account, or development tools.
+and double-click `INSTALL.cmd`. Confirm your Nox folder and choose a separate
+installation folder. Start from the desktop shortcut or `START-OPENNOX.cmd`.
+No Python, Go, administrator account or development tools are needed.
 
-GitHub's **Code > Download ZIP** is source code, not an installable game package.
+Use `SETTINGS.cmd` to change resolution and sprite mode. Choices are remembered.
+The public runtime imports your original game artwork; the optional Hybrid 2x
+artwork archive is not included pending clarification of redistribution terms.
 
-The installer copies required game data into a separate folder and checks each
-copy. It does not overwrite the original installation or import personal saves,
-server keys, old settings, game EXEs, or installers. To upgrade, install beside
-the previous version and copy `NoxData/Save` with the game closed. To uninstall,
-back up that save folder, then delete the installed folder and its shortcut.
+**Unsigned preview:** Windows may show a SmartScreen warning. If you trust the
+release, **More info > Run anyway** may be available. Smart App Control and
+managed-device policies can block unsigned applications. Signing is optional;
+this preview cannot promise compatibility with those policies. See
+[Microsoft's guidance](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/smartscreen-reputation).
 
-## What is included
+GitHub's **Code > Download ZIP** contains source, not the player installer.
 
-- Fresh-install settings, automatic resolution, and original/upgraded comparison.
-- Payload checksums, safe destination checks, and an isolated install directory.
-- A package builder, source snapshot generation, and Windows integration tests.
-- The modified OpenNox renderer source in `engine/`, with its upstream license.
-- The full local preview uses 124,244 Hybrid 2x sprites and HD font sprites.
+## Updates and troubleshooting
 
-The current 32-bit client lacked Large Address Awareness. The package builder
-sets that flag only in the staged unsigned copy and records both binary hashes.
-Windows Application Control blocked that preview on the development PC; use a
-trusted signed build if Windows blocks it. Do not disable Windows security.
+Close OpenNox, extract the next release and run `UPDATE.cmd`. Select the existing
+OpenNox HD folder. The updater verifies a complete replacement before switching,
+preserves saves/settings/custom files, and keeps the previous folder for rollback.
+To roll back, close the game, rename the new folder, then rename the
+`.previous-...` folder to the original name. Preserve any newer saves separately.
 
-## Development
+Fresh installation leaves the original game untouched and does not import its
+personal saves, keys or old configuration. New saves live in `NoxData/Save`.
+Back them up before uninstalling by deleting the install folder and shortcut.
+Failed installation leaves a `.install-...` staging folder for diagnosis.
 
-Python 3.10+ is sufficient for the packaging tools. On Windows:
+Run `DIAGNOSTICS.cmd` for a local report; review it before attaching to an
+[issue](https://github.com/walleky/opennox-hd/issues/new). No automatic uploads.
+See [playtesting](docs/PLAYTEST.md) for the remaining visual and gameplay checks.
 
-```powershell
-python -m unittest discover -s tests -v
-```
+## Build and verification
 
-See [release preparation](docs/RELEASING.md) for explicit package inputs and
-remaining native-build/playtest work. Source snapshots include working renderer
-changes; they do not establish correspondence to a previously compiled binary.
+GitHub Actions builds the Windows x86 client from `engine/` using Go 1.25.0 and
+checksum-pinned SDL/OpenAL SDKs, packages it with matching source, tests the
+installer and renderer, and smoke-loads the client on Windows. Build manifests
+record source and binary hashes. Artifacts are unsigned previews.
 
-Code is GPL v3; see [LICENSE](LICENSE). Component notices are in
-[THIRD-PARTY-NOTICES](distribution/THIRD-PARTY-NOTICES.md). Original Nox installation
-data is not included. The optional overlay is derived from Nox artwork and is
-not covered by the code's GPL license; its distribution terms still need review.
+Run `python -m unittest discover -s tests -v` for packaging and Windows installer
+tests. See [release preparation](docs/RELEASING.md) for the build recipe.
+
+Code is GPL v3; see [LICENSE](LICENSE) and
+[component notices](distribution/THIRD-PARTY-NOTICES.md). Original Nox data is
+not included. The optional game-derived artwork is separate from the code license.

@@ -115,6 +115,21 @@ def module_directory(cache: Path, name: str, version: str) -> Path:
     return path
 
 
+def verify_build_manifest(path: Path, source: Path, client: Path, runtime: Path) -> dict:
+    record = json.loads(path.read_text(encoding="utf-8"))
+    if record.get("format") != "opennox-hd-build-v1" or not record.get("engine"):
+        raise ValueError("Invalid source build manifest")
+    names = git(source, "ls-files", "-z", "--cached", "--others", "--exclude-standard").split("\0")
+    actual = {n: sha256(source / n) for n in names if n and (source / n).is_file()}
+    if actual != record["engine"]:
+        raise ValueError("Source files do not match the source used for the Windows build")
+    for name in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll"):
+        binary = client if name.endswith(".exe") else runtime / name
+        if sha256(binary) != record["binaries"].get(name):
+            raise ValueError(f"Build manifest binary mismatch: {name}")
+    return {"commit": record["commit"], "manifest_sha256": sha256(path), "source_files_verified": len(actual)}
+
+
 def source_snapshot(source: Path, target: Path, modules: list[tuple[str, str, Path]]) -> dict:
     names = git(source, "ls-files", "-z", "--cached", "--others", "--exclude-standard").split("\0")
     records = []
@@ -162,6 +177,7 @@ def build(args) -> Path:
     if output.exists():
         raise ValueError("Output already exists; choose a new directory to preserve prior artifacts")
     validate_client(args.client, args.client_sha256, require_laa=False)
+    provenance = verify_build_manifest(args.build_manifest, args.source, args.client, args.runtime) if args.build_manifest else None
     overlay = validate_overlay(args.overlay) if args.overlay else None
     modules = [(name, version, module_directory(args.module_cache, name, version))
                for name, version in binary_modules(args.go, args.client)]
@@ -181,7 +197,7 @@ def build(args) -> Path:
     validate_client(packaged_client, sha256(packaged_client))
     for name in ("SDL2.dll", "OpenAL32.dll"):
         copy(args.runtime / name, name)
-    for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd"):
+    for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd", "Collect-Diagnostics.ps1", "DIAGNOSTICS.cmd"):
         copy(ROOT / "runtime-profiles" / name, name)
     copy(ROOT / "distribution/opennox.yml", "opennox.yml")
     copy(ROOT / "LICENSE", "licenses/OpenNox-GPL-3.0.txt")
@@ -196,6 +212,8 @@ def build(args) -> Path:
         for path in notices:
             copy(path, f"licenses/go-modules/{name}@{version}/" + path.relative_to(directory).as_posix())
     copy(ROOT / "distribution/THIRD-PARTY-NOTICES.md", "THIRD-PARTY-NOTICES.md")
+    if args.build_manifest:
+        copy(args.build_manifest, "build-manifest.json")
     if overlay:
         for name in ("default.hd2.fnt", "large.hd2.fnt", "small.hd2.fnt", "number.hd2.fnt"):
             copy(args.fonts / name, "NoxData/" + name)
@@ -219,10 +237,11 @@ def build(args) -> Path:
                "source": source, "overlay": overlay, "zip_crc_verified": True,
                "dependency_sources_included": len(modules), "openal_source_included": True,
                "dependencies_without_license_notice": missing_notices,
-               "public_release_ready": False,
-               "remaining": ["Verify renderer tests and interactive acceptance on a compatible host",
-                             "Rebuild/sign the client from the included source for public distribution",
-                             "Confirm distribution terms for the game-derived artwork before uploading it"]})
+               "source_build": provenance, "signing": "unsigned preview; signing is optional",
+               "interactive_acceptance": "pending on a separate Windows PC",
+               "remaining": ["Complete gameplay, audio, save/load and extended-session playtests"] +
+                   (["Verify source-to-binary correspondence"] if not provenance else []) +
+                   (["Confirm distribution terms for the optional game-derived artwork"] if overlay else [])})
     artifacts = [binary_zip, source_zip, output / "build-evidence.json", output / "RELEASE-NOTES.md"]
     (output / "SHA256SUMS.txt").write_text("".join(f"{sha256(p)}  {p.name}\n" for p in artifacts), encoding="utf-8")
     return binary_zip
@@ -236,6 +255,7 @@ def main() -> None:
     parser.add_argument("--client-sha256", default=CLIENT_SHA256)
     parser.add_argument("--runtime", type=Path, required=True, help="Folder with matching SDL2.dll and OpenAL32.dll")
     parser.add_argument("--source", type=Path, required=True, help="OpenNox Git checkout including working changes")
+    parser.add_argument("--build-manifest", type=Path, help="CI source and binary hashes; verifies correspondence before packaging")
     parser.add_argument("--go", default="go", help="Go tool for reading the compiled client's dependency list")
     parser.add_argument("--module-cache", type=Path, required=True, help="Go module cache containing the client's pinned dependency sources")
     parser.add_argument("--overlay", type=Path, help="Optional verified 2x archive (local preview until artwork rights reviewed)")

@@ -18,11 +18,47 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y gcc-mingw-w64-i686 g++-mingw-w64-i686 unzip
       - name: Build published source with pinned SDKs
         run: bash tools/build_windows.sh
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Package unsigned preview and matching source
+        shell: bash
+        run: >-
+          python tools/build_release.py --version 0.1.0-preview.2 --output artifacts/release
+          --client artifacts/windows/opennox-hd-texture2x.exe
+          --client-sha256 "$(sha256sum artifacts/windows/opennox-hd-texture2x.exe | cut -d' ' -f1)"
+          --runtime artifacts/windows --source engine --module-cache "$(go env GOMODCACHE)"
+          --build-manifest artifacts/windows/build-manifest.json
       - uses: actions/upload-artifact@v4
         with:
           name: windows-client
           path: artifacts/windows/
           if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unsigned-preview
+          path: |
+            artifacts/release/*.zip
+            artifacts/release/*.json
+            artifacts/release/*.txt
+            artifacts/release/*.md
+          if-no-files-found: error
+  windows-smoke:
+    needs: windows-build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-client
+          path: client
+      - name: Load the actual Windows client and bundled DLLs
+        shell: pwsh
+        run: |
+          $client = Join-Path $PWD 'client/opennox-hd-texture2x.exe'
+          $process = Start-Process -FilePath $client -ArgumentList '-help' -WindowStyle Hidden -PassThru -RedirectStandardError help.txt
+          if (-not $process.WaitForExit(30000)) { $process.Kill(); throw 'Client help timed out' }
+          if ($process.ExitCode -ne 0) { throw "Client load failed: $($process.ExitCode)" }
+          if ((Get-Content help.txt -Raw) -notmatch 'use specified config file') { throw 'Client help output missing' }
   installer:
     runs-on: windows-latest
     steps:
