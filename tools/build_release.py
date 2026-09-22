@@ -93,7 +93,29 @@ def git(source: Path, *args: str) -> str:
     return subprocess.check_output(["git", "-C", str(source), *args], text=True, encoding="utf-8").strip()
 
 
-def source_snapshot(source: Path, target: Path) -> dict:
+def binary_modules(go: str, client: Path) -> list[tuple[str, str]]:
+    output = subprocess.check_output([go, "version", "-m", str(client)], text=True, encoding="utf-8")
+    modules = []
+    for line in output.splitlines():
+        fields = line.strip().split()
+        if fields and fields[0] == "dep":
+            modules.append((fields[1], fields[2]))
+        elif fields and fields[0] == "=>":
+            modules[-1] = (fields[1], fields[2])
+    if not modules:
+        raise ValueError("Client has no Go dependency build information")
+    return sorted(set(modules))
+
+
+def module_directory(cache: Path, name: str, version: str) -> Path:
+    escaped = "".join("!" + char.lower() if char.isupper() else char for char in name)
+    path = cache / (escaped + "@" + version)
+    if not path.is_dir():
+        raise ValueError(f"Dependency source is missing from the Go module cache: {name}@{version}")
+    return path
+
+
+def source_snapshot(source: Path, target: Path, modules: list[tuple[str, str, Path]]) -> dict:
     names = git(source, "ls-files", "-z", "--cached", "--others", "--exclude-standard").split("\0")
     records = []
     # Snapshot the working tree, including the uncommitted renderer fixes.
@@ -112,6 +134,13 @@ def source_snapshot(source: Path, target: Path) -> dict:
                     "working_tree_included": True, "files": records}
         archive.writestr("SOURCE-MANIFEST.json", json.dumps(evidence, indent=2) + "\n")
         archive.write(ROOT / "docs/RELEASING.md", "RELEASING.md")
+        for name, version, directory in modules:
+            for path in sorted(directory.rglob("*")):
+                if path.is_file():
+                    if path.is_symlink():
+                        raise ValueError(f"Linked dependency source: {path}")
+                    archive.write(path, f"dependencies/{name}@{version}/" + path.relative_to(directory).as_posix())
+        archive.write(ROOT / "distribution/upstream/openal-soft-1.20.1.tar.gz", "dependencies/openal-soft-1.20.1.tar.gz")
     return {"commit": evidence["commit"], "working_tree_included": True, "file_count": len(records), "sha256": sha256(target)}
 
 
@@ -134,6 +163,8 @@ def build(args) -> Path:
         raise ValueError("Output already exists; choose a new directory to preserve prior artifacts")
     validate_client(args.client, args.client_sha256, require_laa=False)
     overlay = validate_overlay(args.overlay) if args.overlay else None
+    modules = [(name, version, module_directory(args.module_cache, name, version))
+               for name, version in binary_modules(args.go, args.client)]
     output.mkdir(parents=True)
     package = output / "package"
     payload = package / "payload"
@@ -154,8 +185,16 @@ def build(args) -> Path:
         copy(ROOT / "runtime-profiles" / name, name)
     copy(ROOT / "distribution/opennox.yml", "opennox.yml")
     copy(ROOT / "LICENSE", "licenses/OpenNox-GPL-3.0.txt")
-    for name in ("SDL2-LICENSE.txt", "OpenAL-Soft-COPYING.txt", "AlegreyaSans-OFL.txt"):
+    for name in ("SDL2-LICENSE.txt", "OpenAL-Soft-COPYING.txt", "AlegreyaSans-OFL.txt", "Go-LICENSE.txt"):
         copy(ROOT / "distribution/licenses" / name, "licenses/" + name)
+    missing_notices = []
+    for name, version, directory in modules:
+        notices = [p for p in directory.rglob("*") if p.is_file()
+                   and p.name.upper().startswith(("LICENSE", "LICENCE", "COPYING", "NOTICE", "AUTHORS", "COPYRIGHT"))]
+        if not notices:
+            missing_notices.append(f"{name}@{version}")
+        for path in notices:
+            copy(path, f"licenses/go-modules/{name}@{version}/" + path.relative_to(directory).as_posix())
     copy(ROOT / "distribution/THIRD-PARTY-NOTICES.md", "THIRD-PARTY-NOTICES.md")
     if overlay:
         for name in ("default.hd2.fnt", "large.hd2.fnt", "small.hd2.fnt", "number.hd2.fnt"):
@@ -169,7 +208,7 @@ def build(args) -> Path:
     write_json(package / "package-manifest.json", {"format": "opennox-hd-package-v1", "version": args.version,
                "scale": 2, "channel": "preview", "includes_overlay": bool(overlay), "files": files})
     source_zip = output / f"opennox-hd-{args.version}-source.zip"
-    source = source_snapshot(args.source, source_zip)
+    source = source_snapshot(args.source, source_zip, modules)
     binary_zip = output / f"opennox-hd-{args.version}-windows-x86.zip"
     zip_tree(package, binary_zip)
     if binary_zip.stat().st_size >= 2 * 1024**3:
@@ -178,6 +217,8 @@ def build(args) -> Path:
     write_json(output / "build-evidence.json", {"version": args.version, "input_client_sha256": sha256(args.client),
                "client_sha256": sha256(packaged_client), "large_address_aware_enabled": laa_changed,
                "source": source, "overlay": overlay, "zip_crc_verified": True,
+               "dependency_sources_included": len(modules), "openal_source_included": True,
+               "dependencies_without_license_notice": missing_notices,
                "public_release_ready": False,
                "remaining": ["Verify renderer tests and interactive acceptance on a compatible host",
                              "Rebuild/sign the client from the included source for public distribution",
@@ -195,6 +236,8 @@ def main() -> None:
     parser.add_argument("--client-sha256", default=CLIENT_SHA256)
     parser.add_argument("--runtime", type=Path, required=True, help="Folder with matching SDL2.dll and OpenAL32.dll")
     parser.add_argument("--source", type=Path, required=True, help="OpenNox Git checkout including working changes")
+    parser.add_argument("--go", default="go", help="Go tool for reading the compiled client's dependency list")
+    parser.add_argument("--module-cache", type=Path, required=True, help="Go module cache containing the client's pinned dependency sources")
     parser.add_argument("--overlay", type=Path, help="Optional verified 2x archive (local preview until artwork rights reviewed)")
     parser.add_argument("--fonts", type=Path)
     args = parser.parse_args()

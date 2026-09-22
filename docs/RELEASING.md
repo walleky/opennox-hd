@@ -6,10 +6,14 @@ directory should ever be uploaded wholesale.
 
 ## Build a local preview
 
-Run Python 3.10+ from the repository root. All inputs are explicit:
+Use Python 3.10+ and Go (to read binary dependency metadata) from the repository
+root. The source bundle includes the downloaded OpenAL source archive in
+`distribution/upstream`; its SHA-256 is
+`c32d10473457a8b545aab50070fe84be2b5b041e1f2099012777ee6be0057c13`.
+All inputs are explicit:
 
 ```powershell
-python tools/build_release.py --version 0.1.0-preview.1 --output builds/release-0.1.0-preview.1 --client artifacts/opennox-hd.exe --runtime artifacts/runtime --source engine --overlay artifacts/video.bag.zip --fonts artifacts/fonts
+python tools/build_release.py --version 0.1.0-preview.1 --output builds/release-0.1.0-preview.1 --client artifacts/opennox-hd.exe --runtime artifacts/runtime --source engine --overlay artifacts/video.bag.zip --fonts artifacts/fonts --module-cache "$(go env GOMODCACHE)"
 ```
 
 The builder pins the current client hash, rejects a stale/retired client,
@@ -49,8 +53,9 @@ and long-session checks covering menu sparks, fonts, alpha, materials, widescree
 
 1. Rebuild the client from the distributed source and record toolchain, build,
    import checks, native test results, and source/binary hashes.
-2. Include all Go dependency notices and required corresponding sources, including
-   OpenAL Soft. SDL and OpenAL versions are recorded in THIRD-PARTY-NOTICES.
+2. Review the three modules lacking license notices: `opennox/nat`,
+   `opennox/vqa-decode`, and `szhublox/opennoxcontrol`. All 57 compiled Go dependency
+   source trees, available notices, and OpenAL Soft source are now included.
 3. Resolve distribution terms for the optional game-derived artwork. Requiring
    the original game does not itself establish redistribution rights.
 4. Sign public EXE/DLL/installer artifacts using the handoff's trusted-signing
@@ -77,3 +82,12 @@ Do not push the ignored nested OpenNox repository to the upstream OpenNox remote
 For the initial review use a **draft prerelease** with the reviewed assets and
 `distribution/RELEASE-NOTES.md`. Publish it only after replacing the pending
 items with measured results.
+
+## Verified preparation
+
+The clean Windows CI installer tests pass, as do all 69 local Python tests.
+Real original game data installed successfully into a separate test destination.
+The current renderer/input CI is at https://github.com/walleky/opennox-hd/actions.
+Two Go 1.25 PNG expectations were refreshed only after all six particle images
+matched pinned upstream `b184030e` byte-for-byte (run `35682750490`).
+This is not an interactive gameplay acceptance or a complete client-suite result.

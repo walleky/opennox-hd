@@ -12,6 +12,6 @@ Launch from the desktop shortcut. No developer tools or administrator rights nee
 - Source snapshot and SHA-256 checksums accompany the package.
 
 This is a local preview candidate. Interactive renderer acceptance, a verified
-source rebuild, public signing, dependency-notice completion, and game-derived
+source rebuild, public signing, and game-derived
 artwork redistribution review are outstanding. It is not yet a public download.
 No unmeasured performance improvement or complete visual acceptance is claimed.

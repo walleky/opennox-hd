@@ -465,7 +465,7 @@
     },
     {
       "path": "src/client/noxrender/particles_test.go",
-      "sha256": "8512e65e87bb2302a349b983ebcd8282a58718d6dce64ab3d76f43062a086309"
+      "sha256": "3fb9a881f7c480ad28b6dbb77c19ea94030913b7609925f5fecbe4d73046750e"
     },
     {
       "path": "src/client/noxrender/primitives.go",

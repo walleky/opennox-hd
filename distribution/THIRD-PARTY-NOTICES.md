@@ -12,8 +12,12 @@
   Source font and notice are in this project's `assets/fonts/alegreya-sans` folder.
 
 Go dependencies are pinned in the source snapshot's `src/go.mod` and `src/go.sum`.
-Before a public binary release, include their notices and corresponding source
-where required, and establish correspondence between the shipped binary and source.
+The source ZIP includes the dependency versions recorded in the compiled client
+and OpenAL Soft 1.20.1 source. Go module notices are under `licenses/go-modules`;
+the Go runtime license is `licenses/Go-LICENSE.txt`. Dependencies whose module
+cache lacks a license notice are listed in `build-evidence.json` for review.
+Correspondence between the
+modified OpenNox source snapshot and the previously built client still needs a rebuild.
 
 Nox is copyright Westwood Studios / Electronic Arts. No original game installation,
 music, maps, saves, server credentials, or commercial game executable is distributed.
