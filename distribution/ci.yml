@@ -20,7 +20,6 @@ jobs:
       GOARCH: '386'
       CGO_ENABLED: '1'
       GOTOOLCHAIN: local
-      NOX_RENDER_DEBUG: 'true'
     defaults:
       run:
         working-directory: engine/src
@@ -34,11 +33,3 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y gcc-multilib
       - name: Test input and renderer
         run: go test -mod=readonly ./client/input ./client/noxrender -count=1
-      - name: Compare particle snapshots against pinned upstream
-        if: failure()
-        run: |
-          git clone --quiet https://github.com/opennox/opennox.git "$RUNNER_TEMP/nox-reference"
-          git -C "$RUNNER_TEMP/nox-reference" checkout --quiet b184030e76be2b681a7f6d2bcdef52b091d94b9b
-          cd "$RUNNER_TEMP/nox-reference/src"
-          go test ./client/noxrender -run '^TestDrawParticle$' -count=1 || true
-          diff -r client/noxrender/.testOut "$GITHUB_WORKSPACE/engine/src/client/noxrender/.testOut" --exclude='image_*'
