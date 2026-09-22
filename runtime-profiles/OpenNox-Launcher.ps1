@@ -5,11 +5,13 @@ param(
     [ValidateSet('saved', 'upscaled', 'original', 'prompt')]
     [string]$SpriteMode = 'saved',
     [string]$ConfigPath = '',
-    [switch]$NoLaunch
+    [switch]$NoLaunch,
+    [switch]$Settings
 )
 
 $ErrorActionPreference = 'Stop'
 $runtimeRoot = $PSScriptRoot
+if ($Settings) { $Resolution = 'prompt'; $SpriteMode = 'prompt'; $NoLaunch = $true }
 if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
     $ConfigPath = Join-Path $runtimeRoot 'opennox-user.yml'
 }
@@ -416,6 +418,10 @@ if ($Resolution -eq 'last' -and
     Write-Warning "The saved internal mode $($requested.Width)x$($requested.Height) is larger than the readable recommendation $($recommended.Width)x$($recommended.Height)."
 }
 
+if ($Settings) {
+    Write-Host "Saved display choice: $Resolution. Sprite mode: $SpriteMode."
+    return
+}
 if ($NoLaunch) {
     [pscustomobject]@{
         config = $ConfigPath
