@@ -1,0 +1,3883 @@
+{
+  "upstream": "https://github.com/opennox/opennox",
+  "commit": "25a9725dc76d0b13f388ce62035881f5213eedc7",
+  "working_tree_included": true,
+  "files": [
+    {
+      "path": ".clang-format",
+      "sha256": "8d86922b4c59412909f76087c5d379beb0a7b0cca22f57679678272b1a6000b9"
+    },
+    {
+      "path": ".dockerignore",
+      "sha256": "c8bcf6a1664322111377c14fce72e3c2a429bd3e2450bb52bdbb9b381b802953"
+    },
+    {
+      "path": ".editorconfig",
+      "sha256": "6a1e10edd0047ad65a94dc53691eed97c7b3d35d8e6031a519606c719d7330f9"
+    },
+    {
+      "path": ".github/FUNDING.yml",
+      "sha256": "d6614ef73294e2869263ba9277e43b6a88b224a7ee1f4f79e659cd09b977a697"
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "sha256": "da9d6adf34df67b1cd72ccc61a32c1d16b392ae51dd02a4c9b314566bb98a7b7"
+    },
+    {
+      "path": ".github/workflows/build-and-release.yml",
+      "sha256": "d65737a0c3565a3adede55191cdac2579b7305df866bed8b73df0e0a00aacbd8"
+    },
+    {
+      "path": ".github/workflows/cleanup-all-artifacts.yml",
+      "sha256": "317baf6cfc19b6942fd71cc8c3b0f63ed165c2940ccc686c5b15e0bbc169f984"
+    },
+    {
+      "path": ".github/workflows/cleanup-artifacts.yml",
+      "sha256": "63758041e49477331dade71a1ab714e1e316f74e8b3bc58a809f273ff9d20968"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "8b753782dab6c7d7eae98ae8f0caf8dcb36ed4a35e23a22f321b03385009a1cc"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "9b6ac1f0a3ca44d808fec38da39a07aed5cda561fb46cbc6ecac6ddd7ec16397"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "588338c81f07af55cea15090d9372262680a4353819a6f370a3f17891ec12d2c"
+    },
+    {
+      "path": "CONTRIBUTORS",
+      "sha256": "6fdc3e850b0813b1e9b036c6e7de3e80f02ef14656b6ef914eb08e59b9aad446"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809"
+    },
+    {
+      "path": "Makefile",
+      "sha256": "a56c4bc7157b9d9e1b7d5e98fc0fc1ae8640fc8abe432a484bef17384c83243f"
+    },
+    {
+      "path": "README.md",
+      "sha256": "fa61b30a12e39bf1a878eb98814e5b71adf48d971e74ef2c698eb7f55498b73e"
+    },
+    {
+      "path": "app/io.github.noxworld_dev.OpenNox.HD.desktop",
+      "sha256": "53f8ac949d44a8ce7225080a6f4892031ecc39257bb029de0273477a2e5d5b2d"
+    },
+    {
+      "path": "app/io.github.noxworld_dev.OpenNox.desktop",
+      "sha256": "3fb82792370832dc54484e8956143d31028cb7288e7f9b6c14ae7f1f8944127b"
+    },
+    {
+      "path": "app/io.github.noxworld_dev.OpenNox.metainfo.xml",
+      "sha256": "08b5efa6e718030f594990afa9b2c3319f3981cec59fee0b208748f4ed052baa"
+    },
+    {
+      "path": "build-docker.sh",
+      "sha256": "2c8fa0560931058d701c8afd31dffae95348bc8705c0cec7b57c35e208978342"
+    },
+    {
+      "path": "cxgo.yml",
+      "sha256": "d0354573563217beab2828d5201ac84811f3c683090bb1cddc41186012fa47a8"
+    },
+    {
+      "path": "cxgo_h.yml",
+      "sha256": "40c12b26ea663d0a1abe7235f1b4aa45c5ea89a75a58f1447f99082e886493ef"
+    },
+    {
+      "path": "docker/Dockerfile_client",
+      "sha256": "5afbf2086cab5aa9a9e11595abbe4e5c50182951a5fa827094445d63d07a2723"
+    },
+    {
+      "path": "docker/Dockerfile_server",
+      "sha256": "1dc2ab28368e2fe69e376889583f74f9a6b766942ef93b13d76522d5929c3c61"
+    },
+    {
+      "path": "docs/build-linux.md",
+      "sha256": "da5ca261c12c2651cf19e73e66e3a1f3e4a9d1f7ea7fd2a240668cef91443137"
+    },
+    {
+      "path": "docs/build-windows-on-linux.md",
+      "sha256": "9a9ec1057cf4aead7f23dbe9748a86a5cb2a0db764bb6012289f518b178ae007"
+    },
+    {
+      "path": "docs/build-windows.md",
+      "sha256": "ccb26ee15b3e7d3a48501f4400be7b4c53c542727320815f7cd37c218cf2365f"
+    },
+    {
+      "path": "docs/enums.md",
+      "sha256": "808644c1e491e4ef21f1102c14e775de0d649abe867ebec7ae2a58614d796714"
+    },
+    {
+      "path": "docs/images/gestures.png",
+      "sha256": "590698e2ac33e01b4635770f8158cd3f4311ea4d518e3b17b87825a45fe4dfab"
+    },
+    {
+      "path": "docs/images/gestures_config_2.png",
+      "sha256": "170f83379e8ac054b916076e75db6ab53d4449c04eda5879e0901959a5c597cd"
+    },
+    {
+      "path": "docs/images/logo.png",
+      "sha256": "0bfbbffbac4f8cd08034acaccafc8925b69ee0839cf56b145bf1d478a8f558fb"
+    },
+    {
+      "path": "docs/refactoring.md",
+      "sha256": "b286d1a4711244fe4bec35ddb23cf7839c9ae6f1c2f3a0182b82cb523ed99226"
+    },
+    {
+      "path": "res/opennox_256.png",
+      "sha256": "ff595a68d0cc32446c50dbc499abb7c5d7c44b8048ab37fd05b77d86dd13d8b8"
+    },
+    {
+      "path": "res/opennox_512.png",
+      "sha256": "3028d6c6389f2afbddfee5e096e5b291817cef7ba4b435cf3571c6c691223346"
+    },
+    {
+      "path": "scripts/buildcsf.py",
+      "sha256": "1be424fe2b65c5461bdbf6227726e8024c5c4811d417ae9dd8ab8baea2890826"
+    },
+    {
+      "path": "scripts/dumpcsf.py",
+      "sha256": "9c025c14b2dfe6d3be694bcc5d142003b14f10489647c366c9f232ee2356e16d"
+    },
+    {
+      "path": "scripts/opennox.nsi",
+      "sha256": "d3d10bac4917f6f86c7f19839879625ed3e2533638a0f0173fc95b28dda3580e"
+    },
+    {
+      "path": "scripts/opennox_play.bat",
+      "sha256": "9c1d57c49794be42f123c54cce08c72224e0c3efc496ad20d9dd45c7e5aadf42"
+    },
+    {
+      "path": "scripts/opennox_record.bat",
+      "sha256": "48d8e54faeebb75b6939880b995cbcab51655d79292e6532731a60fe59371944"
+    },
+    {
+      "path": "snap/opennox.desktop",
+      "sha256": "3093b9796f0795da3f52dd949378b6279dc23117ed49cd44e9d6082de3e3c077"
+    },
+    {
+      "path": "snap/opennox.hd.desktop",
+      "sha256": "049ef855f17d62adf912c991338c6ceff3fc4aef6d0fe26378b40f5fe41070e1"
+    },
+    {
+      "path": "snap/snapcraft.yaml",
+      "sha256": "933754547bdadccb9ab0540fefad9493c65651a6701631b0fe9a92e87c2f730c"
+    },
+    {
+      "path": "src/.dockerignore",
+      "sha256": "d44cd1bf203755e2d091bfdc289bd53003b56b49b7e4fa091e83d1c75d3d3222"
+    },
+    {
+      "path": "src/Dockerfile_go_win",
+      "sha256": "a7434a09ba631280fbe619ab2a7da5e4884d1a020f27d475bbdb56cbdb7f230d"
+    },
+    {
+      "path": "src/NOTES.txt",
+      "sha256": "b275922e36b20a4b399ed7f9eb12227c4b51a8a2621c306e8e30e67be81b6437"
+    },
+    {
+      "path": "src/api_common.go",
+      "sha256": "49bbf64a044e2531ea24e21fdb2b11b671143155fc839f0daa7ad79f56441c90"
+    },
+    {
+      "path": "src/api_drawables.go",
+      "sha256": "421ba5a5d891ba683beefb85670e53965a197616cb9183247be99d957973f842"
+    },
+    {
+      "path": "src/api_flags.go",
+      "sha256": "d665176c2e1e9972a30430b0b767d613bae2f11e5aa43b4cbd110c6fb79f1254"
+    },
+    {
+      "path": "src/api_memmap.go",
+      "sha256": "441425748c4c755b4441fbe158012d4525f31886b3e0bb0d67e03acbc75b95e2"
+    },
+    {
+      "path": "src/api_noxscript.go",
+      "sha256": "f8893fcc5a3e5d8806df012926951af1852fee36348e5bb0a8d916a0fe53459d"
+    },
+    {
+      "path": "src/api_objects.go",
+      "sha256": "319a4976502d213f09d9dddecee302761e12d26f0e6f538ae0fe70fb86c7fde8"
+    },
+    {
+      "path": "src/api_players.go",
+      "sha256": "6b98992f4c84bc9ce62d34d2332c9f69bb5d0933363e8a10eb9627295da54784"
+    },
+    {
+      "path": "src/api_spells.go",
+      "sha256": "7e1affb87683dfca1278ee303f4c44d73db8e695af8a701d0c39dc582bfd7b6c"
+    },
+    {
+      "path": "src/api_teams.go",
+      "sha256": "6486f3680251f8d0bd075adfad703bb92adf08a4f79004a7891c278ca28f0d50"
+    },
+    {
+      "path": "src/api_walls.go",
+      "sha256": "652527cfbf558ec4cd60f7a316841a8086817eaf704f1d0a6417a39df9a4b553"
+    },
+    {
+      "path": "src/api_wp.go",
+      "sha256": "81e7cfc6d4c8e84c484704cdb2e18b5b83dad58eff42300f63e4011dc84a1580"
+    },
+    {
+      "path": "src/audio_ail.go",
+      "sha256": "a2474cada3d45d9e1afc1b5b790de50e14af9aba5df73c92a3079156c2f65d6f"
+    },
+    {
+      "path": "src/audio_event.go",
+      "sha256": "955ccbdd65b8ab26282625d03453bf1ead12477963851ba6af3ff462f100575b"
+    },
+    {
+      "path": "src/build-compat/SDL2/SDL.h",
+      "sha256": "f09c76c540905c0e634df0b91236a998c9f1abf5f3fda6e64199dd4f9501c413"
+    },
+    {
+      "path": "src/build-compat/SDL2/SDL_version.h",
+      "sha256": "c2cd573c1532868a993009ee80044a8c7ddcab1629490a9a8b9abdd541b5eaa5"
+    },
+    {
+      "path": "src/build_go.sh",
+      "sha256": "7d9c3e0fbda6cf826125c075037b8f1dfa4cb4efe5990325694f8a8b9e964094"
+    },
+    {
+      "path": "src/build_go_win.bat",
+      "sha256": "e7b858dce0d69f3bdb4265dcee7f7198f6a9e12bf4bdd2671e49f341a1ed0c3a"
+    },
+    {
+      "path": "src/build_go_win.sh",
+      "sha256": "34e5a839f2a39c476e63a2bfcc2d9d46c35e7ad04bad208233dd26549d418360"
+    },
+    {
+      "path": "src/client.go",
+      "sha256": "8c3df9f76155bebe5f1f38603811cf8b6e5d8675f12196fa6906daf7c64fe00c"
+    },
+    {
+      "path": "src/client/LICENSE",
+      "sha256": "4b6822d4b501f49fc6fc253b2277131d983a19e1454be6a695f58c135e372033"
+    },
+    {
+      "path": "src/client/client.go",
+      "sha256": "600c64480b2c9ff0ba0e5304c4c4db29e2440ccf11194a9e46f0d46f8c3a5f92"
+    },
+    {
+      "path": "src/client/debug_sight.go",
+      "sha256": "9b10630071b3a9c899f7768f1d7af1b6fec5d72276ea16a9038906440d3545f4"
+    },
+    {
+      "path": "src/client/drawable.go",
+      "sha256": "21fb5a75bda1729d5a3eefb0d86799ab2c3209204c7c78ba8b7ae1f2bf7253fc"
+    },
+    {
+      "path": "src/client/drawable_draw.go",
+      "sha256": "c00c95da7a0c5a875f1384d7d50d3d4a6e9dade6129024de8cf65789bb2830ba"
+    },
+    {
+      "path": "src/client/drawable_ext.go",
+      "sha256": "9597b41245c9300d875136ba4a0f1419fdf6825fdbb740f2e7fa3188f157532e"
+    },
+    {
+      "path": "src/client/drawable_fx.go",
+      "sha256": "9a662c32da7461e4fe23e53f800d23ca80784a7b6bb5fb4f7e51d8781e31b5e7"
+    },
+    {
+      "path": "src/client/drawable_monster.go",
+      "sha256": "25dfb809f9d7ac8cc562d2dae2c7a4f4bb241f6328e44243ca0989b548638049"
+    },
+    {
+      "path": "src/client/drawable_player.go",
+      "sha256": "83aafa97bdbf38857a75a2e5b3880cc14c81ef9d194ebc310c3ec2bc1d40e558"
+    },
+    {
+      "path": "src/client/drawable_vector.go",
+      "sha256": "1da7d4f8fec696504ce41c16cf883502dec7afc0174b440b680b9c1a9804b917"
+    },
+    {
+      "path": "src/client/gui/anim.go",
+      "sha256": "646ff87adefb274ddb3006b428dd8bfc34b29b0995aa6ecf8a2fc8bfad8b9620"
+    },
+    {
+      "path": "src/client/gui/cursor.go",
+      "sha256": "397e9ac061e49a8661169056ed464fcdca15eead49ac9fad1347341469cd99ae"
+    },
+    {
+      "path": "src/client/gui/defaults.go",
+      "sha256": "c69a082817347a0de74a8b75f58ad01fb81a148a34e8c85ba1d6896001f3c6dc"
+    },
+    {
+      "path": "src/client/gui/dialog.go",
+      "sha256": "bb96969cefc628de755c5062a89bb9926a5dba3c8da471cccbe78a598c748e86"
+    },
+    {
+      "path": "src/client/gui/events.go",
+      "sha256": "32dd9fdd3f992639c7ad221d70695ef27c7997ed89aa482a7d138cee29ca7b19"
+    },
+    {
+      "path": "src/client/gui/gui.go",
+      "sha256": "dbf6fc01c18b792d49d8df8061535ca576765ba1e63549c15c2df1aefe651ec4"
+    },
+    {
+      "path": "src/client/gui/parse.go",
+      "sha256": "4b770b7d6b6d0a951e9c91c041da4cac69a78f4d88aa113ca34bf9e7f92247fe"
+    },
+    {
+      "path": "src/client/gui/rules.go",
+      "sha256": "0522321ac16b0cb6fb79be308f2ce8f567115347c011650cff44daaf1cb63760"
+    },
+    {
+      "path": "src/client/gui/state.go",
+      "sha256": "7e1c24b3a53381e38f0be0fc86c7fb33a75821726a13faca7eb7dbeeb71445da"
+    },
+    {
+      "path": "src/client/gui/status.go",
+      "sha256": "a267ba5b9427fd05a728748e7b1dc022387989b0227a07d4a684292830ab0e42"
+    },
+    {
+      "path": "src/client/gui/style.go",
+      "sha256": "4d223b8c8a94f502842b7f3c09b72486c950b4eff58a1e4f41a9dcaf7cd3a56a"
+    },
+    {
+      "path": "src/client/gui/widget.go",
+      "sha256": "e34aaec92db4af8af3cd203517f3db080ba0564184a4c050994479976a57a25b"
+    },
+    {
+      "path": "src/client/gui/widget_button.go",
+      "sha256": "36c5cccbbfd52c6dfdc0878120d148ef2398b886525a81fed7f913f7f0eea10f"
+    },
+    {
+      "path": "src/client/gui/widget_checkbox.go",
+      "sha256": "7d28e3d3bb60184f977ff205b43f629a7addef7f6bc9f1da19e3da4ce29c6b6b"
+    },
+    {
+      "path": "src/client/gui/widget_entry_field.go",
+      "sha256": "a373be46294dec1b5594f285bca2ac8a5ad9992b076aa7c6a350116fcbdc822a"
+    },
+    {
+      "path": "src/client/gui/widget_list_box.go",
+      "sha256": "879a53b63e736c25c06ae2be3267bad1d32d31209265ac650610c9a738df7912"
+    },
+    {
+      "path": "src/client/gui/widget_radio_button.go",
+      "sha256": "5e1c1a6bd1e59a0b9e0c951a81c8a5203d22bfa5c34674c6f6fc32b6fbf1318b"
+    },
+    {
+      "path": "src/client/gui/widget_slider.go",
+      "sha256": "5d93704160ee94728fc0f64e610bb9050dae8b6cc67ec5d1803554ef11719738"
+    },
+    {
+      "path": "src/client/gui/widget_static_text.go",
+      "sha256": "8a87a6bf97025ed53735674665760cf549a3882f5b27177855e19efe9530f8e1"
+    },
+    {
+      "path": "src/client/gui/window.go",
+      "sha256": "fdd368973b599e9d999fbafbb76fe8a0444be535d9b2d397f32bb24719aa42e2"
+    },
+    {
+      "path": "src/client/gui/window_style.go",
+      "sha256": "cd582f06990608285430620314934bbaf30b3704e3cf936826c1de8eecbceded"
+    },
+    {
+      "path": "src/client/input/input.go",
+      "sha256": "77afd13336e194c4b2c183b2bb5ed858a7fcee25380228ed8d7d18adec6f6a15"
+    },
+    {
+      "path": "src/client/input/keyboard.go",
+      "sha256": "5db0d131628d6b059dcb1bcf7a4b938c7b28a587bee43a0da3b63c0592d85a71"
+    },
+    {
+      "path": "src/client/input/metrics.go",
+      "sha256": "0e472cb3ec904b4f0fd8ef9f53de3c06cd3b6185de4970314cf8504d338abefb"
+    },
+    {
+      "path": "src/client/input/metrics_test.go",
+      "sha256": "1ffa7e9bc7863f955523d4cedc07b65c71776828a8562bea6a812d9a75e99d7b"
+    },
+    {
+      "path": "src/client/input/mouse.go",
+      "sha256": "dce05d596c39913a4d88a0d8cc5fc125700c00c5022dc73bb2753ace7916d5a7"
+    },
+    {
+      "path": "src/client/input/mouse_test.go",
+      "sha256": "cb373f59b21cfad32eae4deee6ad3e4fb1fcf7309f52a39294a7300acbb46fa1"
+    },
+    {
+      "path": "src/client/input/text.go",
+      "sha256": "1f5f829785429d00dd745aad5f7f2202ffbc19300abc4c7824624516db826148"
+    },
+    {
+      "path": "src/client/input/window.go",
+      "sha256": "c4e9b94257cb2b4c637b92a1432ad691aba24c1185d5da5d1769abedd8386af0"
+    },
+    {
+      "path": "src/client/misc.go",
+      "sha256": "ae8634e3a40d2a21250c538fb4a5bcd56fcf356110a46e6c921d81794a4eea20"
+    },
+    {
+      "path": "src/client/network.go",
+      "sha256": "91839b85fd53fb42871d2af20704dbf38032207befe13eb8dd4194082f82124c"
+    },
+    {
+      "path": "src/client/network_xfer.go",
+      "sha256": "9e1d957988043e7c0ce0c4f36acaf8a49637c5879487f8c4bb869103138be1a0"
+    },
+    {
+      "path": "src/client/noxmovie/noxmovie.go",
+      "sha256": "274eb7737f8501d5e74fdcd77f3de8d78eb446f97b925d1ed5fa93238c49c36f"
+    },
+    {
+      "path": "src/client/noxrender/color.go",
+      "sha256": "896c7572b2c5501b1099edc5be38606b98bb2d689749a1d24012ff5ef5a128c1"
+    },
+    {
+      "path": "src/client/noxrender/fade.go",
+      "sha256": "66b6b5188a65ebc9aa8e9fd8ac8c1193ceca8f3e59a0c3fd23aebafdd5ebc7ad"
+    },
+    {
+      "path": "src/client/noxrender/hdperf.go",
+      "sha256": "66dffb5367795070b77cbb4feed9b3a1adbf009406dac8cbf705c0575e710f52"
+    },
+    {
+      "path": "src/client/noxrender/hdperf_test.go",
+      "sha256": "cdcf54d2605dbd0851a24a8518aad7fc570956efd77ce14f57db1554ecb23772"
+    },
+    {
+      "path": "src/client/noxrender/image.go",
+      "sha256": "f182ff03dd64a4e89b1fe22825577574e6672a881ec7169bc49e4190e06c26af"
+    },
+    {
+      "path": "src/client/noxrender/image_test.go",
+      "sha256": "9fd3edc4d4bbfad25e540556806f23482df5f2d7c3b172c6bca60b7556f3b4ae"
+    },
+    {
+      "path": "src/client/noxrender/noxrender.go",
+      "sha256": "544e99bc0fdf9f6bc5a38a300ab8a8a6473d3b19beed3f635bdcc0623e9ab4fa"
+    },
+    {
+      "path": "src/client/noxrender/noxrender_test.go",
+      "sha256": "37e4400e5205e6faf0d59fb8a3a15cc0584c701ca86aedee58105539a8a906a8"
+    },
+    {
+      "path": "src/client/noxrender/particles.go",
+      "sha256": "ccc333954241b115578dcb2556d7f8be90903a1f14eb37a6139836befbfb3840"
+    },
+    {
+      "path": "src/client/noxrender/particles_test.go",
+      "sha256": "8512e65e87bb2302a349b983ebcd8282a58718d6dce64ab3d76f43062a086309"
+    },
+    {
+      "path": "src/client/noxrender/primitives.go",
+      "sha256": "62dc75951ccb613283ae433e5380767c5b2f332d96380b41b519a7d6517e9472"
+    },
+    {
+      "path": "src/client/noxrender/primitives_test.go",
+      "sha256": "ba8c15d0308370c5aa18fecb17b2f1b479bd3f999811f8260dadfad203dafd6a"
+    },
+    {
+      "path": "src/client/noxrender/rules.go",
+      "sha256": "8bd30065c87e3ce81f4e4e7350fe441587b539afbc4ed40794ec96f06ebb96cf"
+    },
+    {
+      "path": "src/client/noxrender/sprites.go",
+      "sha256": "8ff48aced16d67e329bcbf18f0a3eebdbf844e6edd6abdaa7e2597fb025e5eb9"
+    },
+    {
+      "path": "src/client/noxrender/text.go",
+      "sha256": "86ef5dda73b84559670a2ecbb13fe5350c86196630ebc4f6e865faa15caec79d"
+    },
+    {
+      "path": "src/client/noxrender/texture_density.go",
+      "sha256": "643e49c1a637b792f43101d4ed2803fffb51c3a687b7170b7e62a2bdc893d8ca"
+    },
+    {
+      "path": "src/client/noxrender/texture_density_test.go",
+      "sha256": "38024a33614394f7c771954be6a0351c92f87ea9c5fb98f353242eac5e337e7e"
+    },
+    {
+      "path": "src/client/noxrender/viewport.go",
+      "sha256": "f1efb7f81a2c8b5888ac4202259f50df1553e3b71505444e2fc8a35f7baafd90"
+    },
+    {
+      "path": "src/client/object_type.go",
+      "sha256": "f2a5bf996ec7f6d90d1af5fd93c0688b947002fe89d8d361027630d497c1ee19"
+    },
+    {
+      "path": "src/client/particles.go",
+      "sha256": "a7ff64c4885cb6244ba6e38f9345a55b99f77f20636ec2542fadfe3201118cf5"
+    },
+    {
+      "path": "src/client/render/renderer.go",
+      "sha256": "849eb8849796afbb7d387b6bc6f8e4fffa96cd59fccc1949b8fbee51b83e34b3"
+    },
+    {
+      "path": "src/client/rules.go",
+      "sha256": "f9b31b8596dd50510abc4c698f8b91ef19e72fde80b1d3ce7fb117c4d028aadb"
+    },
+    {
+      "path": "src/client/sight.go",
+      "sha256": "b6e49a326e6c2356d1067265fde847753adcee9b243362635ddfc4402bfec3aa"
+    },
+    {
+      "path": "src/client/states.go",
+      "sha256": "1b0bd2f8878dc7d6dee52702dd78a27c89d3f4c9e83a7aebe7aaed878027046b"
+    },
+    {
+      "path": "src/client/wall.go",
+      "sha256": "fe3c1c93d4b79b52a4170c733bde6e1a804264009d57710964601ad9b15b3283"
+    },
+    {
+      "path": "src/client_draw.go",
+      "sha256": "34e023709fd6c093bfd3ef2f62fc5593c1bf85bbe601408cf4cabc8d68365a3c"
+    },
+    {
+      "path": "src/client_gameloop.go",
+      "sha256": "10b4b739a7a3d738dc6fe356a150bd19e1d4a45db83cc791f511db150dab39a7"
+    },
+    {
+      "path": "src/client_maps_download.go",
+      "sha256": "fd760a2291e649e14df66897b20ec8639a486ec4d2379ff5e835242d85c4461c"
+    },
+    {
+      "path": "src/client_only.go",
+      "sha256": "763a1011574a8424c2d15efd6cc4f293692ee665e942ff75559e5dc6c4f9086d"
+    },
+    {
+      "path": "src/client_seat.go",
+      "sha256": "8a460c8776fb47c3ef644b702dec27de1801bab643c2a1ceda886519906ba382"
+    },
+    {
+      "path": "src/client_select_circle.go",
+      "sha256": "1315ad749420b5d3afda15f4a4c28b167e25f6d6758d7bb29e29dd970018b93c"
+    },
+    {
+      "path": "src/cmd/fontsprites/main.go",
+      "sha256": "67909c3f18cd0010008228bad39817537163f22cbba1de9cc21c467906cfc103"
+    },
+    {
+      "path": "src/cmd/noxmovie/main.go",
+      "sha256": "346d599ba08f53ec9ef2f25b3e4ca1ebf21f67fb2fe2df6cff1b4cd53fca1f5a"
+    },
+    {
+      "path": "src/cmd/opennox-server/main.go",
+      "sha256": "84be2b3aa309fde3041954b528b6e674ace23ad70076ac7ebd06347f08f6208e"
+    },
+    {
+      "path": "src/cmd/opennox/main.go",
+      "sha256": "0302cb9034688246491d935e4783f1b17f4d0c3228853a4d751579c2c5c892ad"
+    },
+    {
+      "path": "src/common/LICENSE",
+      "sha256": "4b6822d4b501f49fc6fc253b2277131d983a19e1454be6a695f58c135e372033"
+    },
+    {
+      "path": "src/common/discover/discover.go",
+      "sha256": "865d53013a5ea7870dbd9e0f9d8bf8d0474e890fec5c6483d3111f44855e532f"
+    },
+    {
+      "path": "src/common/discover/lan.go",
+      "sha256": "91006f043d2abf259662ca8211c869c8abc9b299b80629066c8b0d69ae560fe2"
+    },
+    {
+      "path": "src/common/discover/lobby.go",
+      "sha256": "acf1bbc741aa9dfeff06aa1c19b10b3ecba9bdcbdfcab9b0539b56c00d430319"
+    },
+    {
+      "path": "src/common/discover/ping.go",
+      "sha256": "353a7dc7270f056fbd9b55c6a682a68af5dae4d73be9a54b36201b52d2366512"
+    },
+    {
+      "path": "src/common/discover/register.go",
+      "sha256": "3ecdb4cf3e64a4a9f13b03abad4a03dd39e8119ecd36e77be4f96dbffc75b2e3"
+    },
+    {
+      "path": "src/common/discover/static.go",
+      "sha256": "39f0cee2e3d7b97eeddf173ffa5e857d9c114f569f697894d202132dd147057e"
+    },
+    {
+      "path": "src/common/discover/xwis.go",
+      "sha256": "afa8d70b242d514f1fb46903e891806e65c5a40cd036c9bad1f0074e5a7faac2"
+    },
+    {
+      "path": "src/common/flags/engineflags.go",
+      "sha256": "2ec65941ff87f13203dfe166183abf8cd19ccc3036c9c307e03be37c40982787"
+    },
+    {
+      "path": "src/common/flags/gameflags.go",
+      "sha256": "4588234978b58b8cffd41322b6b265492daedcaacca532af629d4daecc8c832e"
+    },
+    {
+      "path": "src/common/flags/gameplay.go",
+      "sha256": "c09cc28963cb77ab0be9f5f98cd8f1a5fb493283fbfa52ef89b91bc5ded30a71"
+    },
+    {
+      "path": "src/common/gsync/map.go",
+      "sha256": "e78f6b3d0fc5a0516ff75dcbf3ae2c331879a638825aa9aa1d94af60882284ba"
+    },
+    {
+      "path": "src/common/gsync/pool.go",
+      "sha256": "2cbb343ecd69a65c16189637dd93703f8918857b6ce0b5f52210d4841f36bb26"
+    },
+    {
+      "path": "src/common/memmap/checks.go",
+      "sha256": "09e83fc6e86b12d228304fc1db5b6ba663bbcc3b92ec4805a0b004cf871bb431"
+    },
+    {
+      "path": "src/common/memmap/memmap.go",
+      "sha256": "8db67d0c1ef038b85ccf026c55ff4f70e80710c6d6b7331e9451118d5581c1cf"
+    },
+    {
+      "path": "src/common/memmap/nox/blobdata/blob_581450.dat",
+      "sha256": "944ceda72865fde95645dacb45b0ac6aa8be1f9d03dc80881f5f72ed48645791"
+    },
+    {
+      "path": "src/common/memmap/nox/blobdata/blob_587000.dat",
+      "sha256": "9976224488c1b9ba7f818abd61d6e9bf4cf63efc02e5512d844a1cb6c528dae2"
+    },
+    {
+      "path": "src/common/memmap/nox/blobdata/blob_data.go",
+      "sha256": "758f46ea1e1b5f6fbf7b5e7721e3308e2c44ee4a27931256b8947e0fea1f5a92"
+    },
+    {
+      "path": "src/common/memmap/nox/blobdata/blob_init.go",
+      "sha256": "8fd5c473f3d1f1c2875d557b4f1f0983af7efe69caf08346ea56594a3aa05b33"
+    },
+    {
+      "path": "src/common/memmap/nox/blobdata/blob_ptrs.go",
+      "sha256": "97ba5a317c0627a4d5c2f14883db2c86ee93246d108ea2ea7dd6836da7168cee"
+    },
+    {
+      "path": "src/common/memmap/nox/heatmap_test.go",
+      "sha256": "70043d965729647ce70de18e29b1ad4e17de5ef35eff95ad82defb8a3f61e311"
+    },
+    {
+      "path": "src/common/memmap/nox/noxmap.go",
+      "sha256": "568f7e1ab71723510e2df74269184eca2ca66d6bef22ae900bdbefe719874857"
+    },
+    {
+      "path": "src/common/memmap/nox/noxmap_test.go",
+      "sha256": "797c65316e98aab21e2a9dc6149165fbd03ccdf4c00d2f4f5ad4b2baa6616457"
+    },
+    {
+      "path": "src/common/ntype/noxtypes.go",
+      "sha256": "b5af4ac66d342d355c04dc9e071b78f5b954a83a8d5b66e7657a4803a1ea5c02"
+    },
+    {
+      "path": "src/common/serial/serial.go",
+      "sha256": "dc6565395947e50c44588bc4a42b931a4c98d0d3eb376b94d0331774eed53102"
+    },
+    {
+      "path": "src/common/sound/sound.go",
+      "sha256": "ed3bdf0971277763bf8218fcd2c34f420ed530cbac18d2948a8dc4d9e60070df"
+    },
+    {
+      "path": "src/common/unit/ai/ai.go",
+      "sha256": "b426e9869ecf35fcd9b84c28034ce912c307c8c4ba2b3cfc734cbecc00547584"
+    },
+    {
+      "path": "src/config.go",
+      "sha256": "d29689c9bd9d66a56f9a9c03277a23e00953ed995d60b9935efb05ff43fc4871"
+    },
+    {
+      "path": "src/config_legacy.go",
+      "sha256": "0e0a9adb159cf84a464cf511f224f92c58b1af00fc37cd616e060cb85ef1af89"
+    },
+    {
+      "path": "src/ctrlevent.go",
+      "sha256": "8fa17ae98712cb56432ae34f42d97461ee0edd26ef5195cc6717161fd7726f85"
+    },
+    {
+      "path": "src/debug.go",
+      "sha256": "f1a8a296fc6060836dbe6f31161b1970604f36b64a26c4a90de27938a948729d"
+    },
+    {
+      "path": "src/discover.go",
+      "sha256": "ba5149f8c1c4eca6896153053fa20fd3ace4acf9fc5f09489783227b4edbbd44"
+    },
+    {
+      "path": "src/dpi_other.go",
+      "sha256": "e2d741da5711fc602bfa20953298ccd5b96adc3d5d0faa5b30e2fe075ef7d51f"
+    },
+    {
+      "path": "src/dpi_windows.go",
+      "sha256": "e592f5ab195b7e3b769e7c00bf217069a9a73149359326fbb8235acc5c6e0de1"
+    },
+    {
+      "path": "src/draw.go",
+      "sha256": "cc57dc72de71c89595b595b1b2e639ab22e9f32cdfbbcb8aaa95d458693cf061"
+    },
+    {
+      "path": "src/draw_cursor.go",
+      "sha256": "e5fa2803b38fdc7f4b5b618126240902633a6c5223e8427a59119d65f6c8bc64"
+    },
+    {
+      "path": "src/draw_debug.go",
+      "sha256": "26625c4e9bb30820fd0cefe129fdd72ce0441b8f8ff84433eacd873dfdb0e995"
+    },
+    {
+      "path": "src/draw_fade.go",
+      "sha256": "f3b48840bcfe087aec35929e2f750755cc84ee951141d77bc3ef6b9ebc85b7ed"
+    },
+    {
+      "path": "src/draw_particlefx.go",
+      "sha256": "61f5a2ca2485f571cbff9d11cf11eae4f0d9e3f27f4ec9166929bbaac53a83ea"
+    },
+    {
+      "path": "src/drawable.go",
+      "sha256": "637ae04caa50a27931fe882f0a36b065207563ee0ec5da2efe27f6d95d10765b"
+    },
+    {
+      "path": "src/drawable_info.go",
+      "sha256": "4e96f4f2b1e276f18dc5a14097549acc4b7d49129e63ccab07cd92918e840e6b"
+    },
+    {
+      "path": "src/drawable_maiden.go",
+      "sha256": "6ac8207f4405d45fe79056c25e04f06063ae7d311597bdefd7d480406bb04fc9"
+    },
+    {
+      "path": "src/drawable_monster.go",
+      "sha256": "d28bf28f6b04310966640376e2cc1a5bb218f223225b1ce96fdeb093c8c828d0"
+    },
+    {
+      "path": "src/drawable_npc.go",
+      "sha256": "e941d8cfe63284b59847388f67caa02ffac811651de8dcd0791919184d04f7d4"
+    },
+    {
+      "path": "src/drawable_player.go",
+      "sha256": "17c0ea0aced32b071261afc34207d7d42427dbeeaddaa56abfeb018a44af66bf"
+    },
+    {
+      "path": "src/drawable_vector.go",
+      "sha256": "f2cb6de2883a37b3fdd75d62640b73b48120e9097d704adcced22d0cfee40dc8"
+    },
+    {
+      "path": "src/e2e.go",
+      "sha256": "974aeb268faf90b7917b4b04f57d2d68cdce55bbb46db250ea8b2b501e02a391"
+    },
+    {
+      "path": "src/e2e_platform.go",
+      "sha256": "21eb1cb9cb649d70ee3c1ab3c78864a659aa263b026d81daf8da1f800231c6ce"
+    },
+    {
+      "path": "src/e2e_seat.go",
+      "sha256": "711954cd028473f11708b5c0f632d5c72943ee5b93de06cc85d7e98bca0a11d9"
+    },
+    {
+      "path": "src/flagball.go",
+      "sha256": "ffc3378bcd604d3b6bf1d06dde988685af78bad182eeeaa24f7a9e146c2c4488"
+    },
+    {
+      "path": "src/game.go",
+      "sha256": "25a412b8bf6378cf6d454e30fd031fd8d9dc85c8c32d2a3d6b1483963cc681e0"
+    },
+    {
+      "path": "src/gameex.go",
+      "sha256": "d788c895d2260da2449aebd6019af68b88d6e6cf0e9370e63287aa277041cd70"
+    },
+    {
+      "path": "src/gameloop.go",
+      "sha256": "4f0333008ee4331e20640feae04b7e83a5a899b824ec6e45cbcac0ec1854c728"
+    },
+    {
+      "path": "src/gameloop_server.go",
+      "sha256": "2003585c68c7efb540a13641ca742bd0b0913ebbb24f1666c13ec5e372bf5080"
+    },
+    {
+      "path": "src/go.mod",
+      "sha256": "82f8f022b6963a2d775b9ec1850d098044f67acdc1659b3a02e941b38fcdea26"
+    },
+    {
+      "path": "src/go.sum",
+      "sha256": "9971f1cd7ca775dc11e78d0e1129fd69eb2d0a8452bbfe14cbdca6ae5bc7334b"
+    },
+    {
+      "path": "src/groups.go",
+      "sha256": "559093fa7403ded2e28f312cef58ed59bfc807cb4e167faa2945942e8a9d3514"
+    },
+    {
+      "path": "src/gui.go",
+      "sha256": "c8251086c8fe2fa8ddb72845fc4fda119870679063aade1fff84f39835aecb26"
+    },
+    {
+      "path": "src/gui_console.go",
+      "sha256": "736fa435e3dec06da9b7aa4bf781a2d25827944cdb29b9f9d29d4f66d5e18aa9"
+    },
+    {
+      "path": "src/gui_cursor.go",
+      "sha256": "5f9a590534781d79c03efd9f055d4b194b725afc00e9883cfc6a0b48630dd9ac"
+    },
+    {
+      "path": "src/gui_dialog.go",
+      "sha256": "3cf5979e99b21b65e92561c96a1f0d8e7594ffe18d82bad73fc71bfd080489ef"
+    },
+    {
+      "path": "src/gui_event.go",
+      "sha256": "84103dee5c5bc58652d79c8fecfa47a029e9c83f467a123f6f5190dbdddcf4e0"
+    },
+    {
+      "path": "src/gui_fonts.go",
+      "sha256": "dfaf899d206b3baf6d0e0f17773850bb2598aa342ee0d283be8e7f4234f6d450"
+    },
+    {
+      "path": "src/gui_fps.go",
+      "sha256": "31c89aaa22cc2a70e4aecd13ce2a8099d15f09b110d7e84480332e9fbf6691fb"
+    },
+    {
+      "path": "src/gui_main_menu.go",
+      "sha256": "86d9e6de8700cd6be4f5f83b1d751fc33cde452f4501f71cafcee559c8724785"
+    },
+    {
+      "path": "src/gui_minimap.go",
+      "sha256": "36ba2231e59e71940be0132233a56230171e670c0ebc55724bd5e7fa3f81197e"
+    },
+    {
+      "path": "src/gui_noxworld.go",
+      "sha256": "b511834432dfdd795e935936fd9502a46c557251a5dba0730661cd3c4a7c92ea"
+    },
+    {
+      "path": "src/gui_options.go",
+      "sha256": "d1cb9cf220b64e47c0c363d16e07e9dfd1b08162cc7b23a0a59a80ce7ae2e841"
+    },
+    {
+      "path": "src/gui_parser.go",
+      "sha256": "7947c7098dfdecb5590a6b7b07dc8ff2e0b462e9d39a4b4b5385a84271449871"
+    },
+    {
+      "path": "src/gui_perfmon.go",
+      "sha256": "94d819ab31c2ccb5d9e0adaf91e89f7196d413a6d4e16642a81da36aad2d4641"
+    },
+    {
+      "path": "src/gui_quit.go",
+      "sha256": "9144f8bf991caf6f0d5ff0ce4cb5df61f41ba73bf83b21a378d1b56127c36283"
+    },
+    {
+      "path": "src/gui_selchar.go",
+      "sha256": "8a8d5e190decab51e6fdd0329c64266c8e58b23ccaab2bfd76b8164f474ee485"
+    },
+    {
+      "path": "src/gui_summon.go",
+      "sha256": "382af2ca8ed2e61da24949b07f128c7f8a78e4a7dde68b21860324c6d13b569f"
+    },
+    {
+      "path": "src/gui_video_adv.go",
+      "sha256": "dc6b8001ec15428f9d7b6bc1b5022b98cfea9550fc785883a6423440e37d0d01"
+    },
+    {
+      "path": "src/gui_widgets.go",
+      "sha256": "e166874f8b8a16103d88473fe2fa4e417104ca2e596935edae8dbf78007c5f71"
+    },
+    {
+      "path": "src/gui_window.go",
+      "sha256": "5bb1c422dfdaffe98b47512491851f81f3c16b5d9a69e3866761c4c9013d6eb6"
+    },
+    {
+      "path": "src/http_control_panel.go",
+      "sha256": "5a7b14cabafbe2a1f751eb914fcfa6b6f4e1a49584f1290e3ff46bdb0dda72dc"
+    },
+    {
+      "path": "src/input.go",
+      "sha256": "4773a1e57b3b1d67c20b0b54c6863c980fc8b4a2085379005ef403c6d48b911b"
+    },
+    {
+      "path": "src/input_c.go",
+      "sha256": "84a9c36ca0221a5f395114253ddbc7ef2b07334d16a0faf3bd776ac863721478"
+    },
+    {
+      "path": "src/internal/LICENSE",
+      "sha256": "4b6822d4b501f49fc6fc253b2277131d983a19e1454be6a695f58c135e372033"
+    },
+    {
+      "path": "src/internal/binfile/binfile.go",
+      "sha256": "d3540369a1a16b34b487d9d51afdeed2415f0a501a49db37bb540ee0c2ec0d31"
+    },
+    {
+      "path": "src/internal/binfile/file.go",
+      "sha256": "c8146b771c0276d870b216742f245ae46da833a764a1f50dcf36d9796ae0f71e"
+    },
+    {
+      "path": "src/internal/binfile/memfile.go",
+      "sha256": "0a273924abbbdadc4bc8a4dc5ecb706a60fe8fdd4d0e46f1e68c1d0ab00aa0db"
+    },
+    {
+      "path": "src/internal/blobs/access.go",
+      "sha256": "7485cedd5680eef221d2061d36bf1560fa1c7f1f9ac2aa1b12453f32aef369ba"
+    },
+    {
+      "path": "src/internal/blobs/blobs.go",
+      "sha256": "5fa21c63935d8ee2817acddebbbed1f398b0733dac952b50c2f3fb62b6687242"
+    },
+    {
+      "path": "src/internal/blobs/blobs_test.go",
+      "sha256": "97af06387931a65d6ce4007ae8ef4447661904c6d67e7e9b4150cd364018962e"
+    },
+    {
+      "path": "src/internal/blobs/format.go",
+      "sha256": "1570d4406f7786b8be7ecf728e37b0def60690f7af9b633d5c666f8d5d6cee0b"
+    },
+    {
+      "path": "src/internal/blobs/format_test.go",
+      "sha256": "c1db0b194dbc5bf45884ed1b440745b3bb046b97bfd82d3bf38b3f3dab783e16"
+    },
+    {
+      "path": "src/internal/blobs/lang_c.go",
+      "sha256": "0d20db3d5a14deab1516f1de1f4a30485022327a6144eb6a461fd0ad484e02d0"
+    },
+    {
+      "path": "src/internal/blobs/lang_c_test.go",
+      "sha256": "c9002cb242caec2b9cf6777d9ddd232e1c15bcb20cca3be7d37bc07d938cb0af"
+    },
+    {
+      "path": "src/internal/blobs/lang_go.go",
+      "sha256": "8796c093f88e9afaa0adc709fd6bdeb46f1d6062a8185296aca34e13033910c6"
+    },
+    {
+      "path": "src/internal/blobs/lang_go_test.go",
+      "sha256": "72750f0157c34dc28bd9e10738701e94fc605df9ab60f8ea90b1ce5ee2bdb779"
+    },
+    {
+      "path": "src/internal/blobs/memmap.go",
+      "sha256": "96ca0c0717971fd826e42bb603f9b0fa59458d94e0cbaa48b0379985a5cc14aa"
+    },
+    {
+      "path": "src/internal/blobs/memmap_test.go",
+      "sha256": "0d7bf1d8cb12f9b7b55cac8c9fa97cca3673a9bd483c170b0af8cf4a53b0517e"
+    },
+    {
+      "path": "src/internal/blobs/path.go",
+      "sha256": "2e146078d0ee1038956f4ab15c8a17fcd666e8a4293fe73942f9879a810ceab5"
+    },
+    {
+      "path": "src/internal/blobs/rewrite.go",
+      "sha256": "78ddcdeea3a065f9be225c43e7a86662cf6ba5deae52a4b300bb07ddbe2f97ce"
+    },
+    {
+      "path": "src/internal/blobs/spans.go",
+      "sha256": "156d0a97d6e2f526d00eab1430f4f2500bf1acea568afd7117682fc2fd809dce"
+    },
+    {
+      "path": "src/internal/blobs/spans_test.go",
+      "sha256": "568047f46c08139c8236f362f3abcdf6625e73938be80759d954277234ae7a32"
+    },
+    {
+      "path": "src/internal/blobs/split.go",
+      "sha256": "11de8d3bdd1d48e5287ac03c7f33ff821913505d4840edca1294bcd72e6c0496"
+    },
+    {
+      "path": "src/internal/blobs/split_test.go",
+      "sha256": "fb70e73ea5586a40be073fb7d4b3dc5f6a9917dadc79088a9da04a3c044d3c2e"
+    },
+    {
+      "path": "src/internal/callgraph/main.go",
+      "sha256": "d841cd92d89969635f1ef0ed9ab9a0e775f87f8185ee6fc9d3e88634e22024e1"
+    },
+    {
+      "path": "src/internal/cryptfile/cryptfile.go",
+      "sha256": "8184dfcfa3c66cc5f4da96a17838052fd85d06b8da66690267b8d52c29f9e181"
+    },
+    {
+      "path": "src/internal/cryptfile/cryptfile_test.go",
+      "sha256": "265ffc683ada72987fcbd83967af41e21eae15cc3985c3b11ef7e09e89643c46"
+    },
+    {
+      "path": "src/internal/cryptfile/global.go",
+      "sha256": "84d8bd5a685c0d82c32a8870a5e4ca866e6ed6a9126c62d84376063f67cee076"
+    },
+    {
+      "path": "src/internal/exportpkg/ccall.go",
+      "sha256": "0cf901c1eb8dd73ef1658be60c7d7cd2d6a80803a6f2b98ee24103a463337893"
+    },
+    {
+      "path": "src/internal/exportpkg/export.go",
+      "sha256": "04a9f1d883faeda2ba2077d285224c5de40c84081e6818591bb4ae6367cc2538"
+    },
+    {
+      "path": "src/internal/exportpkg/helpers.go",
+      "sha256": "1368baa9cb12d4d0a171999de23cae698d30bf72b65db17e91dbbe2a82cdc264"
+    },
+    {
+      "path": "src/internal/exportpkg/main.go",
+      "sha256": "cbceff9b1dc74b67dd110418622a587cc5598e99727b9e879625d3901ca71ff0"
+    },
+    {
+      "path": "src/internal/netlist/netlist.go",
+      "sha256": "8c859cb473a8aad91a394826810bd9d3e5f8c13f37acd663365ad38879775a77"
+    },
+    {
+      "path": "src/internal/netstr/client.go",
+      "sha256": "048bd8cc31d6f6abacb64b47cd65001fdfe5b33bfbef42b8bb38743c78bde10c"
+    },
+    {
+      "path": "src/internal/netstr/conn.go",
+      "sha256": "8f113ea35da442067cfdde85cdcc1fcdddf7d543279f94e462c9479bf523ea8b"
+    },
+    {
+      "path": "src/internal/netstr/discovery.go",
+      "sha256": "b748b2e2c15356dd2ca889be2c327a7e9abaf962288f102af02e34b3ddf845d5"
+    },
+    {
+      "path": "src/internal/netstr/errors.go",
+      "sha256": "7d9c616f2485d6d97723e10ccbd4ed76126e5fe4e5935b4b9245dd0163228e95"
+    },
+    {
+      "path": "src/internal/netstr/handle.go",
+      "sha256": "4153028b6aea0659706b7c2ef3905e1dbc8d0f3d9ea3a4595b502cfd9d3f7037"
+    },
+    {
+      "path": "src/internal/netstr/netstr.go",
+      "sha256": "7f8c1eb19ed793f20af2edd66637b587867b4c6c2a1f8fa1f5101fd316463ef4"
+    },
+    {
+      "path": "src/internal/netstr/netstr_test.go",
+      "sha256": "f6b51148383fea0b6f606aa9681328494484e2f37b1e52ce0907daf29390b4c2"
+    },
+    {
+      "path": "src/internal/netstr/send.go",
+      "sha256": "df07f39b74c7f6d1b6dd5a013cd5d2a9cb58b683c306cf18c6cadafa09023724"
+    },
+    {
+      "path": "src/internal/netstr/send_reliable.go",
+      "sha256": "5fac349cbba8fa0b44f271d415f062b459b80fea5ab9dd4aaca96b2158ef4066"
+    },
+    {
+      "path": "src/internal/netstr/server.go",
+      "sha256": "a624e70652b3087537da03b8fe47689ed67496a64e8c2e0de3aed9231703ce77"
+    },
+    {
+      "path": "src/internal/netstr/socket.go",
+      "sha256": "4bd65234366b779e160228579d69ee59614a65a1935b0aca8bc23c811f4cccf9"
+    },
+    {
+      "path": "src/internal/netstr/socket_linux.go",
+      "sha256": "8c4d2d30ce5e8f3b1ef30a319994497251a860f4f9e5871b2ee23a700efe9136"
+    },
+    {
+      "path": "src/internal/netstr/socket_windows.go",
+      "sha256": "1391a84f792c4606e23f606e4711f90633a6cb7a28182236c6b6a2e540547d5e"
+    },
+    {
+      "path": "src/internal/noxbuild/main.go",
+      "sha256": "4a16924859c8583c765f376128c26ed5624ccbc94a9b3cb8aaef39828d5448f7"
+    },
+    {
+      "path": "src/internal/noxfactor/c2gotok/c2gotok.go",
+      "sha256": "6138fb178748a7b4ba241fd01aa2b53a5529aaae645e1998009bcccf568d51d6"
+    },
+    {
+      "path": "src/internal/noxfactor/c2gotok/token_test.go",
+      "sha256": "3f59a82c77b188f39acefc0f66c3ba740052f59c544a3506ee2a6dcf9bc0c07c"
+    },
+    {
+      "path": "src/internal/noxfactor/c2gotok/tokens.go",
+      "sha256": "9c1b451ee72e8ded2a60ea8a61be9198e94a88955a5f52ee5df600a57d45d080"
+    },
+    {
+      "path": "src/internal/noxfactor/main.go",
+      "sha256": "8713d77d1583f23df0526861066e6ce498ebeffe348896ba14cfa945c3e0077e"
+    },
+    {
+      "path": "src/internal/noxfactor/main_test.go",
+      "sha256": "bb256b5a4d6e2e883c812769b9f04f24c2d5263766182e22b1c7ab88e3844ab6"
+    },
+    {
+      "path": "src/internal/offalign/blob_calls.go",
+      "sha256": "483993c702e5a60f84fdda93b0ec0f5629ebe1e953cf2067e8c50f2603da1fdb"
+    },
+    {
+      "path": "src/internal/offalign/csrc.go",
+      "sha256": "2c5ce866d3fc142d1e9cab8cd77edeb485a65ce55076d5b4b1f8f18e68380c6c"
+    },
+    {
+      "path": "src/internal/offalign/offalign.go",
+      "sha256": "c38398393bf7dd0612054cf0a2399c9a0cf099ae8cc74dacbff287021a8548da"
+    },
+    {
+      "path": "src/internal/offalign/offalign_test.go",
+      "sha256": "1aefb05dc4f06be3059f89fe9041a93b94fef287865b511a5049810d5a2c6422"
+    },
+    {
+      "path": "src/internal/vers/desktop/opennox.desktop",
+      "sha256": "b25277705c7a89c04df35dc59dbe3ab86d02fe293f3df1447e575aa94556c723"
+    },
+    {
+      "path": "src/internal/vers/git/git.go",
+      "sha256": "9ee66b1e90899bb994295b8ef11c242a822fa4f8ed97b3e91e07787951e1d91c"
+    },
+    {
+      "path": "src/internal/vers/main.go",
+      "sha256": "3e95e91deca4e5a1c50b322fd4f097117e3620128ee2da801a647c54eb42cd18"
+    },
+    {
+      "path": "src/internal/version/latest.go",
+      "sha256": "dfd9b0bbe4827cd3ac972de7e8566bf06516a96417dfa92f725341fca2dba9ac"
+    },
+    {
+      "path": "src/internal/version/latest_ghcr.go",
+      "sha256": "a6e888191cbfcf825307cecdad68e3a282bdb2e1dac1cdffcae2dba8f8197f59"
+    },
+    {
+      "path": "src/internal/version/latest_test.go",
+      "sha256": "52c58c9d4fcf9e96e912d6636b0802492ffddb98706ee7a91a5a027ec804eae5"
+    },
+    {
+      "path": "src/internal/version/version.go",
+      "sha256": "a1ae3a953c82188c9cb858c9bfb0c1ce5057871f44194153cb0d5a4339b2623b"
+    },
+    {
+      "path": "src/internal/version/version_test.go",
+      "sha256": "d662b1f8d93c726bb6ffff1789d914009b41c7886843d882b5681881d45756e5"
+    },
+    {
+      "path": "src/legacy/GAME1.c",
+      "sha256": "85e7948cde6ecb0e5f9c3e1ac27b84580b2579259d2e777eacf38a8b67f3087b"
+    },
+    {
+      "path": "src/legacy/GAME1.h",
+      "sha256": "02719d4d61840f3647c60746ae322db593c656fc9532106d5a6437007ca9b2db"
+    },
+    {
+      "path": "src/legacy/GAME1_1.c",
+      "sha256": "b7663c972e62429be2dd239f780f8dcd2e80787ecfb4f409409991d7892c246a"
+    },
+    {
+      "path": "src/legacy/GAME1_1.h",
+      "sha256": "6b109a0cc158cba022246c752795ee74b35533fc10f3c682b8c2fc764ce4653e"
+    },
+    {
+      "path": "src/legacy/GAME1_2.c",
+      "sha256": "8aacb46da6f2368825dddca10495f376150aea15c22b82ae0fd956f95cdd6e8c"
+    },
+    {
+      "path": "src/legacy/GAME1_2.h",
+      "sha256": "94f66865b6c8854f6d8af9304c947debd53174103482a9ad6dab0bd4a7c728c8"
+    },
+    {
+      "path": "src/legacy/GAME1_3.c",
+      "sha256": "afa682748412b08071d7bb3205023521ef54a3764ce61042c4969c7c917ecd2d"
+    },
+    {
+      "path": "src/legacy/GAME1_3.h",
+      "sha256": "62c9fc3350dc64ffcba5e46f24d20edef432d8a732336ef61208309bd883c3f8"
+    },
+    {
+      "path": "src/legacy/GAME2.c",
+      "sha256": "ae1fbfa78c899f859aa526c8fce08e86b0f34671b044a36ba0eecb5de81f2db3"
+    },
+    {
+      "path": "src/legacy/GAME2.h",
+      "sha256": "cc961ab7263484907a708bbec241d3faa5d8f6609f5ca982eef974cf3a428d8a"
+    },
+    {
+      "path": "src/legacy/GAME2_1.c",
+      "sha256": "699e58bfb1bb649cee0fcdb708deb1e6e131149739fa0a880ad7881e9c2bf443"
+    },
+    {
+      "path": "src/legacy/GAME2_1.h",
+      "sha256": "f2763da417a5b3de6269959e3d4de578213ad63325049c9f8ac7f16dbc19d581"
+    },
+    {
+      "path": "src/legacy/GAME2_2.c",
+      "sha256": "876b0d6fb988a4bcc24aabebffc7d1a899d5f2fe241a8523110f81be9870c213"
+    },
+    {
+      "path": "src/legacy/GAME2_2.h",
+      "sha256": "7e491eaf221571788f295be92049ca0baac993e1198a5f767c52be05099b9023"
+    },
+    {
+      "path": "src/legacy/GAME2_3.c",
+      "sha256": "5a3c5152950f14a5c02b0d367d43791351b1db216a2d05658d05f97d5505832f"
+    },
+    {
+      "path": "src/legacy/GAME2_3.h",
+      "sha256": "32f630285ac9210952704ea40c19d2e1308e7b9732eb2d5ba7c006ceb35a4603"
+    },
+    {
+      "path": "src/legacy/GAME3.c",
+      "sha256": "588002802b551bf761b1640548f15aa5b3282de54ec2ee7ff62610fbcc3a4a3a"
+    },
+    {
+      "path": "src/legacy/GAME3.h",
+      "sha256": "65f6a2a20a855055acd127a24169d6bef5d59b54cdc646badd14b5efb738afaa"
+    },
+    {
+      "path": "src/legacy/GAME3_1.c",
+      "sha256": "3554f59c327f6edb3fad2f478a646a4b55c7730323c2c3052290b1064da4bd05"
+    },
+    {
+      "path": "src/legacy/GAME3_1.h",
+      "sha256": "b08708fbb446e39b9cdef6e9358db6c1aad250727fb74c0b842eb78bf773f064"
+    },
+    {
+      "path": "src/legacy/GAME3_2.c",
+      "sha256": "dc3bf162f39eacf2627b3ea157f4eb5f56e68a140da67a22bf01cd955bab0085"
+    },
+    {
+      "path": "src/legacy/GAME3_2.h",
+      "sha256": "c0a221fa9b9085a04d41c8db81b898ed1e80d3fd2509b157e4bff93d6baa39bb"
+    },
+    {
+      "path": "src/legacy/GAME3_3.c",
+      "sha256": "3efacabb34ca374c4e494b6ea8897b033b860feef4578209c8e017ae1c4008b0"
+    },
+    {
+      "path": "src/legacy/GAME3_3.h",
+      "sha256": "53cc455fd321c93b7033969d80bde62586b6a8c1d5feb60eff3d392a168777c5"
+    },
+    {
+      "path": "src/legacy/GAME4.c",
+      "sha256": "715e1700932388df2b239d3a8c150ad442991b4338ac52a721dcc1c032d8c2e3"
+    },
+    {
+      "path": "src/legacy/GAME4.h",
+      "sha256": "c2fccfabe4dc830a243a8cb32b4d4ee5a05f2266b1ca368df61ce6048a4b2570"
+    },
+    {
+      "path": "src/legacy/GAME4_1.c",
+      "sha256": "f26ae7cff0462458c1c0698c3839750547342bd6432f361ce6e365db3de9f084"
+    },
+    {
+      "path": "src/legacy/GAME4_1.h",
+      "sha256": "3a6e750a753d648639dabdf23b4d3fb8793419e008f5fe29cbfe0e253c8a3c48"
+    },
+    {
+      "path": "src/legacy/GAME4_2.c",
+      "sha256": "15d30cbbd95d35edd017d93bc25767e5e104670eb350abfc369e4a757f9328b3"
+    },
+    {
+      "path": "src/legacy/GAME4_2.h",
+      "sha256": "caab267ff48c2f940555a9d85735e5f0fee11ecf108e18435705a34681aabd6e"
+    },
+    {
+      "path": "src/legacy/GAME4_3.c",
+      "sha256": "a2c91339bb874091f72057af389e21a25ccc73e68459893d0de77c30407c2bc2"
+    },
+    {
+      "path": "src/legacy/GAME4_3.h",
+      "sha256": "4f96f67bbb6e96f835117ff979242256c2e715b4a6ef2b3e83a5534afc830f13"
+    },
+    {
+      "path": "src/legacy/GAME5.c",
+      "sha256": "3d5b1191d12fb5c1e37908a4bda874a29c8cc171c8c034b08ceecbb6e59a612c"
+    },
+    {
+      "path": "src/legacy/GAME5.h",
+      "sha256": "f6f8b1ec266c056b975619c826fc137a17f0aafa479e5c5ea5716dbb2d119cd7"
+    },
+    {
+      "path": "src/legacy/GAME5_2.c",
+      "sha256": "be7907dbbbe5c7e57648920548967fbd7fc504b776d5e98c9f6f74ecf40797c9"
+    },
+    {
+      "path": "src/legacy/GAME5_2.h",
+      "sha256": "a2979458cc14dfa7d8d52db825253c0dd9b6e07b0a7d3fac690c86526398ea43"
+    },
+    {
+      "path": "src/legacy/GAME_data_init.go",
+      "sha256": "c8e28b498a6048d61d1a6c5b6c7e5b7cbbbaefe4147b3f3fe1355f090fb7c97e"
+    },
+    {
+      "path": "src/legacy/GameEx.c",
+      "sha256": "c85d7326e53b67c4c4a0e69a2a5e51ac6b8ac7ad3473b5155a630b1727c6eaad"
+    },
+    {
+      "path": "src/legacy/GameEx.h",
+      "sha256": "9d1d629b9147674d817f253e5d1bc58774665bf0a38d0f97db97c42f85b6d4e7"
+    },
+    {
+      "path": "src/legacy/MixPatch.c",
+      "sha256": "2c873a490576b589cabf24d04fbffd2032a8b6a74e6ecf59a17afb78e70c5d00"
+    },
+    {
+      "path": "src/legacy/MixPatch.h",
+      "sha256": "0bc76d1cb4a66b55641dc4e50d4271c5f89fe6fd90107e3b21d7bf078a02cab0"
+    },
+    {
+      "path": "src/legacy/alloc_classes.go",
+      "sha256": "e7342105c90e7eef09b6979b66a28e957b56e2f34333d1130c6d6af1e2702252"
+    },
+    {
+      "path": "src/legacy/audio_ail.go",
+      "sha256": "5466cf7025fa66bb828531c9f9e05448ec8c520bd976920598ac1741c0352643"
+    },
+    {
+      "path": "src/legacy/audio_event.go",
+      "sha256": "3463363e76154f50b10c8fe103391cd770c452ca7a183bde358c54959dfd8e0a"
+    },
+    {
+      "path": "src/legacy/binfile.go",
+      "sha256": "11459a9caa0523b96fed6f728b50168704b287d23aca10c83436697ed8d99180"
+    },
+    {
+      "path": "src/legacy/cgo_blobs.c",
+      "sha256": "9f11f100708dd48b11ef20d4adbae5130e455f0e15c8c17420f6c139b164d12d"
+    },
+    {
+      "path": "src/legacy/cgo_common.go",
+      "sha256": "7cfa405706d19d60f1f5243d6ab68fd00691791c8a87672372ba3b337fd751c6"
+    },
+    {
+      "path": "src/legacy/cgo_fast.go",
+      "sha256": "791e93a9850e45efd9bedeb4667f58ffc6a9f7affba5f9fde2c6f407d6403ca4"
+    },
+    {
+      "path": "src/legacy/cgo_flags.go",
+      "sha256": "36235f1e20d72de034b1adc7362c189a88ea8634f9002583284ef9730aac7ced"
+    },
+    {
+      "path": "src/legacy/cgo_fs.c",
+      "sha256": "71e6d74cb960ae9fb73b9a3f0f63cfeb37af042dd54db777eafac6c78a2b1841"
+    },
+    {
+      "path": "src/legacy/cgo_fs.go",
+      "sha256": "7e89f9acac4a61406bcaee3f04f8ba8b988f2970b59cd151374d536254825eb7"
+    },
+    {
+      "path": "src/legacy/cgo_safe.c",
+      "sha256": "541f99c674f2af24383667ff8adb16917290e303c9a0664391b12aa5cc7f3e62"
+    },
+    {
+      "path": "src/legacy/cgo_safe.go",
+      "sha256": "42ef9d25d0d7175b6db3a6a058ce67286fdca891f053d006a08c7550d17e95c5"
+    },
+    {
+      "path": "src/legacy/cgo_server.go",
+      "sha256": "367a07f1ff968bf82e7f2e74d9ee33dde37a05f56c4108e90fbcf9303e434d5e"
+    },
+    {
+      "path": "src/legacy/cgo_strings.go",
+      "sha256": "95b942c40422fb27ca54903ebdb6862c448d80e1119c3146065d26d1740437cb"
+    },
+    {
+      "path": "src/legacy/client.go",
+      "sha256": "47b4c7697a5e5edc51855df58eafda7f7757d58ae86a958c8743de5273d343e4"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/audio_adpcm.go",
+      "sha256": "e67845d629653664e4843796299892adc910626040c0a4a7978d4e0963eec968"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/audio_mp3.go",
+      "sha256": "bd64d9d021b17cecadf6a9468c20a25f67faaecec9bc1b99f8e052755f3ca0fb"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/audio_null.go",
+      "sha256": "a3c452b1dfb10f4b3c5e4e77573024127c2b628a04f0e39ae629b16a03cdc723"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/audio_openal.c",
+      "sha256": "aa0f682a069440b2f38a3026ad630efa9521b33844c80b2c9687c4728043454c"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/audio_openal.go",
+      "sha256": "3d2b54e57a6d9822ff2fcd554b2a242616b10a32181d75f815b1fc1d2cd523d3"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/audio_pcm.go",
+      "sha256": "dfe3534cdd3e172e9664e3daf23d53c108324af99408ba399bb5e9211ef4958e"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/audio_test.go",
+      "sha256": "25223176e0fcce394c0274279e4e897c55529a2a5bbabe96b1307734f7816a82"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/audio_wav.go",
+      "sha256": "28d14a7b9cf30ca2a44715b1e1648b0432546f6e54c02a1b2cd7a79338f93479"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/compat_mss.h",
+      "sha256": "15703156009e0a9699187067479ed92c15c3ecfc06fa0a2ac5576889c40c07cc"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/data_test.go",
+      "sha256": "ebeb3d7e20898e721e0414c4c0bfdf0c2b868d5480084951cc0ba17348ce5d5c"
+    },
+    {
+      "path": "src/legacy/client/audio/ail/handles.go",
+      "sha256": "4418438d9bf39ddd8a80b86648db5cd26c8361a6ee72ad2aa2114840a5dbba3f"
+    },
+    {
+      "path": "src/legacy/client/audio/mp3/minimp3.h",
+      "sha256": "07f0c1f8efbfb39eda1b9b438d0e7660d3d6a02b2669eeecc4d58731fec6d60d"
+    },
+    {
+      "path": "src/legacy/client__audio__audevent.c",
+      "sha256": "267cff0f0ff13c7a9222e61cc499e4ca5b7c02ea70549a445d2fad5f67a469b2"
+    },
+    {
+      "path": "src/legacy/client__audio__audevent.h",
+      "sha256": "44da5ae70858fdbd3b928cce2b7543d26b058c0c0727147cccad6cb4d3c58410"
+    },
+    {
+      "path": "src/legacy/client__draw__animdraw.c",
+      "sha256": "be65139599a8fbcc80a59539e4f3515cc3080cd10d608dfba069d93ec183985a"
+    },
+    {
+      "path": "src/legacy/client__draw__animdraw.h",
+      "sha256": "17197f8c37ff8273100189b88b11f1eaee434bdbc9111291282a90d4a8b816aa"
+    },
+    {
+      "path": "src/legacy/client__draw__armordraw.c",
+      "sha256": "7f548bfa9283a11d6d683a8dbbdf5a017fb214f01a2d91e4e69e68963bf5d4e1"
+    },
+    {
+      "path": "src/legacy/client__draw__armordraw.h",
+      "sha256": "bfae9b9a102b0b5a8c287c33e69f186dd2456465a9b34f445cea30017b7e3402"
+    },
+    {
+      "path": "src/legacy/client__draw__arrowdraw.c",
+      "sha256": "933dc75cb9fa47ae7f9f5d3429f04587e6feee515d9fdb603d34036523a6aa7c"
+    },
+    {
+      "path": "src/legacy/client__draw__arrowdraw.h",
+      "sha256": "128ea1d22882c75eadd683bfd07ad5fbd3314892259141b04c6936c7a6abd3b1"
+    },
+    {
+      "path": "src/legacy/client__draw__basedraw.c",
+      "sha256": "fb0c94b19e331414c697a6f7433a7729ae52421aa7abaf9eb9161694685c774b"
+    },
+    {
+      "path": "src/legacy/client__draw__basedraw.h",
+      "sha256": "2d236de01670248904d71a3b5a03687940eb7b58fb33c2cbec5ad35882fcf54f"
+    },
+    {
+      "path": "src/legacy/client__draw__boulderdraw.c",
+      "sha256": "3c90879cc7077bdaa7e35f43e53dc7f937ae9b2cc7afde2e4ae68bab01baac57"
+    },
+    {
+      "path": "src/legacy/client__draw__boulderdraw.h",
+      "sha256": "03f8f80d22a13bc780913b476a4188f090274c47216407a3eba58fd8ce4f40ca"
+    },
+    {
+      "path": "src/legacy/client__draw__bubbledraw.c",
+      "sha256": "50d42bdc447e51b9efc6a7c843343aceb9fc056b4a540b6334729239d5566207"
+    },
+    {
+      "path": "src/legacy/client__draw__bubbledraw.h",
+      "sha256": "3805cca7bd88a09008d0bed040fcc7990b5b58f6c2d2a7a08cdf7ca368bd0a1d"
+    },
+    {
+      "path": "src/legacy/client__draw__canidraw.c",
+      "sha256": "743799f764dac22021b730fbaa3edb891dbd4f8353fc149d226ac74d5d801cce"
+    },
+    {
+      "path": "src/legacy/client__draw__canidraw.h",
+      "sha256": "bb0f6cdf8dc296a553bbc809d006578797453c6e54ff96fa6b1acd583f65ebbd"
+    },
+    {
+      "path": "src/legacy/client__draw__debugdraw.h",
+      "sha256": "a99707b51de5521ac3b6814846619f4bc7250827ff0a7f31d8a859a9de1846aa"
+    },
+    {
+      "path": "src/legacy/client__draw__doordraw.c",
+      "sha256": "a4cdae4857c803cba43aa3fcc6308286ea03e8f19aa8af999e5f1db6b9544210"
+    },
+    {
+      "path": "src/legacy/client__draw__doordraw.h",
+      "sha256": "532c21f957ab8eb383ac091dfc9f2ca2bd83eb09f6c23b871041b00b2bd7a05d"
+    },
+    {
+      "path": "src/legacy/client__draw__drawrays.c",
+      "sha256": "392b349d853c100fbc5acc46b758b46d1f4da6b37cfb92a05ff964b553a598de"
+    },
+    {
+      "path": "src/legacy/client__draw__drawrays.h",
+      "sha256": "bf9c76c6138dd7ec30461755993c239aad34851e13fafeb7b27a7d09e4569680"
+    },
+    {
+      "path": "src/legacy/client__draw__flagdraw.c",
+      "sha256": "9485cf7c565a7a8626606241e4708194bbe4ac66f5ad3e6af6c9b350e8710f7d"
+    },
+    {
+      "path": "src/legacy/client__draw__flagdraw.h",
+      "sha256": "05cdd240668c19bb2986537e94a75c65aa22518b1cbebbcf37eb0d61577de5e0"
+    },
+    {
+      "path": "src/legacy/client__draw__fx.c",
+      "sha256": "975d5f13f36ff2223ba7c6a9e9afb6b1fa4c49ac14e5abd2e836c6394117e39d"
+    },
+    {
+      "path": "src/legacy/client__draw__fx.h",
+      "sha256": "ef1ba4d88996df663a57266d31a6551ec2cc7ad0b1f2dca6bbf67ce56f84ebf3"
+    },
+    {
+      "path": "src/legacy/client__draw__glowdraw.c",
+      "sha256": "3b0f24d16bceb12b67f441701c86a1548f2592136b07e5b9942a0ced4fcdc69f"
+    },
+    {
+      "path": "src/legacy/client__draw__glowdraw.h",
+      "sha256": "a4190eb010405f6187fc1111446a64605c6deeb1658c87bf2108db0f070bf687"
+    },
+    {
+      "path": "src/legacy/client__draw__glyphdraw.c",
+      "sha256": "47bff511a2eb16ba0439814156d78502aac58f7157ba67ef4810999f2fc98736"
+    },
+    {
+      "path": "src/legacy/client__draw__glyphdraw.h",
+      "sha256": "0cde5e1c101d317b6798f5d9423943d8d5e2979841bf01ddda21f7bba874f6be"
+    },
+    {
+      "path": "src/legacy/client__draw__harpoondraw.c",
+      "sha256": "9d5f66178934976f236ba06d77c85e855dc42c663c5cd7e44a579041da355bac"
+    },
+    {
+      "path": "src/legacy/client__draw__harpoondraw.h",
+      "sha256": "14b3c18582a03ec2907f5b35cdff0049d99884578db7eaa7826f7587549f8e90"
+    },
+    {
+      "path": "src/legacy/client__draw__lightning.c",
+      "sha256": "19d5a04f45bfbacfeb451924017efa7a47a09099f1736aefc271b20d32d32b7f"
+    },
+    {
+      "path": "src/legacy/client__draw__lightning.h",
+      "sha256": "a6231e66c0ad079eabfbc0581a6cb2b1fa3be93d5466f896bba2351d4f543319"
+    },
+    {
+      "path": "src/legacy/client__draw__lvupdraw.c",
+      "sha256": "cbabd42bb1a04adcd1b028158b7b081732de2920d250d84c963578f0153bfc2a"
+    },
+    {
+      "path": "src/legacy/client__draw__lvupdraw.h",
+      "sha256": "295920557a95196e4567a7bba12518cbfa74bb5ab058b4b208e6f5f5904130c0"
+    },
+    {
+      "path": "src/legacy/client__draw__magicdrw.c",
+      "sha256": "979093abfb742958b445d5c9c89e4d92852cffa467388da4e5a0c9c9fad92592"
+    },
+    {
+      "path": "src/legacy/client__draw__magicdrw.h",
+      "sha256": "3d26032fb7b52a2bc003dee633232fa3d333a2dbfbdba9f4bfbb3787c473034f"
+    },
+    {
+      "path": "src/legacy/client__draw__maidendraw.c",
+      "sha256": "c15574e5c7ff875723f69f497503ab186d12fa454784b2b31a7b554b7de57b6f"
+    },
+    {
+      "path": "src/legacy/client__draw__maidendraw.h",
+      "sha256": "edf32ea453b1111313a4b5f5e3b56ab8a45af6fa83453e0d4e5119c02b8258fa"
+    },
+    {
+      "path": "src/legacy/client__draw__mgendraw.c",
+      "sha256": "29343220e6741a1175e0acdd34edef88bf228fa3dabb153dd7c4c6b3a5e62930"
+    },
+    {
+      "path": "src/legacy/client__draw__mgendraw.h",
+      "sha256": "f1ee4492de217740c7bbc00f67287c97b985db6083e2a1a7f0850b742be08db3"
+    },
+    {
+      "path": "src/legacy/client__draw__parse__parse.c",
+      "sha256": "6a014b42a374a67694fa7142e5380c9bd654942ec87aaad6a1e4a7c7b234cacc"
+    },
+    {
+      "path": "src/legacy/client__draw__parse__parse.h",
+      "sha256": "7cdf67d26ce0041a88b67a47f0898d0daf6f772cb0f134d192f53080fba54f02"
+    },
+    {
+      "path": "src/legacy/client__draw__partrain.c",
+      "sha256": "886aace4f03db0c5640f251827c6a8b021ef7742d4c9309b083a3ce021176742"
+    },
+    {
+      "path": "src/legacy/client__draw__partrain.h",
+      "sha256": "0154f830c8504087b231755f487080ea1bbedf1f6c342b0eb7feff1898acc383"
+    },
+    {
+      "path": "src/legacy/client__draw__partscrn.c",
+      "sha256": "7575cb8a1527e15a502d5b1518f5b76126bed952b056d89c05011fdcdf12aa93"
+    },
+    {
+      "path": "src/legacy/client__draw__partscrn.h",
+      "sha256": "4956d4ea26f7bf11a16ff3eec18ce883908215b00be61d7ff1c11055794745fe"
+    },
+    {
+      "path": "src/legacy/client__draw__plasma.c",
+      "sha256": "c445be3295aa8f77c547f94961dcfc6dd5ec0cc4a4a2b2d7f2c2669ad119e4a0"
+    },
+    {
+      "path": "src/legacy/client__draw__plasma.h",
+      "sha256": "ae15fbf56f607d16526669dda8f0ef04e0392005e96497edd2cba81e6e49900c"
+    },
+    {
+      "path": "src/legacy/client__draw__playerdraw.c",
+      "sha256": "c0f762927b5daa4ac31500700d8f559c68dbb2daf4438724aeafd4e2e24bef3c"
+    },
+    {
+      "path": "src/legacy/client__draw__playerdraw.h",
+      "sha256": "10ca9f7af2363af2c8ba3e3e98b63eca46d1072931dab9661430044f3b889d5a"
+    },
+    {
+      "path": "src/legacy/client__draw__powderdraw.c",
+      "sha256": "7ba030a76a13050ad865c6acdaec985400cbfefc2057097330683677f946d90a"
+    },
+    {
+      "path": "src/legacy/client__draw__powderdraw.h",
+      "sha256": "7ccdbbf6898680bc198018ee9ba8e0f4dc3d841562c64e300b1c8974a873b228"
+    },
+    {
+      "path": "src/legacy/client__draw__pressureplatedraw.c",
+      "sha256": "9cd3ddc765790570b9e0581d7262b6123732a67737e4849d5d9308c58c5e5d15"
+    },
+    {
+      "path": "src/legacy/client__draw__pressureplatedraw.h",
+      "sha256": "4048e675ad033eae25983c197bfd9b1a9feead3f3f7cf63d1bc80a1ede2c4635"
+    },
+    {
+      "path": "src/legacy/client__draw__slavedraw.c",
+      "sha256": "f8e80d616e19c53047a09e6292f968e76f917d1434a089214e9269b9a3e07f22"
+    },
+    {
+      "path": "src/legacy/client__draw__slavedraw.h",
+      "sha256": "48b81a495411f204e7d2caefb3c1de03d42b99d25538b31e0069c049f7cd08eb"
+    },
+    {
+      "path": "src/legacy/client__draw__souldraw.h",
+      "sha256": "13e3d1831aef5fb3c17c8208e7c208e6fea9788b7f6ea572ea2a34ea82a1d2ae"
+    },
+    {
+      "path": "src/legacy/client__draw__spiderspitdraw.c",
+      "sha256": "edba6d97df095dfe4f0751bc02046808e824cc81185c4163a5094b588705cfc2"
+    },
+    {
+      "path": "src/legacy/client__draw__spiderspitdraw.h",
+      "sha256": "4a69284a9bb8bc558b803f1a1a17362d60d0e73ae419090c038675f4c24fc5eb"
+    },
+    {
+      "path": "src/legacy/client__draw__staticdraw.c",
+      "sha256": "3140cb24d497dc8c70f55e32ca37a617c82ec4bc940a5f9d050e3ce8ed31e089"
+    },
+    {
+      "path": "src/legacy/client__draw__staticdraw.h",
+      "sha256": "c32269ee90b6127454898f5cf820fa5d7082f845ee2b2bb23b39a3fa079d8567"
+    },
+    {
+      "path": "src/legacy/client__draw__summondraw.c",
+      "sha256": "d80783f0f7a155d1207fd4e65ba92f042a28690c3f302c5871255665ea6a852f"
+    },
+    {
+      "path": "src/legacy/client__draw__summondraw.h",
+      "sha256": "8ae7d8445dae37f8f40d9e4c843fb7839cffec2e8a388f128808e0f4e919fac1"
+    },
+    {
+      "path": "src/legacy/client__draw__triggerdraw.c",
+      "sha256": "d0610eb28b1b13121994e9f34917175e57d3a3d52be8c28190251ef7de451eaa"
+    },
+    {
+      "path": "src/legacy/client__draw__triggerdraw.h",
+      "sha256": "7db1f0c657e120659c581394857c07ba6f8d1643b18f3d3b7db8412b67de3a7c"
+    },
+    {
+      "path": "src/legacy/client__draw__udeddraw.c",
+      "sha256": "50b030f94af8c02fb73d4605673f596cabc581fcbccfb53be0a404fee2bfecec"
+    },
+    {
+      "path": "src/legacy/client__draw__udeddraw.h",
+      "sha256": "8793677286e4f314a44c263fab7a487dcf74688c669d5c6b48dbd5c946bddc22"
+    },
+    {
+      "path": "src/legacy/client__draw__vortexdraw.c",
+      "sha256": "c6ad7b53f8d96eebbf909ed0935de07ba3d9db7db96c6e5b52583044b20b1885"
+    },
+    {
+      "path": "src/legacy/client__draw__vortexdraw.h",
+      "sha256": "517ccab230c5b1be90fc04ed64111597542c663443e7b70d7e06efdca67ee864"
+    },
+    {
+      "path": "src/legacy/client__draw__weapondraw.c",
+      "sha256": "2e07144aea32cdc043b1d4b95a0ccca73efc30d9b9086dd5e7588ad80264add5"
+    },
+    {
+      "path": "src/legacy/client__draw__weapondraw.h",
+      "sha256": "2ca7fa77bc8212ca598a22c1d157244c2f2f2eb3f4717ff9764b4f9fdb73ae2c"
+    },
+    {
+      "path": "src/legacy/client__drawable__drawable.h",
+      "sha256": "5e6a4bc98e436cf0956a30707e5e469009a46ee8cb8ff7d083150ff0ec855b98"
+    },
+    {
+      "path": "src/legacy/client__drawable__drawdb.c",
+      "sha256": "c62a8fa3245ad07dd6cdcb04bee24bfc486cc0a72aefba45f3d1cad1ed91a231"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__charmup.c",
+      "sha256": "37a34b0bf0fe082d68cbdda5a00fcc4bd3c58bca56348d77d655610a57e1221b"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__charmup.h",
+      "sha256": "d515544fa57ca86250480696891b43edfb574ab4f6b0c27a1489344925a796e4"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__cloud.c",
+      "sha256": "59200bd3d9535c1c8ffca32ddb4f011704f4196953b6992ea97ae6220871ac92"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__cloud.h",
+      "sha256": "1e536212fd7357f69d64bc78b607079a89a3d5e5d0db50e37c1f5e87276793c1"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__dball.c",
+      "sha256": "860ca703a885a9241e6bf4f48700d791eca17bf7613ba0378f8fb10533c15fd9"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__dball.h",
+      "sha256": "368c11ac20eba4e5bd5eba2cb5c29f3dbce9d067000acc4baa87c151031001e1"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__drainup.c",
+      "sha256": "b031ef63aad4785835202522c13688b5670ab0170ee8e35438f06c4e00985d60"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__drainup.h",
+      "sha256": "6d6bd7ea14d5256ed6b365d8ffd09c2705ff1a256fd1ee69f11b13f157debb90"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__fireball.c",
+      "sha256": "8db1ba612f9554f58fb4db5cceaf36b927d084833c2dfb7ad48dbcbcca19e410"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__fireball.h",
+      "sha256": "6372ac3dde4147436327a3ba19b265fa90b40472cfc9ba69dc81d0b802f56ec8"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__healup.c",
+      "sha256": "fb3506504634e0a9b1ac6816224a2a157e9b2357c072b68a5e19aa273012da3c"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__healup.h",
+      "sha256": "3fd4319545d0df9d7edadbc2cf9f46fbe51992df4f29d4aae2ffd49e69390ceb"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__manabomb.c",
+      "sha256": "f2dd2a82e85696e9ae4af79f4d3110c1cab1d740aa565c9d150447ecfe535dad"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__manabomb.h",
+      "sha256": "bc3d436c2504af2beb9406c821f604bfc57a2b90390b79d0dd10225a1f6b7036"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__mmislup.c",
+      "sha256": "d93d15e0527b36e98e2d13376f3a6bfa54621fc5a9a0ae282c1a8c5f8bc86565"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__mmislup.h",
+      "sha256": "760a5e1f812beb748d8c624ae23682eb9350eee53298c1b628a890612e6b7ba6"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__mtailup.c",
+      "sha256": "5ff3c6b3a8696fc00c02962c5c3274d13489a86cc887429e01b2e58522fa4aef"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__mtailup.h",
+      "sha256": "76aaa0458cc43a37ae0bd379d5d53d13b7139bac06f24df074804839e396fedd"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__sparklup.c",
+      "sha256": "fb5c69973875db58459fd09e33792823567639d194b72461bfdca602e7758b13"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__sparklup.h",
+      "sha256": "6ceea8a7f4a11d47181d59024b820948cbbfad93f2b237ac63d53988a8822d78"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__telwake.c",
+      "sha256": "cbd3a4062b81092c4d724e4f0202304bd29eee42b4b71bb4ba7dbe5c70caf328"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__telwake.h",
+      "sha256": "affc9f3922a7fa296cac70762dc50ca938e158d7a54bba62c13b28c3b4fcdcf1"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__vortexup.c",
+      "sha256": "33818a9210b91f109d86cb2e965f2ad21abd73db9ba767419c29dca4a2bcbc88"
+    },
+    {
+      "path": "src/legacy/client__drawable__update__vortexup.h",
+      "sha256": "50aaafcbaeb704193be4ecb9948aa04510b266a5ea96564cfb8143d4d04bf4b0"
+    },
+    {
+      "path": "src/legacy/client__gui__chathelp.c",
+      "sha256": "dd9418cd1f595f50246624cf724a40686c13a9b59e1ef54f3200c1cd8e339245"
+    },
+    {
+      "path": "src/legacy/client__gui__chathelp.h",
+      "sha256": "cdefd4c66b2a91ebecbefc4b14fdc385d03d8b7a8ebfc8c3f07a62ac4ac827d0"
+    },
+    {
+      "path": "src/legacy/client__gui__chaticon.c",
+      "sha256": "566fd7fe092b2303ae7d509d203245cfa9bfb48960213679f37f66a45fc133d9"
+    },
+    {
+      "path": "src/legacy/client__gui__conntype.c",
+      "sha256": "4ba829bcb657cac4976dc47fb881ab5513ab65e33788fd7cee1beba2914c3fcc"
+    },
+    {
+      "path": "src/legacy/client__gui__conntype.h",
+      "sha256": "2edfc7a0e32462ec9bac40b379067d480ef02e2921fea13429179a72ad0b4f9f"
+    },
+    {
+      "path": "src/legacy/client__gui__gadgets__listbox.c",
+      "sha256": "8dbba97218fc1c4269ba704b394f5cf2d74249038a8dc461795f5f6ee721c11d"
+    },
+    {
+      "path": "src/legacy/client__gui__gadgets__listbox.h",
+      "sha256": "c1c8ecbf31777a5e2729c9ea8c1c923f1dd5b0866ef15a5a8c301f830e2838d2"
+    },
+    {
+      "path": "src/legacy/client__gui__gamewin__gamewin.c",
+      "sha256": "e120e1a89d522695b3182e42930d66a677c5036e377461f9580a4eff17c43626"
+    },
+    {
+      "path": "src/legacy/client__gui__gamewin__gamewin.h",
+      "sha256": "df08a8b903f063ef4372b847541b5dbcd26bf7f60ee89ead4b1663ddb22296b3"
+    },
+    {
+      "path": "src/legacy/client__gui__gui_ctf.c",
+      "sha256": "d5acc3c2904ef8f8a65d04b1c1bc273b802b267836a04ced0a15fff9fe407932"
+    },
+    {
+      "path": "src/legacy/client__gui__gui_ctf.h",
+      "sha256": "f782aa0460997193408261083f7d9584322f45b64db4df2917d2d2e39a9a80a9"
+    },
+    {
+      "path": "src/legacy/client__gui__guibook.c",
+      "sha256": "cd5f6e8b146055185785284d4ffeabc51bf3c3c44f749715b2003aa49750f100"
+    },
+    {
+      "path": "src/legacy/client__gui__guibook.h",
+      "sha256": "31450428ff73bcd8fe00ada0c29f170a675e1412ce56ce0c819658a30c7ca8b4"
+    },
+    {
+      "path": "src/legacy/client__gui__guibrief.c",
+      "sha256": "3caded7ea07549d884c6f15b51b439c8e4375a527568d69b110c266f08ca45bd"
+    },
+    {
+      "path": "src/legacy/client__gui__guibrief.h",
+      "sha256": "25eaf8aff3cd78eb0c87bfc5c4f0accbd55300cd07e0e88a1d5381c07cc42dd2"
+    },
+    {
+      "path": "src/legacy/client__gui__guicon.h",
+      "sha256": "b66e4f2e8dfd7aaadef2944e67dc5872c00920ca0c19465d49a52941a16baed4"
+    },
+    {
+      "path": "src/legacy/client__gui__guifb.c",
+      "sha256": "a84f6c892c191b62d1e056edbdc8548f775acd6c32a6d42df16d5630c913437d"
+    },
+    {
+      "path": "src/legacy/client__gui__guigen.c",
+      "sha256": "14bfa6ec03b80975f4376dfe3f44c9469fcf9323490222e2606d255c111eadae"
+    },
+    {
+      "path": "src/legacy/client__gui__guigen.h",
+      "sha256": "fd41851a87f53e73713329746a66119ac3e41868419cc4360ccf560e36567a22"
+    },
+    {
+      "path": "src/legacy/client__gui__guiggovr.c",
+      "sha256": "65a7c24ff716154c059cb116497e6d0beed9eb58268d8156ee4f0cb0dd68f0c0"
+    },
+    {
+      "path": "src/legacy/client__gui__guiggovr.h",
+      "sha256": "7e0877be350f1ab645f6c3d23c61b982c12c43619351ecca1b3437273e92bf47"
+    },
+    {
+      "path": "src/legacy/client__gui__guiinput.c",
+      "sha256": "42f5bc98fc3b7832d6f0e925a660e601760fde6c2b090afca712b8438ccc0034"
+    },
+    {
+      "path": "src/legacy/client__gui__guiinput.h",
+      "sha256": "fc3e7199c8b3c40f541fe2f5836fc6a0e5ccf18667c41893ef890b754469dc08"
+    },
+    {
+      "path": "src/legacy/client__gui__guiinv.c",
+      "sha256": "6c458dfad27f25782263e391d591f49c1be1382199f233119939ccf266d3e0eb"
+    },
+    {
+      "path": "src/legacy/client__gui__guiinv.h",
+      "sha256": "eb7de0e871bb4b8863889c45eb497b2f6cc84dc8bf727ab515e3e8138d4c3787"
+    },
+    {
+      "path": "src/legacy/client__gui__guijourn.c",
+      "sha256": "764ace48c97dfb9e7c5235ddf9f4fbcacab080a6ce649708cff1a6a4a38aab36"
+    },
+    {
+      "path": "src/legacy/client__gui__guijourn.h",
+      "sha256": "236e2ad3aa12ef7a60e7329f41bfec98ca12c1b371e2ca81b0864c4b51d2c89c"
+    },
+    {
+      "path": "src/legacy/client__gui__guimeter.c",
+      "sha256": "db88c8ec9eb5d5d6854417e35589b09c2ee30dd1e758e06696190092c9c9cf0f"
+    },
+    {
+      "path": "src/legacy/client__gui__guimeter.h",
+      "sha256": "066cf164775a174e4a946e65551b3c127425a55a59aa24e7c006bae844f18392"
+    },
+    {
+      "path": "src/legacy/client__gui__guimsg.c",
+      "sha256": "0ea8e9239b470090c1c06699afc20b2f3d17aea60235bf8d98a5c15df3f3b01a"
+    },
+    {
+      "path": "src/legacy/client__gui__guimsg.h",
+      "sha256": "3db673e4be8dcab62ad4e67817559c0fe2bd2408ec0010d01503699bf04afbb5"
+    },
+    {
+      "path": "src/legacy/client__gui__guiobs.c",
+      "sha256": "82068a6597474701cd2de9e81f13f44875237e01ddd55c3e48be14e5985286c4"
+    },
+    {
+      "path": "src/legacy/client__gui__guiquit.c",
+      "sha256": "e12da5de7e39dd18f0c358aa22f30b14ad752a44d905fc9833ee42c4d223d45a"
+    },
+    {
+      "path": "src/legacy/client__gui__guiquit.h",
+      "sha256": "fb1e341f9b310891828f1a76a0db02e0576ce0f95f727e3ec4c0cf46d1c53b97"
+    },
+    {
+      "path": "src/legacy/client__gui__guirank.c",
+      "sha256": "228d24af3778684ad496afba15901c84750d7fa5d85205eb25e5a10fc7796f62"
+    },
+    {
+      "path": "src/legacy/client__gui__guirank.h",
+      "sha256": "cac01a93e5bb8e88a1f2b1f20b5b4e2ce706367e809a307ac607239716f13883"
+    },
+    {
+      "path": "src/legacy/client__gui__guisave.h",
+      "sha256": "aad05e34b647f38bdad2598a5574f216de5ba1f62b5142c7b8ed7134d7fe36d0"
+    },
+    {
+      "path": "src/legacy/client__gui__guishop.c",
+      "sha256": "47af7329b9eb2c8685bfcd7f05e4121d2b01550fb68c767e2449cfa770ba42ea"
+    },
+    {
+      "path": "src/legacy/client__gui__guishop.h",
+      "sha256": "1699f749a2bfde24c2547f21106064045f63bf75e01f8f15f4230fd7f205b4b5"
+    },
+    {
+      "path": "src/legacy/client__gui__guispell.c",
+      "sha256": "c18aa9c9f87eff2ab1e6ac6e22de0245999c8b799ad97e3840a5b1bd1a7f7b66"
+    },
+    {
+      "path": "src/legacy/client__gui__guispell.h",
+      "sha256": "adc976c863e7fe22522e6bc9897a04ec3d2ef7c12d00b7be1b55d4cccadd31c1"
+    },
+    {
+      "path": "src/legacy/client__gui__guisumn.c",
+      "sha256": "6093cb270e8ad1987c9df579a127642b688492bf214aeea94adcede3221fff4b"
+    },
+    {
+      "path": "src/legacy/client__gui__guisumn.h",
+      "sha256": "11ee35d231f6a67b882a4a10d107bd123aa2694ac4835199df75aa476b3dc49a"
+    },
+    {
+      "path": "src/legacy/client__gui__guitrade.c",
+      "sha256": "c6d0362f2fe0a009fee9129cd0a5f7b5b8cd411cbda661cdd7caf76c42f3ed8e"
+    },
+    {
+      "path": "src/legacy/client__gui__guitrade.h",
+      "sha256": "dbe774aa5ec3574a17d6b4a034397c720ed0f91edd7daa7c58f9ae21e10e25d7"
+    },
+    {
+      "path": "src/legacy/client__gui__guivote.c",
+      "sha256": "62b1f2173208e307c078e3e849f60a347ceefcfa1033f8ced3f8c3262ee4f474"
+    },
+    {
+      "path": "src/legacy/client__gui__guivote.h",
+      "sha256": "0d9e00fdf343c89e81b2e439dabf46eb9e64f9d78dce7f4201b7dd6fce993b7d"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__access.c",
+      "sha256": "37506de59ea5ab35e34949ff397fed195a5d97a6ac1f32295c452c9d08aea4e9"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__access.h",
+      "sha256": "b0c66811a0ef6c7faf3ac95e2ee4b256fca120e59ec634c6d479340e915ff72d"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__advserv.c",
+      "sha256": "5719a0ff268e0b22f597259707d4310134eb15e5ad03dcf9594ba2dfa33d439e"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__advserv.h",
+      "sha256": "258e11a7d640ca8d9bf64b62f59e7603c67b25bdc3ca2102feb5504e1ef3de24"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__general.c",
+      "sha256": "3ccef0b50f633cf4971bc71325bbd773d95150d1d0e7a6f0457e0afce2be559f"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__general.h",
+      "sha256": "b41e51cf730b2c33cd1af2ac7df45eff5d8adeee216f111440e6a07c88d0cd44"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__guiserv.c",
+      "sha256": "7d371a3185a8a4a46931007668645c1b5b1cf171c3da337a7125658fbae626b7"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__guiserv.h",
+      "sha256": "8b73b8a09c59b53987ffc4c3fedcfcaa595397fd602ba6a76e796089866cce98"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__objlst.c",
+      "sha256": "1209bd8fdb38c4b041f8816eaedd4df4b0f1d69db91d3381fb6de3a0c8484c00"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__objlst.h",
+      "sha256": "727090fc71bb7f4a529509040093b4a577a059eba9ac184cd218f338fe670be7"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__playrlst.c",
+      "sha256": "7dabf82683d771ce1ea2271277388673bf94e96b97045e43ca1f2ec30da9db77"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__playrlst.h",
+      "sha256": "121f3061cedb381f6863fd148f22382bb6b0f8340abe62ec1e5e2976ed2c71dd"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__spelllst.c",
+      "sha256": "b16ce04adc03ad8928f62641408c3c89ae917c255c00fb1fccd705e62522725e"
+    },
+    {
+      "path": "src/legacy/client__gui__servopts__spelllst.h",
+      "sha256": "812721fdc450c9bff1c5486977e272d061dd10316807853d321604a377d8103c"
+    },
+    {
+      "path": "src/legacy/client__gui__tooltip.c",
+      "sha256": "2f751373f14d4e06d8746267dc4a482e9a6406eb133797b253bb1ea17914a9bb"
+    },
+    {
+      "path": "src/legacy/client__gui__tooltip.h",
+      "sha256": "1182085be3a29ca2d0b0cf4251678cfc0e0dbf873581f1aebee0050c2a77f1bd"
+    },
+    {
+      "path": "src/legacy/client__gui__window.c",
+      "sha256": "7f7b779ec7671d7e8230dd00c07c62ff4ecaefe9d1ec3dbff1b5c7d54afba3c0"
+    },
+    {
+      "path": "src/legacy/client__gui__window.h",
+      "sha256": "279df9c30ebf1731ea2d2c7878f31dfcc35fc8741ae388d79f17437cacd4fc79"
+    },
+    {
+      "path": "src/legacy/client__io__win95__focus.c",
+      "sha256": "93332cb33a0fa2f5a627abc6a46db6b06067622a8d85b0a3a9dcacb63225b026"
+    },
+    {
+      "path": "src/legacy/client__io__win95__focus.h",
+      "sha256": "19ad710f331cda0f7c53e0cd63815e1417410f61740648d47d8e25a43fd885be"
+    },
+    {
+      "path": "src/legacy/client__network__cdecode.c",
+      "sha256": "449f5452fd44d005d570ba3b5c64fe5e613f9b5f9b59dd6ddb57613a53a28957"
+    },
+    {
+      "path": "src/legacy/client__network__cdecode.h",
+      "sha256": "4da9fa5b0350783ef666a50494e857d2e95e8b27fb360ae49cb55435a6c852dc"
+    },
+    {
+      "path": "src/legacy/client__network__deathmsg.c",
+      "sha256": "df46fd361f6e17d5f2d5e385a428da118a095673859fc841b3aabdfd0fd7ca66"
+    },
+    {
+      "path": "src/legacy/client__network__deathmsg.h",
+      "sha256": "2f65e3a3f0f836165f79b290cd1230860814b7e40174c53c873bed4c2cb880b0"
+    },
+    {
+      "path": "src/legacy/client__network__inform.c",
+      "sha256": "41b08c9592c18d8046975a5b4c49d83e40a2e6d2d8fa8422fca83d7b827d7130"
+    },
+    {
+      "path": "src/legacy/client__network__inform.h",
+      "sha256": "2e60bcfb041e60b51775b17c8275e7c7f1c0be72cfe62b28f0dfa2c496b06f16"
+    },
+    {
+      "path": "src/legacy/client__shell__inputcfg__inputcfg.c",
+      "sha256": "bac57861b4992e05a278cbd0a7ade53bfb403c747798ec7a84c2d1ac427f2b73"
+    },
+    {
+      "path": "src/legacy/client__shell__inputcfg__inputcfg.h",
+      "sha256": "7f2ba9b2f254949c21a5e6ebc7672e8c572be888cf85c93d97da27344966f3e9"
+    },
+    {
+      "path": "src/legacy/client__shell__mainmenu.c",
+      "sha256": "60a0dda4f3e3f89686be40f922ccd74a92379af1aee6c9529c2ad6ec798112e1"
+    },
+    {
+      "path": "src/legacy/client__shell__mainmenu.h",
+      "sha256": "911d2504299a2a0bae51c1c99c159ebe6f65548ec9339e12a17795764d7580ee"
+    },
+    {
+      "path": "src/legacy/client__shell__noxworld.c",
+      "sha256": "28b5b3aa877292f0943cb1da664a7f058ba2bd9957be020f6d7f751f3eadca31"
+    },
+    {
+      "path": "src/legacy/client__shell__noxworld.h",
+      "sha256": "f21f527e87ccd9a655ebc89f178387ef842da812064ff059065329114f2e8c02"
+    },
+    {
+      "path": "src/legacy/client__shell__options.c",
+      "sha256": "ec59dc782ceef1a211d373907da5ea786ed256c6634748f90ab279498aef9b37"
+    },
+    {
+      "path": "src/legacy/client__shell__optsback.h",
+      "sha256": "20f625fdc2cbe965e7f8a909e9d91424ca9fe16e75b9a529cb0da48a54994f71"
+    },
+    {
+      "path": "src/legacy/client__shell__selchar.h",
+      "sha256": "14e5a559e5825399e8231dbdb48978963f372b21cb4aef2eac69ec22f1283e3e"
+    },
+    {
+      "path": "src/legacy/client__shell__selclass.c",
+      "sha256": "7a2a17c87a39d7e01f0eb0a81fe4e58fc40048f1ba5b9df55f4d91e32eab6b5a"
+    },
+    {
+      "path": "src/legacy/client__shell__selclass.h",
+      "sha256": "5e9f2fa23853ba12cf4d73d300722d35a2586d2d19f0bad592cf3e9c2663cbd6"
+    },
+    {
+      "path": "src/legacy/client__shell__selcolor.c",
+      "sha256": "e64fcac751f6cac030d45886e0c355d886c18995b31e636a95132ad2944f5351"
+    },
+    {
+      "path": "src/legacy/client__shell__selcolor.h",
+      "sha256": "f0257fdc74472aec80f9fe1fd71bc514131cf4be22b18f8445ae5a9783817056"
+    },
+    {
+      "path": "src/legacy/client__system__client.c",
+      "sha256": "93e0978637151254bd12ff18bce7b772af3eae7aae0c344f40ccfde2d0ce69c9"
+    },
+    {
+      "path": "src/legacy/client__system__client.h",
+      "sha256": "c8ecbbec0c6f7a1bda264be8f4b6b59aa90f20fa980f9fca60a3ac67b67901d0"
+    },
+    {
+      "path": "src/legacy/client__system__ctrlevnt.h",
+      "sha256": "83d80b537f29d2e961e9cfd08b07780c29ce7122845065d10a2346cca0c0d3ca"
+    },
+    {
+      "path": "src/legacy/client__system__parsecmd.c",
+      "sha256": "d3c1512d0172824ecd08c3e0d5f8cbb00ea57b17478521f8e1ec8577970fd3fe"
+    },
+    {
+      "path": "src/legacy/client__system__parsecmd.h",
+      "sha256": "6bcc546bba17833451eeaa344048eba5befbc1f137ccf3f9097ac7fc0e7843db"
+    },
+    {
+      "path": "src/legacy/client__video__draw_common.h",
+      "sha256": "cc2e88e6682cce4ab478368cbacf57cc05cf379adf307fb015dea3859363f799"
+    },
+    {
+      "path": "src/legacy/client_draw.go",
+      "sha256": "a1d2b3501133d565a695cc46f1aa1c3badaa0aeb6a5d6f2138b0b882515a64f3"
+    },
+    {
+      "path": "src/legacy/client_draw_all.go",
+      "sha256": "baa42072f6e4c36e635bef60ed9636611a0609e01d160d8a31bf572ef0aa8f32"
+    },
+    {
+      "path": "src/legacy/client_gameloop.go",
+      "sha256": "8c76ee2cd778f631dc2f4db8308cbdd8fb0154e94f5ac093de287e87159ac0f6"
+    },
+    {
+      "path": "src/legacy/cnxz/nxz.go",
+      "sha256": "68e6b9233899fab59c9d17cfcc7fa0537f669a8d4eba238b156812dfea23ed68"
+    },
+    {
+      "path": "src/legacy/cnxz/nxz_common.c",
+      "sha256": "07c6a26c729ee55c1f0d50a5c4ad1a79a1821fec7aa180be143e5b82606e85a5"
+    },
+    {
+      "path": "src/legacy/cnxz/nxz_comp.c",
+      "sha256": "57c37ce461753278e69e3ca56b436733a74e8a8fef7147e517dcd9286d5dee77"
+    },
+    {
+      "path": "src/legacy/cnxz/nxz_decomp.c",
+      "sha256": "2e417ed377e01fcf5123178e09ab1be1d2399c78fd61b8d76ebe2f5d2223c7af"
+    },
+    {
+      "path": "src/legacy/cnxz/nxz_test.go",
+      "sha256": "85488237b9fa6cf65215ec6db162f0e403d29e53275bafa5330df3a468b59171"
+    },
+    {
+      "path": "src/legacy/common.go",
+      "sha256": "b130979bf6d5dc237db2e19b2cc8e7a53fa2a7e022763871a9672136460109d1"
+    },
+    {
+      "path": "src/legacy/common/alloc/alloc.go",
+      "sha256": "17e1c2eefadfb763bd7e945bc234fce2fcb3ca3505b298ca5c6eb953cee65e3b"
+    },
+    {
+      "path": "src/legacy/common/alloc/classes.go",
+      "sha256": "e34c9c88e9f053d6377ae64bb14ed8e28c86c02029d73b33e02da07790300f28"
+    },
+    {
+      "path": "src/legacy/common/alloc/classes/alloc_class.h",
+      "sha256": "2dd2c4cc624c20080fba11c4048e2cb49fb51f0755d8f86a8f14c5fc166daa1c"
+    },
+    {
+      "path": "src/legacy/common/alloc/handles/handles.go",
+      "sha256": "1255eea66ec252241fd230bcb018936b2d7740cbe86e728ec22402468b9bb12c"
+    },
+    {
+      "path": "src/legacy/common/alloc/memguard/memguard.go",
+      "sha256": "d599530677a09fbe4fb9f61ab110d3dd807b34d391a75aba4ed0c8fb733eed72"
+    },
+    {
+      "path": "src/legacy/common/alloc/memguard/memguard_linux.go",
+      "sha256": "f571304ba7ff5f0b6f1f54d9458903c2b4923111a8f2047f09d6c9b0bd4d69f1"
+    },
+    {
+      "path": "src/legacy/common/alloc/memguard/memguard_windows.go",
+      "sha256": "ce33e1cb92d79f2c28716a3402b25fac0a6059563082f9747e39be212e53eac4"
+    },
+    {
+      "path": "src/legacy/common/alloc/memlog.go",
+      "sha256": "0490eacb7e9f9286c8576b4ebbd11909b814e7470cbb25d9b2c4aa518bc2c48a"
+    },
+    {
+      "path": "src/legacy/common/alloc/obj_list.go",
+      "sha256": "a312383854964a891cc882377e4866413f7d53028ae1a1d7320fe3abcc125677"
+    },
+    {
+      "path": "src/legacy/common/alloc/obj_list_test.go",
+      "sha256": "8b197173754f319ae1c2646ca8d430e331fc12d7fa81beb68892b6f5825fdd18"
+    },
+    {
+      "path": "src/legacy/common/alloc/string.go",
+      "sha256": "99e9a3f92edc9da96b52934bc2175836309872f3bfe0c8770a095a8417980dd4"
+    },
+    {
+      "path": "src/legacy/common/alloc/string_u16.go",
+      "sha256": "1a0867817a92b14772e977eeffc4b8ce7dd9868371ffa111e5b09aaade23ba7b"
+    },
+    {
+      "path": "src/legacy/common/ccall/callgen/main.go",
+      "sha256": "3ddc91c617fcdb06ecb7931ce31d37a87cb5ba4a8f3f27aeeeaad6b5ded25a57"
+    },
+    {
+      "path": "src/legacy/common/ccall/ccall.go",
+      "sha256": "eb733d9c590427047c769fc7e741f2b439e181ef5d79f32257ad5c016f256682"
+    },
+    {
+      "path": "src/legacy/common/ccall/generate.go",
+      "sha256": "55ed1ca5a475e0e2810ac3a42c63dc557e664aab6986839d8199f6bff01742bb"
+    },
+    {
+      "path": "src/legacy/common/ccall/ptrs.go",
+      "sha256": "722be0ee1d203a132edc0bdd16a04a698077cc9985008283bdccb0b356cc952d"
+    },
+    {
+      "path": "src/legacy/common/fs/nox_fs.h",
+      "sha256": "0647eb27e04605853a232d0b2d1ba2a43be95ce8d84c7a067033ed844ddf61c7"
+    },
+    {
+      "path": "src/legacy/common/platform/platform.h",
+      "sha256": "c8a2550ea34aecf096ce14f9862bba3ad42de60fea5086dc2fac18b687241a1b"
+    },
+    {
+      "path": "src/legacy/common__binfile.h",
+      "sha256": "a032494d020bd9b2a3ca8230ad4f2cc5516d3224c69ff8d4ff748bf332dde322"
+    },
+    {
+      "path": "src/legacy/common__crypt.h",
+      "sha256": "48d0fd2ef46af4679d8682e73ccdc57e5a24032cf7d497d7cdfc7763f85aea85"
+    },
+    {
+      "path": "src/legacy/common__gamemech__pausefx.c",
+      "sha256": "d18ee67fe2457bf584e9537a7b4734f39d3dd0c1c5c2945585e348c48cc77c6c"
+    },
+    {
+      "path": "src/legacy/common__gamemech__pausefx.h",
+      "sha256": "2f362d7285550bfef2a98f38fe2a6ff108063ce495e7969c077d437e543b5152"
+    },
+    {
+      "path": "src/legacy/common__log.c",
+      "sha256": "b94a90964fc9a0608c3f06fac8763f874dcb5308520452491285327208c7f87e"
+    },
+    {
+      "path": "src/legacy/common__log.h",
+      "sha256": "db2d93a07f05414c3f51cba75f634f666f7404f3ca6ddbd0ebd251c710abfb7c"
+    },
+    {
+      "path": "src/legacy/common__magic__comguide.c",
+      "sha256": "1dacfffa09a885c7d04a99f276cc602ea8a70f367f285b0b68c7d32418004db4"
+    },
+    {
+      "path": "src/legacy/common__magic__speltree.h",
+      "sha256": "1c3b6b95faa618f542224a1567db22a87b16025ddee291af95b61d9c59110d70"
+    },
+    {
+      "path": "src/legacy/common__net_list.h",
+      "sha256": "1257d7d2f0cdf1ea046568d680d3c632aca7252fdaa0e30f28ba4464b5437e1d"
+    },
+    {
+      "path": "src/legacy/common__object__armrlook.c",
+      "sha256": "0377f87e9de377b316738965d679a3fc1ee90d9fa5115af6bd3fd81f462b1e04"
+    },
+    {
+      "path": "src/legacy/common__object__armrlook.h",
+      "sha256": "43c8849d4acfa0847dfab5958e82c49374ef530dc59aa4dd68b56de37c663600"
+    },
+    {
+      "path": "src/legacy/common__object__modifier.c",
+      "sha256": "bbfdeba4ee8991681cec861f10dbf7f4ea861b6462d3d0f5c62064503cbfda4f"
+    },
+    {
+      "path": "src/legacy/common__object__modifier.h",
+      "sha256": "a299a7d90442a9eac640b195f04a4ad68598b6659da1f845ddadc04abca036e7"
+    },
+    {
+      "path": "src/legacy/common__object__weaplook.c",
+      "sha256": "7c2f3d991d97e1eb101231aca7bcb0e4829114f8cbb9c9d82c5e690438cb1f94"
+    },
+    {
+      "path": "src/legacy/common__object__weaplook.h",
+      "sha256": "f759e29ba3514d9c1b6ddf06eeb2aa41136942aa325f00380734c02287a50a35"
+    },
+    {
+      "path": "src/legacy/common__random.h",
+      "sha256": "aae84387994d73c7a143b7541947c9ccd6975f2b03dad6c44d8a38bdd849f1c2"
+    },
+    {
+      "path": "src/legacy/common__savegame.h",
+      "sha256": "1dabd27ae6eabc8a6b64b9bf2f32d4d100dc94ef60f43ef6ed13359b78dda0f9"
+    },
+    {
+      "path": "src/legacy/common__strman.h",
+      "sha256": "28d1a8192702fc8ac6d317550f7973ac4ed9f5437f2030e95a57eb5d85682d7d"
+    },
+    {
+      "path": "src/legacy/common__system__settings.c",
+      "sha256": "cf72088a3fd470c366d0a087f4c7a02116d99b0ee2502e0b1dd7061c93b67032"
+    },
+    {
+      "path": "src/legacy/common__system__settings.h",
+      "sha256": "f326b452e906bc8fb4341845c0fd518e5194adab7ed7bc52e00c221ab1cc62c3"
+    },
+    {
+      "path": "src/legacy/common__system__team.c",
+      "sha256": "3457dfdde5e237e4b6c4626148e283fcdab0377e035005717f94a6810d0933cb"
+    },
+    {
+      "path": "src/legacy/common__system__team.h",
+      "sha256": "dedcc292f9e109bf08fe0747e922f9f85d7a045b0645f9cb3538004d337bb57d"
+    },
+    {
+      "path": "src/legacy/compat.c",
+      "sha256": "f0b93380261e63f276251e0e8057c92c081717c08f122c94dd82a80dba808573"
+    },
+    {
+      "path": "src/legacy/compat.go",
+      "sha256": "fb32d9cb5a06632854cbbd42dd6c71f7b584cd821824a28121baf447da3a913f"
+    },
+    {
+      "path": "src/legacy/compat.h",
+      "sha256": "21a8660f725894eab7e86ddda513e9cf6fe608ee59c4ec61b0f2fe704e2a696f"
+    },
+    {
+      "path": "src/legacy/config.go",
+      "sha256": "2788e961a165fa2f0b8c5da075dcdf144a6ac45b90c022bee1a7a8a8feb80e51"
+    },
+    {
+      "path": "src/legacy/config_legacy.go",
+      "sha256": "4ff8d329a6a15648e526f0b4e9e914ad26efedf6efeb000f1acf15eb1f133ed5"
+    },
+    {
+      "path": "src/legacy/cryptfile.go",
+      "sha256": "7c3d296248c2ca1c0e81d170332e6f76a9338cfec37566147045ae28d1307ab7"
+    },
+    {
+      "path": "src/legacy/ctrlevent.go",
+      "sha256": "4f2bac6b5986161e02934bd39a1417124d625022477006b2f04d7dbcb3e92150"
+    },
+    {
+      "path": "src/legacy/debug.go",
+      "sha256": "3fe6b3c68d505b8dbb5d93e6c554a948f7286975bc7b38759bfe7c686e7f306c"
+    },
+    {
+      "path": "src/legacy/defs.h",
+      "sha256": "ec0699eff6a7fcab6a354a8f87086cb49616883f8bbf027cafa7c1ba8ffcd8cf"
+    },
+    {
+      "path": "src/legacy/dialog/dialog.go",
+      "sha256": "7056db74cc78d61e0da60e1c7be6baadf3e92a04ee86b1209fcc11135773c630"
+    },
+    {
+      "path": "src/legacy/dialog/dialog_test.go",
+      "sha256": "135a362969055d23103f12ab3885725a3eb0e71aa1102d19b3e6ad8809e5e1ff"
+    },
+    {
+      "path": "src/legacy/dialog/testdata/dialogs.json",
+      "sha256": "87b77cb9f4909e36e01b2c2ef3c049236026e40820992feb7fe4573974315a40"
+    },
+    {
+      "path": "src/legacy/dialog/testdata/empty.wav",
+      "sha256": "544e3c8c58320ee05554a5215879d8c3ea05851f60fb8a10bfb647a17d632521"
+    },
+    {
+      "path": "src/legacy/dialog_imports.go",
+      "sha256": "60b2af3c29adc639ede0e4dc4f047e07290da1b08346ef8216179d5c29f066e7"
+    },
+    {
+      "path": "src/legacy/draw.go",
+      "sha256": "21f35fdb81ac53d9cb83ae27773e380a76d2af500144da7b64846e4c4a1a4d14"
+    },
+    {
+      "path": "src/legacy/drawable.go",
+      "sha256": "a62aae5a92a169ff1cff6c1f8dc72edf645a9e2e5219055655e7b5c968755929"
+    },
+    {
+      "path": "src/legacy/flagball.go",
+      "sha256": "21a4977df7678b1e6d75922c0c704549663aed6f7fbbe46be63e7c8535f7d79b"
+    },
+    {
+      "path": "src/legacy/game.go",
+      "sha256": "ed7c222206a0282999531b8a009178287f1bcd532d5b7f21802195f59b3b1afb"
+    },
+    {
+      "path": "src/legacy/gamedata.go",
+      "sha256": "9a852804b5a6f14623b99e4bc38ae0545dc65be2de0ba5702f5a0b8fd8df7398"
+    },
+    {
+      "path": "src/legacy/gameex.go",
+      "sha256": "3c05fc547611efa8a37ddc0db28e256eaf9d3cf91f45449f5746c42cd238eb17"
+    },
+    {
+      "path": "src/legacy/gameloop.go",
+      "sha256": "4c9d0dc62ddf59f5ede2b803bb8813ea4de743f6a8dade1b971f12ee74ede84c"
+    },
+    {
+      "path": "src/legacy/groups.go",
+      "sha256": "061a43a5571ac45352cf25bf4066d405574e602d003e545893f06799fb051937"
+    },
+    {
+      "path": "src/legacy/gui.go",
+      "sha256": "33562a1ea49f31d663b0ac861214c1e05d09195fe567be20c477b25e78488d0b"
+    },
+    {
+      "path": "src/legacy/gui_anim.go",
+      "sha256": "41ba92635cb62f698622481dd2e1bf32dc103d29abb172e5510e92672e2b2e2a"
+    },
+    {
+      "path": "src/legacy/gui_cgo.c",
+      "sha256": "d03d0054d97a8b897b2a5ac314ac952754e447d43714dda08338e84fb0e70b35"
+    },
+    {
+      "path": "src/legacy/gui_console.go",
+      "sha256": "cd649f9be3a045935d943fdf60793e603c925e4f10b106ecc64864e3fdfecaa2"
+    },
+    {
+      "path": "src/legacy/gui_cursor.go",
+      "sha256": "8fc0c7aa8f8aff5744cfa8f83a8c4482a1ef0ed342baa92adb6070c972f2c3fc"
+    },
+    {
+      "path": "src/legacy/gui_dialog.go",
+      "sha256": "776ec742d8c48a89b96da51b8dcc5c09994e20ecc90a4545922bf5b93a251c05"
+    },
+    {
+      "path": "src/legacy/gui_fonts.go",
+      "sha256": "795aeac6e7951e692b3db5a5a579e37732ce83ecbd97ab65a2d01f3e5b129f90"
+    },
+    {
+      "path": "src/legacy/gui_fps.go",
+      "sha256": "1d74ae367576f1615d7314dc3b6dbe135f89d45766d0819de7ff71dfac9a1359"
+    },
+    {
+      "path": "src/legacy/gui_main_menu.go",
+      "sha256": "0f11c5a79100aa7008babfa4e7d416c26995c81755a1507ef06856579d5cd33c"
+    },
+    {
+      "path": "src/legacy/gui_minimap.go",
+      "sha256": "8aec5c5054d7d175873786dba6a6964da554381cf0cfece7148f6e17b5f8f651"
+    },
+    {
+      "path": "src/legacy/gui_noxworld.go",
+      "sha256": "35e50deff4946082085d972b99271ac82f410959e0f0694924adf5d74523030d"
+    },
+    {
+      "path": "src/legacy/gui_options.go",
+      "sha256": "7d88cc4c00b1d4bbb2709872456869befbce2974fe52dc6f641e0bbdab1ce82a"
+    },
+    {
+      "path": "src/legacy/gui_parser.go",
+      "sha256": "123ca2f5fd5cee087211d8be54db599e7711f842e5ae9fcc3d5ea7cd3b9fc601"
+    },
+    {
+      "path": "src/legacy/gui_quit.go",
+      "sha256": "0e271bc11f95575ebf8771f6cc2f2743aaf6fbfa5c8115b96e8d2f8b14833c05"
+    },
+    {
+      "path": "src/legacy/gui_selchar.go",
+      "sha256": "087ff9af1886f08c5d3470a6eafefa584248eb5e74c96a97cbbeda9cc3ab394a"
+    },
+    {
+      "path": "src/legacy/gui_summon.go",
+      "sha256": "e7a8a25193c2ad58e6292ea9a179705b83736f222e0547e07b6dd05f09dfa8d6"
+    },
+    {
+      "path": "src/legacy/gui_video_adv.go",
+      "sha256": "c1cc50dc60f0de74173bbac3b763bb01be2546da06c4db5bb005dc3e1f6d8316"
+    },
+    {
+      "path": "src/legacy/gui_widgets.go",
+      "sha256": "e8f26d72b9cac3fd00f6a810690b8791c7b910810e1aa0a04c96a349f2527581"
+    },
+    {
+      "path": "src/legacy/gui_window.go",
+      "sha256": "4a4c04faa573ef6f46a3ae867a3dcb38b22886aef3eb3665af5e348e11952a15"
+    },
+    {
+      "path": "src/legacy/input.h",
+      "sha256": "5207d3637265fcc163a0aa2ce290cf639688bbce28f363c563e9fe6f6dc54c8c"
+    },
+    {
+      "path": "src/legacy/input_c.go",
+      "sha256": "2f683b8f98040300166b2e2653e4b3afcdc5cef9ef8a6e3b462ae4f2f06a882d"
+    },
+    {
+      "path": "src/legacy/input_common.h",
+      "sha256": "161360528403e5ac8648641eb6276fd518ddb6e6fa4c60f7d5e2cf8934307d14"
+    },
+    {
+      "path": "src/legacy/keep.go",
+      "sha256": "64e681058ef6d90a8be23745daf746eb0a52d2f5abec4428a130c9e25dbebdca"
+    },
+    {
+      "path": "src/legacy/legal.go",
+      "sha256": "b68c5cafa9242d0b3a46010c6f0ad639c783cd1466c03af58ef76ecada611a3b"
+    },
+    {
+      "path": "src/legacy/main.go",
+      "sha256": "6caf6d511a34af4d148124f882833805c07a51fef3dd99ec8eef4df9e91d3581"
+    },
+    {
+      "path": "src/legacy/mapgen.go",
+      "sha256": "3ccb9999a5565c76aa9ad56c1a0e8475bb832ff8485b6d69f9cb6b33d432cbc3"
+    },
+    {
+      "path": "src/legacy/maps.go",
+      "sha256": "67115040d6daf57142748296fd87add1fca8c70b232bd5b06585978b6ed00b75"
+    },
+    {
+      "path": "src/legacy/maps_list.go",
+      "sha256": "2d2aadf3b793a952f6c97793f912c0a89e5de6149a823ab0c72035e4eabbd1b7"
+    },
+    {
+      "path": "src/legacy/memfile.c",
+      "sha256": "e13d3914bd0a30d38b6cd32a8f1fdd9eba547883947fb25fa240b8c57520cb09"
+    },
+    {
+      "path": "src/legacy/memfile.go",
+      "sha256": "f60840654e663af11e2079a5df8dd5503b095bad3c7c10fe7393ffe94a2a77e7"
+    },
+    {
+      "path": "src/legacy/memfile.h",
+      "sha256": "9dc95d4dbb9cdec069e074c08c07454e44680d50f2071c0291f6916c86ff6a5a"
+    },
+    {
+      "path": "src/legacy/memmap.c",
+      "sha256": "09c5d1579045020663170af8218b553867560234c86cabb76b10ad947f3871f6"
+    },
+    {
+      "path": "src/legacy/memmap.go",
+      "sha256": "7500ea830fc55c954fd1e6edf9db146ae5b2c62cb256ea5d208236e24a1b07c9"
+    },
+    {
+      "path": "src/legacy/memmap.h",
+      "sha256": "b443d050787dfbaf76f45dbd7d252d69602f6799e57cb8f49831e992fd4d699b"
+    },
+    {
+      "path": "src/legacy/misc.go",
+      "sha256": "293eaa7fd39665d33b0780e21590694cbe62e2ab4e68d854e779b7c02bd64237"
+    },
+    {
+      "path": "src/legacy/modifiers.go",
+      "sha256": "471b1eaf1082e414a6b7e236291d369fb0213b55e132e916075744517c6c1fff"
+    },
+    {
+      "path": "src/legacy/music/music.go",
+      "sha256": "c050b9996991b2bce9b258ead6d9e2c11bb1ebbf6a65c0c85c02f3c6c27f5702"
+    },
+    {
+      "path": "src/legacy/music_imports.go",
+      "sha256": "25912b6132e4851a5193c6e0f5c7b8d11c470f679a54c2dcde0face6f858eff4"
+    },
+    {
+      "path": "src/legacy/network.go",
+      "sha256": "7957c46948b951abc3a2bf3a68f169d1130b79eb76aa731e21496bf1a5ae681c"
+    },
+    {
+      "path": "src/legacy/network_lists.go",
+      "sha256": "c433f64fe768417b35ce631202e9949062ce7f8dec606172441952da5fa934b7"
+    },
+    {
+      "path": "src/legacy/nox_wchar.h",
+      "sha256": "03df9b92769073498bc97394ee8fb5549c8fa8b4cce039944ccdc9bc7c8c5794"
+    },
+    {
+      "path": "src/legacy/noxstring.c",
+      "sha256": "6737b902a5b56e8ef43d3b4fdf19cbfa2e0d08692ee6f7cb26bb2c10f3540014"
+    },
+    {
+      "path": "src/legacy/noxstring.h",
+      "sha256": "2fdfbf6c52170a6c2a5995e45ef5312c3c9bd62f9d5ba81d1821bdf9cba31c07"
+    },
+    {
+      "path": "src/legacy/object.go",
+      "sha256": "d603abc14cd77e340683a0ee07a810bad7c123e119fe6964af60c3212af1b82b"
+    },
+    {
+      "path": "src/legacy/object_collide.go",
+      "sha256": "5eb7dc82e1a45d1e91926c37603c33b937a66253c2348bd8e16a5d4430f66211"
+    },
+    {
+      "path": "src/legacy/object_damage.go",
+      "sha256": "fa25f0abe2a4866f8248fa5459213887594bd15ff798e3061b7e2cc22977e379"
+    },
+    {
+      "path": "src/legacy/object_death.go",
+      "sha256": "b4279acbc9bc6f03a969504339ceab534eccea78ab04903e672229b32dfaf5eb"
+    },
+    {
+      "path": "src/legacy/object_drop.go",
+      "sha256": "056ab664d81ee92206ecc762fae2c51e5aba09a7778758ca0b5cdec238603aab"
+    },
+    {
+      "path": "src/legacy/object_parse.go",
+      "sha256": "f6dd837cea0cefe22ffaa9e92c2d5e2b758ec1b1c69cc6c38233b0378e48e2a6"
+    },
+    {
+      "path": "src/legacy/object_pickup.go",
+      "sha256": "93c2c38f7b5c2b89fe30e454a5069883cf3af88a27dcf76f8e7d359aaedbbde9"
+    },
+    {
+      "path": "src/legacy/object_type.go",
+      "sha256": "e10480ee01eeb0e230e9ce15cb5bce32492ba4f78f574600405b904243645061"
+    },
+    {
+      "path": "src/legacy/object_type_client.go",
+      "sha256": "e1d782384698fb9e406af37de0dbac1ee550ead157403c8f83d470392dd6852c"
+    },
+    {
+      "path": "src/legacy/object_update.go",
+      "sha256": "8a3e65cd819f83d080d30a7254d6ae6c3b3f5fc65f92f616b15a5f069c1ed095"
+    },
+    {
+      "path": "src/legacy/object_use.go",
+      "sha256": "456b69775720ac8c15237aa3e79d197d0059beeb4ca8c782982b9f12d48c9645"
+    },
+    {
+      "path": "src/legacy/operators.h",
+      "sha256": "6e616033d12b71c63caa97b9599f45f245b93a0bd0ebf88f6e7b9c17efa249a8"
+    },
+    {
+      "path": "src/legacy/parsecmd.go",
+      "sha256": "b816db0c8cc5409ed8c19853536dea756164e5ef298fef64a62f5b427ba60ee5"
+    },
+    {
+      "path": "src/legacy/parsecmd_list.go",
+      "sha256": "226871b0523692459c9d6c31ca7a0777256d02c7bcf3595f1f1ad7224df90191"
+    },
+    {
+      "path": "src/legacy/parsecmd_maps.go",
+      "sha256": "ccf93c3adea7161de245aa1546dd8f49bb005645d051a47e7d4bf77402fbd821"
+    },
+    {
+      "path": "src/legacy/parsecmd_rules.go",
+      "sha256": "6730da5f173ac645ec0d27357c390ebdaa9084a9b638444a7c288927b6061931"
+    },
+    {
+      "path": "src/legacy/parsecmd_send.go",
+      "sha256": "660de30fdcf1d76646e628fb01c57cb0d8b884e877112bcb3522b1559d4a7555"
+    },
+    {
+      "path": "src/legacy/platform.go",
+      "sha256": "8aa9a79a8252fc809a23ca8df3504f5998fcb800bb99bed2f9589c32dce98b51"
+    },
+    {
+      "path": "src/legacy/player.go",
+      "sha256": "aa5e3db87f66baaace1a7bd5618b3f874ae7d72b8f1082bbb30a69f6fb0efe58"
+    },
+    {
+      "path": "src/legacy/pre.js",
+      "sha256": "3c56b31ec9254305f1f04e7a32e6a1f3a9b916446b57887a8fa7eafb7d14b83e"
+    },
+    {
+      "path": "src/legacy/protection.go",
+      "sha256": "4a18e673d898126047f17f96fcb41014bbddb9a5043d1d20eb4e48ebe0d8f908"
+    },
+    {
+      "path": "src/legacy/quest.go",
+      "sha256": "2910ce1255e91122490f163953dbe5287498f2e17dd897804b264a2000157214"
+    },
+    {
+      "path": "src/legacy/replay.go",
+      "sha256": "b7dc1d1d9291fd1378b370bac82a92ad9aa94b300c02a5572aa1dab11e754faf"
+    },
+    {
+      "path": "src/legacy/save.go",
+      "sha256": "e18fb4bd81af2cc96ed82259819a519dbf4e6812f9dd15cec313dc2eed1da684"
+    },
+    {
+      "path": "src/legacy/script_cgo.go",
+      "sha256": "c658f6588055863610437ae831345378562a743cbe15abf6fbb79e74ca5649aa"
+    },
+    {
+      "path": "src/legacy/script_noxscript.go",
+      "sha256": "0240c773f31d986ca2e1c8fd446c28d8e0d9eb746a4e3bd049d796abc4b73e29"
+    },
+    {
+      "path": "src/legacy/script_noxscript_builtins.go",
+      "sha256": "e3cbf2853a19c3c2794decbc00fbf624a1fe7fd9da8b923025640a518869c2ca"
+    },
+    {
+      "path": "src/legacy/script_ns_audio.go",
+      "sha256": "aa6d7a3827c9f403ed868315991e568b4664a10239d575e3b154ed77a8c27db7"
+    },
+    {
+      "path": "src/legacy/script_ns_object.go",
+      "sha256": "b3649f1b47e7a00fc9f3c7fa29ff3f642adda54a12d70dc2425a5948e44039b4"
+    },
+    {
+      "path": "src/legacy/script_ns_quest.go",
+      "sha256": "060bfe7529881a07a7800fb66d4308321c6350352f977653bb30697ead0a8381"
+    },
+    {
+      "path": "src/legacy/script_ns_spell.go",
+      "sha256": "36af57a5b98a7af17ff05f3582acd78e74b7b8d35575495f1b31d184596ad142"
+    },
+    {
+      "path": "src/legacy/server.go",
+      "sha256": "be76d51f74e6f2ecc0b32a180ac795d82cdd258c59562ae71bf1df2d58c470a5"
+    },
+    {
+      "path": "src/legacy/server__ability__ability.c",
+      "sha256": "9d138fef19888e238b5f8623d4bc8d15905443fb82575274faa48b40b234b690"
+    },
+    {
+      "path": "src/legacy/server__ability__ability.h",
+      "sha256": "8ff2d16b11c2c7ac9e3e795e7c0936c06ecd4268ddf74c8267cc3f9c67ab699e"
+    },
+    {
+      "path": "src/legacy/server__dbase__objdb.c",
+      "sha256": "121dba5f69e4d5ebb8d1a786a20c41ab629f77141d2911d8cee056aa9668322b"
+    },
+    {
+      "path": "src/legacy/server__dbase__objdb.h",
+      "sha256": "0f84f40fcd561894eb37f74b2abaf0dfeac23faa5308052b75d5b718e51539b5"
+    },
+    {
+      "path": "src/legacy/server__gamemech__explevel.c",
+      "sha256": "afcbb389faf762a18471bc46b36197189c7ae4637b2df5023d53d6f17ec9e37e"
+    },
+    {
+      "path": "src/legacy/server__gamemech__explevel.h",
+      "sha256": "c66873095cc7f93b179ffd273cdda81ae681abf48d29e0861c99a68f702abd8f"
+    },
+    {
+      "path": "src/legacy/server__magic__plyrgide.c",
+      "sha256": "5639f769630caf13e51a2a2470a6d3a9a4dcd0bf1eb28528c55698fc52ce29e2"
+    },
+    {
+      "path": "src/legacy/server__magic__plyrgide.h",
+      "sha256": "3299b742879a155bb7cba8504271726208f63606c9c4cb16e78528391446d9cb"
+    },
+    {
+      "path": "src/legacy/server__magic__plyrspel.c",
+      "sha256": "50f09f0678242cf30d36427a2a0cc8a26bc91515de16d545803d79dee333d033"
+    },
+    {
+      "path": "src/legacy/server__magic__plyrspel.h",
+      "sha256": "eab79325cfafa38786f7528f0a68c33218426348956ae6287a6f0ff77d50c010"
+    },
+    {
+      "path": "src/legacy/server__magic__spell__execdur.c",
+      "sha256": "9406839bcb21f29daa76cc655f5adf6adc43d93b1674f646a1c0ccdcc1876cf9"
+    },
+    {
+      "path": "src/legacy/server__magic__spell__execdur.h",
+      "sha256": "dcd0b92c67f75cfc4430cd32d28378da71ed63756020f627f72339bcd9ec5acb"
+    },
+    {
+      "path": "src/legacy/server__mapgen__generate__populate.c",
+      "sha256": "a00f021184ecef295f97ee040d59901560057cfdfed5e856e01c28ce6d741e07"
+    },
+    {
+      "path": "src/legacy/server__mapgen__generate__populate.h",
+      "sha256": "9340fd8356f5dff9240e248a8fab75ab6cdc48af852655f9dc583f43bdc633c4"
+    },
+    {
+      "path": "src/legacy/server__network__sdecode.c",
+      "sha256": "baf950034729501954944b8554dad17391fe2cb3beae7605c59afb0d0cfeb825"
+    },
+    {
+      "path": "src/legacy/server__object__die__die.c",
+      "sha256": "f1c0f0c31cddb37ef776c5fb0802f59fc62d25bd8dcc72bafe06dd01fb8c86e7"
+    },
+    {
+      "path": "src/legacy/server__object__die__die.h",
+      "sha256": "6c726d0ace58a568ed17331be0048a3530c506dd92abe460bc6e7c266072bfc3"
+    },
+    {
+      "path": "src/legacy/server__object__health.c",
+      "sha256": "afdc38424d6d5c6ff4c9102adf71f5e99b58903c712549ecb39652ee523fd29f"
+    },
+    {
+      "path": "src/legacy/server__object__health.h",
+      "sha256": "e9d48b68913e4d05fceec0c06b062529d7e647c09c152bd9bef812ac7f5b6017"
+    },
+    {
+      "path": "src/legacy/server__object__objutil.c",
+      "sha256": "4e24125ab251be98218ec6918ca121b12220d6c0a4693964cbe19ad543a21737"
+    },
+    {
+      "path": "src/legacy/server__object__objutil.h",
+      "sha256": "38f1bcbc86f0f92be1e90b377baadd90e98e5156a2f0677764b5990e262e4019"
+    },
+    {
+      "path": "src/legacy/server__object__pickdrop__pickup.c",
+      "sha256": "4bf9ee133ddd0cbd96dd582952455cc93b11778679586cebf470036345e551bf"
+    },
+    {
+      "path": "src/legacy/server__script__activator.h",
+      "sha256": "104b9485e359114f74d5632ea53d969e5cc97ecace795217ff567261386be51b"
+    },
+    {
+      "path": "src/legacy/server__script__builtin.c",
+      "sha256": "6b29a8dd7cb3314a3297aef8e58dabe664cd47337195b1dc0db6b173c0944a4f"
+    },
+    {
+      "path": "src/legacy/server__script__builtin.h",
+      "sha256": "e6dc5e8e117e4140ab611e414a764f697ddc5c492a731fed0561048d3e8a58b1"
+    },
+    {
+      "path": "src/legacy/server__script__file.c",
+      "sha256": "9e8ef3b8fdd4f5f34eb645a446d923e9773e84ae54a180a111eca3e8e3bb6194"
+    },
+    {
+      "path": "src/legacy/server__script__file.h",
+      "sha256": "1c89030b8a351ecf9acdadcc7e7cc6491004cba6dde56a3b9098320365e6fc4d"
+    },
+    {
+      "path": "src/legacy/server__script__internal.h",
+      "sha256": "dde7f309724f72009a96ccbbb750a1a1e57b2dec55704610a8a0b9a5f114f095"
+    },
+    {
+      "path": "src/legacy/server__script__script.c",
+      "sha256": "63b81188839e74bd0b9fcffa8997276aa887ac53847c22893139b257dc7f6641"
+    },
+    {
+      "path": "src/legacy/server__script__script.h",
+      "sha256": "51bb83e421f6bf37818c3dc074d436f1fa91e23e72f5fd7fb3967b1fca7dc1c0"
+    },
+    {
+      "path": "src/legacy/server__system__cscrfunc.c",
+      "sha256": "804dd9db8859ad9a26ac635dc569332e4c63c2874884f83315a1df272e9d14e7"
+    },
+    {
+      "path": "src/legacy/server__system__server.c",
+      "sha256": "311a91b348d063a42467467c43804b7ef71609ee74906cf5d363a0335593445c"
+    },
+    {
+      "path": "src/legacy/server__system__server.h",
+      "sha256": "7c0380bc601e0fa6def3cd076ed5fde55d444478afd838e48297f7d65dd23f97"
+    },
+    {
+      "path": "src/legacy/server__system__trade.c",
+      "sha256": "e2c21be995bf7ba917a6c204da66936e68df11fa61bc1784f76b14f50aada134"
+    },
+    {
+      "path": "src/legacy/server__system__trade.h",
+      "sha256": "48ea70d8a1a5b2c7c30d6361bbeca66f385f61fb5cfb256f78a1276957890891"
+    },
+    {
+      "path": "src/legacy/server__xfer__savegame__savegame.c",
+      "sha256": "57a678daedcaee6f72d26a8399a0b18f83b3104226f44da2a6683be30bd1e207"
+    },
+    {
+      "path": "src/legacy/server_update.go",
+      "sha256": "525816d3f3feaf738229c8b9c9be1aae5884aa0b1601ede2f634e31f97c0e5b0"
+    },
+    {
+      "path": "src/legacy/sound.go",
+      "sha256": "1a2ab0c726eed69c0f7db2937e78a373a4361c9de528ed6ce9d5a0c224053a05"
+    },
+    {
+      "path": "src/legacy/spell_berserk.go",
+      "sha256": "f213dff7e2b775ec22fcd688f2f8691cdae5c6be66e759ae0952a2c445cb9733"
+    },
+    {
+      "path": "src/legacy/spell_harpoon.go",
+      "sha256": "8e0cf9fd8dbd79289949d9b83f92783a9fd4c6d7109ebf74ba5cb1c34e0652cb"
+    },
+    {
+      "path": "src/legacy/spell_lightning.go",
+      "sha256": "f0d77ddb8f27911a554635919bb6f654306b1ad66dd3f8f38ae53a04e9aa093c"
+    },
+    {
+      "path": "src/legacy/spell_missiles.go",
+      "sha256": "4444180c8878aacda7e3081ec3eae7edcd9b6b6433bdb2cd4f3f3af3bfc63f37"
+    },
+    {
+      "path": "src/legacy/spell_tread.go",
+      "sha256": "c8a131aca1def15abd6b72296c361ae131089438e032f708dfdb1a505f2c44cd"
+    },
+    {
+      "path": "src/legacy/spells.go",
+      "sha256": "6baf49fde5eeb278413912687f766a6b0262234cbcd36da3b6a5d5a554c92715"
+    },
+    {
+      "path": "src/legacy/spells_abil.go",
+      "sha256": "87d46d435703675d9b4f5637280b51c75e104fd4cb08f45ffceac5703df04eef"
+    },
+    {
+      "path": "src/legacy/spells_dur.go",
+      "sha256": "a58a67d01faa74e0b7fdd5e2acc21d1a047129eed4c902f7d2abda1c5d729cd3"
+    },
+    {
+      "path": "src/legacy/springs.go",
+      "sha256": "ac8238605349fea0cb3016200284008a1dfa488dc9a038982478ee833b257c51"
+    },
+    {
+      "path": "src/legacy/static_assert.h",
+      "sha256": "6a685e7d488a5dfd63abcd5ff0e02d27585ff3512c725fdf3846f8abb3bcab3a"
+    },
+    {
+      "path": "src/legacy/strman.go",
+      "sha256": "d244fa537163b24e172408a52dd14e83f33c2c4a8445719f58f03cf9318b055c"
+    },
+    {
+      "path": "src/legacy/teams.go",
+      "sha256": "a1ff9f6f74e55d33a2432fa731824c24c5c9582dc76bd872bdc116005f32423a"
+    },
+    {
+      "path": "src/legacy/things.go",
+      "sha256": "63520fb197cf8dce9e8cc6104a04990ad15239f8ddfcaafd6f5a388615a08955"
+    },
+    {
+      "path": "src/legacy/timer/timer.go",
+      "sha256": "d67ae9a4e7a60c09433a228e01da8b5829b7410d421322f2359b990378f4636e"
+    },
+    {
+      "path": "src/legacy/timer/timer_exports.go",
+      "sha256": "37360c7270e5b4b18a670c81164a999fd73a7d08d5f2202ddbad190edc7d98a4"
+    },
+    {
+      "path": "src/legacy/timer/timer_test.go",
+      "sha256": "9a8e1176929db630b6ed3c6951e09d2ec7aabc7826f4b1d572eb5ed562eebddb"
+    },
+    {
+      "path": "src/legacy/unit.go",
+      "sha256": "a98bdb234a44aa8dfa9d887d773bc7b4ab7d5dcb2876114f6ed7a495825fc28e"
+    },
+    {
+      "path": "src/legacy/unit_ai.go",
+      "sha256": "2fa68f317501fb6dfe1744234382618a4b40ae49e0bca88a0dbba049c4355f6a"
+    },
+    {
+      "path": "src/legacy/unit_monster.go",
+      "sha256": "d7be60e55e1da0129ebc51b4d1d89fa9538ba6458dc738ed4e62f81bd7848758"
+    },
+    {
+      "path": "src/legacy/vardefs.c",
+      "sha256": "8ceb04248cc52b8fa1b86f89d228c588cf3c0def9d7aa162aa0f48d76fe787e5"
+    },
+    {
+      "path": "src/legacy/vardefs.go",
+      "sha256": "787cf15f45c3571c0f37d6ac8a41a152c07f9809d7240f529aad906e3ab7ba1e"
+    },
+    {
+      "path": "src/legacy/version.go",
+      "sha256": "074e948118bbeb4eed66654690ea6132ca6c7bb9e8e2dbd8ec9f58d8a3088da8"
+    },
+    {
+      "path": "src/legacy/video_bag.go",
+      "sha256": "d641fe3bf4c008163365e4b3d702c3bdda1d8847f8ada06f2d63c78a8c978e8c"
+    },
+    {
+      "path": "src/legacy/video_cgo.go",
+      "sha256": "7b45b18a548ba77bc8290953a6e77d4b4634b2424ec8aa89e7e33484dc71f57a"
+    },
+    {
+      "path": "src/legacy/video_client.go",
+      "sha256": "a932558bbbcb87cd5a342851a8f9d036a283e3c22d1f62f3ea1e230944ae7d6b"
+    },
+    {
+      "path": "src/legacy/video_highres.go",
+      "sha256": "a96c43f24eb5ea2a64e094eabfa1c8265b0bd880d8dfe52f9cc36e60dc80aa76"
+    },
+    {
+      "path": "src/legacy/wall.go",
+      "sha256": "884ac30dd9f76e4f270ecc4462a60304587f7071297aac7b73cbab6a982ec44d"
+    },
+    {
+      "path": "src/legacy/waypoint.go",
+      "sha256": "e63ed936248ad6e817c20c3d765c466f7833b3a225ea42c0e1d0b2f4b2402b7b"
+    },
+    {
+      "path": "src/legacy/windows_compat.h",
+      "sha256": "15d9d028526f65c4077b55ffd69dd84a198b608eeca60657993f5120707acb88"
+    },
+    {
+      "path": "src/legacy/xfer.go",
+      "sha256": "e8df1372a92e35be4d5b2a8293867334f45b2b72da813640e937327c7a416e3e"
+    },
+    {
+      "path": "src/legacy_exports.go",
+      "sha256": "913e59d0db04f17947136d3bd35c40e583725f2eb07e32049c1df91495801faa"
+    },
+    {
+      "path": "src/legal.go",
+      "sha256": "2ebd560434783eb6f92e246719695e51b42fd8685af25091fb565e5a8bc9cdbb"
+    },
+    {
+      "path": "src/lists.go",
+      "sha256": "d67dc8809afe4484d5cbd7e73233af56cab9ee4a2eb255629ab8181c0c296d00"
+    },
+    {
+      "path": "src/log.go",
+      "sha256": "2a3509e2c831bd6b97468a2f65b36128830cdc032e403d03767d8a316d42d4e7"
+    },
+    {
+      "path": "src/main.go",
+      "sha256": "b4a6197bb98d9a60ba37728ff3a26aecff99be295e94f654ecd780515e5cbb9a"
+    },
+    {
+      "path": "src/main_client.go",
+      "sha256": "0e9da6c9605f7206088f975b21286036f2f4a4557e6b2ee7c477abdd305ddd01"
+    },
+    {
+      "path": "src/main_server.go",
+      "sha256": "20c8cda3177eb5b91965d3fd80525ea15caf77c3438c34a1fedccce2219d940c"
+    },
+    {
+      "path": "src/main_windows.go",
+      "sha256": "ed2207b2af10c2202e0f285634209fb2246c4e7d7cfc570275fbcbd10dff2a5a"
+    },
+    {
+      "path": "src/mapgen.go",
+      "sha256": "9c4ca591bc131a3a1cf1d8df12cdf7acea8e04d865575a665764306304a9a7e8"
+    },
+    {
+      "path": "src/maps.go",
+      "sha256": "bbc1541ba1303ec4e9d719a85969d1bc454440a5494f00ac3dfab7b6685b3872"
+    },
+    {
+      "path": "src/maps_download.go",
+      "sha256": "23d28acf052a06e95814c0b496d7d976d6f260c1e5b21076f38ff81cbad9d286"
+    },
+    {
+      "path": "src/maps_list.go",
+      "sha256": "775e3d53e39e30ddf82fd26ae88a5bf10fea579f356e8b35573f0bc508811a8c"
+    },
+    {
+      "path": "src/misc.go",
+      "sha256": "7d6dc2eb2190272f22021823dcfb0a68e20c644dce5841c5826b410d422a627b"
+    },
+    {
+      "path": "src/modifiers.go",
+      "sha256": "9d5923154239a45b6e6f3356e2592363d5b806dfbb504242fcc062c573c0c328"
+    },
+    {
+      "path": "src/network.go",
+      "sha256": "dfdecef521c1a08c4b76c96f94748194080da0bf1777cd6eeae9b3abf0c5483e"
+    },
+    {
+      "path": "src/network_client.go",
+      "sha256": "bf6b3bd52c417f22fdc6eafe023865f99c3ccc9cb4e9b974c17bbf2b7a08ed64"
+    },
+    {
+      "path": "src/network_lists.go",
+      "sha256": "834982c0fa00723332769df9c2287ea6addb2e801395c65562ce184494c41bd8"
+    },
+    {
+      "path": "src/network_server.go",
+      "sha256": "b00fdea3b43dc63762c0b48a8da432645cf123e7c8b63dde7c1c94127f912ef9"
+    },
+    {
+      "path": "src/noxmath.go",
+      "sha256": "850b345355675b57614592752cd346bbb48025d8f37c07690d2fafd42b579f46"
+    },
+    {
+      "path": "src/object.go",
+      "sha256": "ee69b045a3cd4fb36bb0f0d4b1bdc5936d68c7a8ffd0e4870bfdd5275a8c278a"
+    },
+    {
+      "path": "src/object_death_ball.go",
+      "sha256": "152616c35480b810eb02a914c91dcbbda413921cae0a2c4f87da380c218c5d5a"
+    },
+    {
+      "path": "src/object_drop.go",
+      "sha256": "e27f6cf6b1d6cc7b65777e49ed657c0d3da3ea10195f9f38a3de35059c693e69"
+    },
+    {
+      "path": "src/object_pickup.go",
+      "sha256": "1745d69877101b12b6d8b2f58e0d5855af6a8099e5b05506f085f3751dceedd8"
+    },
+    {
+      "path": "src/object_type.go",
+      "sha256": "f921fd5d65f1f23953adfc9a4c6ec43b9a96562b378facdd1f2227b0c1a59fa9"
+    },
+    {
+      "path": "src/object_type_client.go",
+      "sha256": "1e238715e7509d3f0883579df624b9070f3d78767c89ec5d354c82565746d312"
+    },
+    {
+      "path": "src/object_update.go",
+      "sha256": "385ab413559b4f53bdb0813e08c27a51ceed66643ab3510da65ce502ee90c05d"
+    },
+    {
+      "path": "src/object_use.go",
+      "sha256": "e4ab9e56c748b9f427a28f7b8675f7ec6338d06ed3f3c78e2996b00620e1babe"
+    },
+    {
+      "path": "src/parsecmd.go",
+      "sha256": "40eb102bb87955d7fae5ed9eafcb6716a1c3742e0a0210ad9b6b67cc7168eb5e"
+    },
+    {
+      "path": "src/parsecmd_cheats.go",
+      "sha256": "aec3c71ef4a80db226cf74909336f7e16bcedff067570561fdfccd479f49dd0f"
+    },
+    {
+      "path": "src/parsecmd_debug.go",
+      "sha256": "3ce1ac6c631bb12c0bed8dbd0e876572c2b79fc12f235fa62334a4628d53c64f"
+    },
+    {
+      "path": "src/parsecmd_exec.go",
+      "sha256": "10e6606c7e88a59a8846ffc0b42b5171244be4fb4b7eebe8ec3e19a2fd932f3e"
+    },
+    {
+      "path": "src/parsecmd_list.go",
+      "sha256": "b800847a33507b64cabbc69328f21e308106e45a1130571a101e10bc02cd6f3a"
+    },
+    {
+      "path": "src/parsecmd_maps.go",
+      "sha256": "676f397569f8952df332bba5b9fa0e8a4e6693b5dd67125d3c67608c6ec1eb58"
+    },
+    {
+      "path": "src/parsecmd_rules.go",
+      "sha256": "b5466967d0f035eba8584233b770c13642cc0de0170aa73d82a53673e2bd0a4e"
+    },
+    {
+      "path": "src/parsecmd_screen.go",
+      "sha256": "5a769019c5ccd977155ddd9a051a9011f3d7f2288655bd8691d9c28d6bb6746e"
+    },
+    {
+      "path": "src/parsecmd_send.go",
+      "sha256": "d7f23ef1dc642eb018a631a478480de1df10e6c325f9886c69acd047ea38a291"
+    },
+    {
+      "path": "src/parsecmd_spells.go",
+      "sha256": "be8e4cc48c930b21fbdc9e1e68f9bf72c04f8949879981d803bec827dcd57185"
+    },
+    {
+      "path": "src/perfmon.go",
+      "sha256": "58a328f714c71fea08a3291ebe3f9f7e275b5aa1b0a9d154def1a5d7801ca936"
+    },
+    {
+      "path": "src/platform.go",
+      "sha256": "55aa9be779821254d98c63cf0dba3ac594cd5404a3c02d72cca20fa5c8264974"
+    },
+    {
+      "path": "src/player.go",
+      "sha256": "b9247b35f2b30c75b2f8bf9ba6c72f5591cf9675b8006c82ee1d63d2707e2cc8"
+    },
+    {
+      "path": "src/protection.go",
+      "sha256": "bd209c5d7cb707f9224b0f4bac59dc57f92888442f0c24ebe3d766fd4ec67ac2"
+    },
+    {
+      "path": "src/quest.go",
+      "sha256": "45f0c42fc965c4b9309128e3ae56e6d9e840923b3d30032368edbeabc87bb44b"
+    },
+    {
+      "path": "src/replay.go",
+      "sha256": "030b53fc68b5c710cef57348aa8c5c383d5bccc8a18c75fb91ec58c96af4c1bc"
+    },
+    {
+      "path": "src/rules.go",
+      "sha256": "53de981d74b44da831ed986186b544cb8482feadbb8fbb627fbd4a718d82e142"
+    },
+    {
+      "path": "src/save.go",
+      "sha256": "19d51293cd1e2199df2279bab96f02ef25e2476febbcddae252a7ba352e5e24e"
+    },
+    {
+      "path": "src/screenshot.go",
+      "sha256": "466e1aeb7a4e017f624549c32d9b8d65e39f99d6dd8fba8266c527bb3def35bd"
+    },
+    {
+      "path": "src/script.go",
+      "sha256": "3d6b5e169cea6f784dbcdad2c892e638fcd852f943e56404cf941cbd008018c8"
+    },
+    {
+      "path": "src/script_cgo.go",
+      "sha256": "bd4a02aea49cf0b22208af6bfdf81f4bd6828289207ed9d3b021eecdd8e1137f"
+    },
+    {
+      "path": "src/script_compat.go",
+      "sha256": "02e80ba1d58ae197b6120734eba6c4af1c7dd965b77b592a490dc8d5eb014855"
+    },
+    {
+      "path": "src/script_noxscript.go",
+      "sha256": "66df546457e08018d59760387ce2a2af9a36ecd493e05e9bc787509d57cb8ae2"
+    },
+    {
+      "path": "src/script_noxscript_builtins.go",
+      "sha256": "fe05fac637fe964ad25e4aac84a10e51551b261f8e1b558e564d85589c1586bb"
+    },
+    {
+      "path": "src/script_ns.go",
+      "sha256": "9702043286e709654ca4cf434b857b72369b4ec0e99e1df070bbb74be4640c76"
+    },
+    {
+      "path": "src/script_ns_audio.go",
+      "sha256": "dc1c17cb8c69f82eb8ea27bb5934f24b1830cbfb725d3cd5af41bf45b3849d00"
+    },
+    {
+      "path": "src/script_ns_dialog.go",
+      "sha256": "c7007ffb057271d628765d70fc01fb799bac13c7ab5733fa09aad0fead3b08f8"
+    },
+    {
+      "path": "src/script_ns_hooks.go",
+      "sha256": "d9057f8b776528a1cb091ef087f19c70d9c914e5d4d1c4152bfaa4accba66c12"
+    },
+    {
+      "path": "src/script_ns_object.go",
+      "sha256": "49d3dcca9e6d005dabd9a7bc3ff562c78e570b71345ff8009ccb24e826288219"
+    },
+    {
+      "path": "src/script_ns_player.go",
+      "sha256": "cfadfd887a4e92e9dc2284066072635e89b2c0cca8809e4069856771e942c844"
+    },
+    {
+      "path": "src/script_ns_quest.go",
+      "sha256": "eec363c06fa5528d2235c97d7d8d8abff4c07948054bf5b5c1f88c3c389c9c1d"
+    },
+    {
+      "path": "src/script_ns_spell.go",
+      "sha256": "174e380b434b66084a32448dde517f937505675cf84b8aa2f46634d0cc8f5097"
+    },
+    {
+      "path": "src/script_ns_store.go",
+      "sha256": "a3803b251ed1e1c3d62d197d1aca4c2debddcb77d229326a71f8723e7e1c30e5"
+    },
+    {
+      "path": "src/script_ns_team.go",
+      "sha256": "4a9ba09866f0d80c50fede97c01973f7d52c7bc4e032c7514a686227c2c6faa2"
+    },
+    {
+      "path": "src/script_ns_unknown.go",
+      "sha256": "033aab10ac96f008d794301689b513dd0f6ac621b8290bb019722529f5012dc3"
+    },
+    {
+      "path": "src/script_ns_walls.go",
+      "sha256": "b72fd54a55b558338dd8f56cc2241e1548fd3bcdc5bed1c877c3b1e635253578"
+    },
+    {
+      "path": "src/server.go",
+      "sha256": "a7ba0c08a7fdf661b2c923ea63ed5a5605512d85abbdd0baef5e17204b69c9d9"
+    },
+    {
+      "path": "src/server/LICENSE",
+      "sha256": "4b6822d4b501f49fc6fc253b2277131d983a19e1454be6a695f58c135e372033"
+    },
+    {
+      "path": "src/server/activators.go",
+      "sha256": "8967411c4147b368b03dea7e0e7fac2119a0cf45545b5dfa6420581005fb3938"
+    },
+    {
+      "path": "src/server/audio_event.go",
+      "sha256": "b14fcb5b3da894d167f67e86d0d89119e88d56c98bec456e2c130f35c2e2fc33"
+    },
+    {
+      "path": "src/server/colors.go",
+      "sha256": "471ef35430160f2902f33598c7dc9362ecd47cf149605280838a3c842230225d"
+    },
+    {
+      "path": "src/server/compat.go",
+      "sha256": "17ce6a77482bca5b5ab6a78af0c7b28569522495665bfaa58f95097dc153ae21"
+    },
+    {
+      "path": "src/server/crc.go",
+      "sha256": "4fa93ee821d46467bba7bd64d80dd41f716682d211883ac68f5c6ba0be5e3858"
+    },
+    {
+      "path": "src/server/gamedata.go",
+      "sha256": "a069f2f0e93788aca3caca73730433e44d633a9308de9cb022c9c9786a413cff"
+    },
+    {
+      "path": "src/server/groups.go",
+      "sha256": "e1cf6cf12f7cb040b1e8da7fcad926dab35c6d5cfebef624e729d4eb2bb12401"
+    },
+    {
+      "path": "src/server/hooks.go",
+      "sha256": "8bf89a1bb2c664094e1866afe5ace4cb72aec94c399a369043525f26c55a5149"
+    },
+    {
+      "path": "src/server/http.go",
+      "sha256": "8a3a621c9ba681bce7f8db2f274e47afeb8ed05a2f8279a80599aeacebc9c632"
+    },
+    {
+      "path": "src/server/map.go",
+      "sha256": "42ea10b96064bb50010cda15fd22a62e3bfc395501d1a056470a44d2ccaa753a"
+    },
+    {
+      "path": "src/server/map_debug.go",
+      "sha256": "f18d69a94e13f409b2ce1a15f28578ede0e78ece5882114dd50bee762aabfac6"
+    },
+    {
+      "path": "src/server/maps_send.go",
+      "sha256": "316acf24493068f24856f692484ce8e0bee5e42492b7cc31cf80176f83bf27f8"
+    },
+    {
+      "path": "src/server/math.go",
+      "sha256": "bf585c33d41f8a2b1668d74f92a86f1408b3459b23de07dc9964637b2740d284"
+    },
+    {
+      "path": "src/server/misc.go",
+      "sha256": "8d5a8abd44b6465f90da654ec58779c0cef69159c6da559790c94eb912927bcf"
+    },
+    {
+      "path": "src/server/modifier_colors.go",
+      "sha256": "b4d172b1491f8b59cb2ee7ceb6fa7e6147cdac8ed2fb9367641bb818f6321d15"
+    },
+    {
+      "path": "src/server/modifiers.go",
+      "sha256": "35454e87e6fa8e79cf999585d689f979d2003fd0b3890194b085e94a56eb4585"
+    },
+    {
+      "path": "src/server/nat.go",
+      "sha256": "386e08465cb6224496896f6ac1c718c0505115229648451638882764dbf175c4"
+    },
+    {
+      "path": "src/server/netlib/streams.go",
+      "sha256": "293cc8e5add64fcf8ad68aaf95a35719ff343b2dd7a7b12ea1c3ef14297599e6"
+    },
+    {
+      "path": "src/server/network.go",
+      "sha256": "7a78ae6329f10117f61166cfc8bdde9a47c8a4b3541c94701b7c290e4bb9c2ef"
+    },
+    {
+      "path": "src/server/network_xfer.go",
+      "sha256": "d1080d3bb082b97c7cedacb35ae32b8f7acc5d42d397e9418c1a6fc162b87b93"
+    },
+    {
+      "path": "src/server/noxscript/audio.go",
+      "sha256": "ccfb197073f2dea53eaeaa678619c6f1fc11828e6f479b2c383a3e2cbceb4713"
+    },
+    {
+      "path": "src/server/noxscript/builtins.go",
+      "sha256": "80ed045432d4572e2a3ed9b2bd43b29040384b831a3453e5f57863d4e3920b1d"
+    },
+    {
+      "path": "src/server/noxscript/object.go",
+      "sha256": "817c1d8d1ea3cd44d7afc0a66b9fd37709b5ae2ef6bd5785a6a2d1535d8fdb58"
+    },
+    {
+      "path": "src/server/noxscript/object_group.go",
+      "sha256": "f4591fc1528eb3a4930155eb6bbcf51c2bdd4ff27f86bdf9782c47a56e7c2451"
+    },
+    {
+      "path": "src/server/noxscript/script.go",
+      "sha256": "c2e0f10b1517ea76e2a54a516ad7d56aab9985d16dc30a0caa53a3f598e500ee"
+    },
+    {
+      "path": "src/server/noxscript/spells.go",
+      "sha256": "33a942afb9a7bac9925b5ff9daab24e337a56850f958eb9fe96a6e06859f60f9"
+    },
+    {
+      "path": "src/server/noxscript/unknown.go",
+      "sha256": "f0a09f5249577d4f9fc64c32d7fb152dd66e38575f363810e2db7fe411b4a279"
+    },
+    {
+      "path": "src/server/noxscript/vm.go",
+      "sha256": "0266f1ba044e796bb9fcfda9dd1e10cf33b7437d4346292210e36fd9a01e2787"
+    },
+    {
+      "path": "src/server/noxscript/walls.go",
+      "sha256": "06514b0b15633063e1593fac332cebf1cf34fabe93d99aeee95d3b0d11e90e52"
+    },
+    {
+      "path": "src/server/noxscript/waypoint.go",
+      "sha256": "7b423d220b90b09626e4ee5b50ea493d6b181d89bd6706b2971184a7c851daaf"
+    },
+    {
+      "path": "src/server/object.go",
+      "sha256": "e38aaa6e489a4ef2bea6f304bf48cc7e11c2e88983fc5814384294ff1d499e2e"
+    },
+    {
+      "path": "src/server/object_ai.go",
+      "sha256": "1b4785fbcdac490239e2558bcbff34e666df8185394d71ff0ab6412fedfb7ec1"
+    },
+    {
+      "path": "src/server/object_ai_actions.go",
+      "sha256": "d887a36284567d3c7ee39aa24ec35c66967f2dc512ea4f5d69d505495605916c"
+    },
+    {
+      "path": "src/server/object_ai_path.go",
+      "sha256": "7eeb0d5b8acf0110a9b8807f60a493dda3b6d3115afaed3a87f8ccab29a5ac68"
+    },
+    {
+      "path": "src/server/object_armor.go",
+      "sha256": "723620d3e3ddbeb263e1838982db47727b970cc9f804c3ebaf9e1aaf18e462f3"
+    },
+    {
+      "path": "src/server/object_dialog.go",
+      "sha256": "1e3582782b83f07bc1bdfb33cfa8f0d1a8eecd82c644507249254729b6c174f6"
+    },
+    {
+      "path": "src/server/object_door.go",
+      "sha256": "e5a9465f678d81e36e79f3e34976740ce310c1b2af86f55cab3810b870f666d7"
+    },
+    {
+      "path": "src/server/object_elevator.go",
+      "sha256": "6ed6eab320193ce38bc2669d1b8c367614689074970eb9d188452816bf8d24be"
+    },
+    {
+      "path": "src/server/object_funcs.go",
+      "sha256": "3ffc8213b063a69e9ffa9fb4c3d4678b535298c1058d6f003478e4a358ba1b7a"
+    },
+    {
+      "path": "src/server/object_glyph.go",
+      "sha256": "017b986030b092f0a0b75acdac197e53d5c0c5d8d843513821055acabd9862e0"
+    },
+    {
+      "path": "src/server/object_item.go",
+      "sha256": "4fb119c82e745d7001a4ada2d9cc0abf1670331cc3703941e6f6931a95185fd9"
+    },
+    {
+      "path": "src/server/object_missile.go",
+      "sha256": "e232b70ed1be22d90a876355aa76acf1f9daf01588fd309613ec26e58d78aaf9"
+    },
+    {
+      "path": "src/server/object_monster.go",
+      "sha256": "028463ef9e2167ad13c299252c1221e5ad3be9e9a9f503394ef947f5158b74ff"
+    },
+    {
+      "path": "src/server/object_monster_gen.go",
+      "sha256": "ad378c1b670a35af387c3276618174e2f5d29b450975e32c3166ad872dcff809"
+    },
+    {
+      "path": "src/server/object_mover.go",
+      "sha256": "da121169241e087ac94d0d6c4b2e6b7d68721798f42723775806eed456a5b1e3"
+    },
+    {
+      "path": "src/server/object_npc.go",
+      "sha256": "707a4bf156b7d27b9c9dd67376d0ee1e80e964e93402b26e2fa2ed9b29a59665"
+    },
+    {
+      "path": "src/server/object_obelisk.go",
+      "sha256": "11590d9458c59a6d0130e92d976c156b65e863027275f118b0b0df42e1adb80d"
+    },
+    {
+      "path": "src/server/object_player.go",
+      "sha256": "ac126a174011f30c30ba8d7f0785ac49ce8fba0ca1b6cfb9d9e07cd150a3d720"
+    },
+    {
+      "path": "src/server/object_shop.go",
+      "sha256": "c6b7d6f18ed140a9d32523e5c4b648fff15a8e6748c496cb60714ccf80393b1d"
+    },
+    {
+      "path": "src/server/object_spell.go",
+      "sha256": "d86e486c9178da88326e60d4728375a5866e2d577897f21c70e3fafbf849f871"
+    },
+    {
+      "path": "src/server/object_type.go",
+      "sha256": "a1250bad2fc09615fd93ce1a25393b3e6c7fac9265cfad2c0f99490ba948ac3b"
+    },
+    {
+      "path": "src/server/object_use.go",
+      "sha256": "557c5b4aaefca586ef9dc2c52bd13abfec4611481d753e89f2e312a19463bce5"
+    },
+    {
+      "path": "src/server/object_weapon.go",
+      "sha256": "cf9add8bcd628f11fb15282df9dd88e46213dfbb811831610c58f07ce477fa0f"
+    },
+    {
+      "path": "src/server/player.go",
+      "sha256": "7f10fd0e52b967e692fd5527186cd82cef28e913d3870b5a8378b7923b6e1c3a"
+    },
+    {
+      "path": "src/server/player_camper.go",
+      "sha256": "df13faed8193fcee9b5d9042c87d294d3ef44308b8b0b0edff96526d4421167d"
+    },
+    {
+      "path": "src/server/player_ctrlbuf.go",
+      "sha256": "93988961eea31812e8943e331271da062d4d411ec2a250d6a235a6c94d03a9c6"
+    },
+    {
+      "path": "src/server/random.go",
+      "sha256": "e3a1f510968b6906efc35b122abc635e132b64ff60907818dac42d2c44ea216e"
+    },
+    {
+      "path": "src/server/rules.go",
+      "sha256": "ef74df00deea64b34027b2ef92b2d59635a7216b9470888e416b5fd8e1d6740a"
+    },
+    {
+      "path": "src/server/save.go",
+      "sha256": "59b908cd425708b6148b9b22d72d79b5b18e029b181f9f6ca3586fcd094821da"
+    },
+    {
+      "path": "src/server/script.go",
+      "sha256": "f6d983ab377400becef309cfed09587d25bc1801dd1b292c72342874ad0a575a"
+    },
+    {
+      "path": "src/server/script_events.go",
+      "sha256": "225a5e481cae94818d0bf1728c2abd583721be742f36a630df893b070d2aac42"
+    },
+    {
+      "path": "src/server/script_vm.go",
+      "sha256": "99b7fdcb9518f7edb727e5c73e1ed6367b683330a247ab9c9e5bef1c243aaaa8"
+    },
+    {
+      "path": "src/server/script_vm_ns.go",
+      "sha256": "01a41dea4c18021fc0a814114edb4ca729af09d122a3fe04eaf8d7927f422435"
+    },
+    {
+      "path": "src/server/script_vm_ns_audio.go",
+      "sha256": "80865511376789847f30ae7297ddfc7177691aa815f04ca050dce5a7d244f154"
+    },
+    {
+      "path": "src/server/script_vm_ns_dialog.go",
+      "sha256": "54a1f243988ab3887c8e1f24ca4c0663ad0125d08f7aa8b7d5c1588b6e1b1707"
+    },
+    {
+      "path": "src/server/script_vm_ns_hooks.go",
+      "sha256": "4d77d756b7d9d42f1896cfa66aa00a8b815679b3c970cd5906dc4d8e55b22f6e"
+    },
+    {
+      "path": "src/server/script_vm_ns_object.go",
+      "sha256": "f2c4b6aaf9461797398b5b7d969baf78598da1a40b28142ee5aa679010d3e39e"
+    },
+    {
+      "path": "src/server/script_vm_ns_player.go",
+      "sha256": "0ad815f55c604b135f8033b7a4d3f9295d9d0f31e917381e30500485bab8861e"
+    },
+    {
+      "path": "src/server/script_vm_ns_spell.go",
+      "sha256": "eddf6f856739887fe22610cf56e963a3bf8edf63739cf4b10a39b4382f48debc"
+    },
+    {
+      "path": "src/server/script_vm_ns_unknown.go",
+      "sha256": "86ba7ccf2926dff5000fd1b7f5635917bcac7a5ec1c6a2224fdb95caaf013252"
+    },
+    {
+      "path": "src/server/script_vm_ns_waypoint.go",
+      "sha256": "79d28e12220ba165ede8c92e7216c7011665af68d113ce632691799ab5197f32"
+    },
+    {
+      "path": "src/server/script_vm_old.go",
+      "sha256": "1176c2d2e7abb386426663bdafcadc2a5c3725a5f0c11f9fca0bc6396201312b"
+    },
+    {
+      "path": "src/server/script_vm_old_builtins.go",
+      "sha256": "88007f82ec9328f4e9c8f3efff662b934e1f1540e815fbd96a0ffe5d061f7236"
+    },
+    {
+      "path": "src/server/script_vm_old_ns.go",
+      "sha256": "22f93e4d2b97c2861b8d8c589f2eaacd2dfc16edbe2babcbd670e9380830fa60"
+    },
+    {
+      "path": "src/server/script_vm_old_panic.go",
+      "sha256": "62b0b13ea962ec3e17febb2b0cdd1e475b197514ea27def2eae3ec3dda477939"
+    },
+    {
+      "path": "src/server/server.go",
+      "sha256": "eed5524ea7f8bf4a458a37c3338f470cd1ae9579fba7ec778912ab2317ee03ee"
+    },
+    {
+      "path": "src/server/settings.go",
+      "sha256": "0a8a5ac4c8d7a293ca787d754d7c35b8b4b211f032cf2e8830d87404214ecffe"
+    },
+    {
+      "path": "src/server/sound.go",
+      "sha256": "9875fa98d80d228bd4adbaab86caaed4f2e0cea69a5e0e1f37e26b294ee1f281"
+    },
+    {
+      "path": "src/server/spell_magic_wall.go",
+      "sha256": "7b047dfc6c4914b7f8ed183e97d0f3ea48127cbde0861eb41a246a2f2994467f"
+    },
+    {
+      "path": "src/server/spell_pixie.go",
+      "sha256": "c1782975de06887364f000f1e065c101bbbe7a2f756069fbf9f17d7bb0208bd7"
+    },
+    {
+      "path": "src/server/spells.go",
+      "sha256": "8d3177c716cd76aac70c8f0ccf0a0765bf02123c87f57f1aec1445d127939ca9"
+    },
+    {
+      "path": "src/server/spells_abil.go",
+      "sha256": "216b22b7791d2916dff1872c0ce83c688a51ed4b2e96751d4c244a07ba318c7f"
+    },
+    {
+      "path": "src/server/spells_debug.go",
+      "sha256": "d1198d37482fcc66038b0f0ffcb041f0c3d1f4fdd8edd4e315bfd9d0bdff0a93"
+    },
+    {
+      "path": "src/server/spells_dur.go",
+      "sha256": "901f4fa8cc94534e48934ba32308ceb993f9e115935a227876c9b156458e415d"
+    },
+    {
+      "path": "src/server/spells_enchant.go",
+      "sha256": "f82ab1d34c56b02efd8f6d23a2ef1b3547f19844e6b70969c10f7fa4bdb2a2fa"
+    },
+    {
+      "path": "src/server/storage.go",
+      "sha256": "b007dbaa4e0ffdd6cc9ce11dbf69b5b9f98b59be2df626060c7a8a3731f24d31"
+    },
+    {
+      "path": "src/server/team.go",
+      "sha256": "ecaee289c2a977132eb4863d57d2152ea70ada84ffe7da4c414d1b675abb6c03"
+    },
+    {
+      "path": "src/server/things.go",
+      "sha256": "033e33a3dd7f612a37eb82441ddb4f6d211748a8f34357990483404b158c5773"
+    },
+    {
+      "path": "src/server/tile.go",
+      "sha256": "b28b6fec8e378d83c37a30ce035ead298f9b4d19017187b2556f41e94780cae0"
+    },
+    {
+      "path": "src/server/trade.go",
+      "sha256": "470083f7b3a46c0bce0665399fe053e6a7bf351a92e6fbb18ff4db0447cdf569"
+    },
+    {
+      "path": "src/server/unsafe.go",
+      "sha256": "96481ff0ec02fbcdd7c58b4a1221851d00044eb522552bdc3c20335464a495ec"
+    },
+    {
+      "path": "src/server/unsafe_test.go",
+      "sha256": "3a08fbe25d007ac346236ac17bc6c90fbb9565c7faf8c813f9a7ac0645e813a6"
+    },
+    {
+      "path": "src/server/wall.go",
+      "sha256": "e07414e848ab2ab263412ff8c70665f96a1492eafd11db7fc65d6678318d8afa"
+    },
+    {
+      "path": "src/server/waypoint.go",
+      "sha256": "e145f1eea55f8a837f51bb7b76a95bddc8a83e11b277da880ab1d09581da789a"
+    },
+    {
+      "path": "src/server_api.go",
+      "sha256": "4e587d35696d6ca6d976014aff11fdb709898a6f13c2b2ad940c2b0f13078066"
+    },
+    {
+      "path": "src/server_metrics.go",
+      "sha256": "3b4c3e36ff01a181841f19349f2f0c9a2c00e26cb9b129d2fea072fd4c9c8c6e"
+    },
+    {
+      "path": "src/server_only.go",
+      "sha256": "4a33f0370c71f256545e29b2a39953dc7c0dbf8cc39c33b98f9a7fe5eb4fdf32"
+    },
+    {
+      "path": "src/server_rcon.go",
+      "sha256": "d2e2aaa54f3f1f6b26ffa46790adec148755b1aa7392d135a0764e127c0e9cfe"
+    },
+    {
+      "path": "src/server_seat.go",
+      "sha256": "74934fdecf05b3902d7d37bf5649619a6a7bfa1c4824c412aa6e2b9640be5bb3"
+    },
+    {
+      "path": "src/server_update.go",
+      "sha256": "68aeed3f0b61d4ebc00fac16e522d0a6bde24ae6a13f660729dcd83c600a17ed"
+    },
+    {
+      "path": "src/sight.go",
+      "sha256": "6132df8ddf2f3bb04e074a90a4ca0c845a690f4fc2e9741ebef7896a05228d0c"
+    },
+    {
+      "path": "src/sound.go",
+      "sha256": "4bca1ecf4034b16ad14031bc7a94382646cd14b1e4b0e4f6214082ae1df8a24f"
+    },
+    {
+      "path": "src/spell_anchor.go",
+      "sha256": "58edd50a99f019ba0471eece8886022275a1b38ab486d4d9725b5d97d09a566a"
+    },
+    {
+      "path": "src/spell_berserk.go",
+      "sha256": "2559b56d83fbe766af6fd4fa9f59f56747e205dc0d7de137aef38232e11fa58a"
+    },
+    {
+      "path": "src/spell_blind.go",
+      "sha256": "07ba6f728e5ecf2299630034b90db1ac90d88afce978c1ee46507106d02bb077"
+    },
+    {
+      "path": "src/spell_counter.go",
+      "sha256": "2eaf648ff6c3b2e0ff561170b6e0671bf89ac8c6a7ff6e7b2f09b01ee19f86bd"
+    },
+    {
+      "path": "src/spell_death.go",
+      "sha256": "7446409184e6b4325c82d30a37c7c82a203d93b2d8987f053901368f513f71cb"
+    },
+    {
+      "path": "src/spell_death_ray.go",
+      "sha256": "891f6fda7bdc36c7fbcad533287910aaf57e7b687f1c06f0b5bc5a504b21871e"
+    },
+    {
+      "path": "src/spell_detect_magic.go",
+      "sha256": "f0bb404c8d46e699e10c6bed0684aec9d8bff49a070ede984476c35e3719be5b"
+    },
+    {
+      "path": "src/spell_fear.go",
+      "sha256": "c52913ad3bfab909cc5ab311e7f19d4d77ff9136d67aa38c4538a36905427baa"
+    },
+    {
+      "path": "src/spell_freeze.go",
+      "sha256": "4abd6311970cf45001a75caaab7bd1ae0a033f109fb34dda230971b5c315a0d3"
+    },
+    {
+      "path": "src/spell_harpoon.go",
+      "sha256": "2d566d1152304c610da5ab64c79f0d22276ed3c0b4ef01de270d2d9bc5d8a880"
+    },
+    {
+      "path": "src/spell_haste.go",
+      "sha256": "0d897001a7f2db379f1c03417fe10c4c352ae085502fc556acf4860792cc0926"
+    },
+    {
+      "path": "src/spell_infra.go",
+      "sha256": "9f80ab64de0856296a3a51ef7f07dcaf36ae149d9e0c871d50ebe2e9887905bd"
+    },
+    {
+      "path": "src/spell_invis.go",
+      "sha256": "1c14d786ef131f9371c1bb8e2cf9a7c72edc42c641befd5c72c7dd00930bdd99"
+    },
+    {
+      "path": "src/spell_invuln.go",
+      "sha256": "577e4f4453f67d644f48305083af15b681db9effd954b659ffd60cab798105da"
+    },
+    {
+      "path": "src/spell_light.go",
+      "sha256": "972155405dd8d35ffbf4abcfd80750e35f7174e00c2406a9a415c1cab73afe0a"
+    },
+    {
+      "path": "src/spell_magic_wall.go",
+      "sha256": "bdf6b8df61e6a723925b96a1024a48aac5dfb80dad41840ce343eeec8e985589"
+    },
+    {
+      "path": "src/spell_missiles.go",
+      "sha256": "b310049d335ac067d845c913755e0fbac6a095d6ac0723602d0282d66dbb0995"
+    },
+    {
+      "path": "src/spell_nullify.go",
+      "sha256": "203e249af1687aaaecc24971b4bb8c5a0fffc1890effaf05ec560db7b9fe2fdf"
+    },
+    {
+      "path": "src/spell_protect.go",
+      "sha256": "469d98ee7773a4724d9ecc1ce6db67367da89d3e2e6f1d891d8667ff8d15d866"
+    },
+    {
+      "path": "src/spell_run.go",
+      "sha256": "dee6bab575ba5dd5c53be3e461dbe83dd10004a717dba99a0a86e8517b3281c8"
+    },
+    {
+      "path": "src/spell_slow.go",
+      "sha256": "9af5b80775c10fa818ea18335a08b60a70f78f732001a70ca6f194fae0b9065b"
+    },
+    {
+      "path": "src/spell_summon.go",
+      "sha256": "d4b2023d8ea259d25132faf1d9110d2e30ed4f8226e68be10229967f78cd4e97"
+    },
+    {
+      "path": "src/spell_trap.go",
+      "sha256": "84714e1b2883ad1fe2e47a293a35b04551e4a3ef8f6e77af4e59986e1586e09f"
+    },
+    {
+      "path": "src/spell_tread.go",
+      "sha256": "0c003aec494aa02a96e870f51104909406e4ffbef1903f4770e0b83025a7d874"
+    },
+    {
+      "path": "src/spell_vampirism.go",
+      "sha256": "578a2b57cbc63b9489f11a3b190e573cf246cafdc33b3ae8e199c1c14bb08834"
+    },
+    {
+      "path": "src/spell_villain.go",
+      "sha256": "dd7e76b43b7a1c855ef067a3146f9b1cd1ff79064130c70e95f6c9b2d3fcca55"
+    },
+    {
+      "path": "src/spell_warcry.go",
+      "sha256": "8b487b794bc11b64a0b3797d9103d5fe39f602a8b2bd7ca68b8ce7d06d1e3ee3"
+    },
+    {
+      "path": "src/spells.go",
+      "sha256": "b1af7e0d8822c91e4e882a0bf77ed15fc8b668daee130b9459a894cee6bd609c"
+    },
+    {
+      "path": "src/spells_abil.go",
+      "sha256": "541acb821c5cf80072191f0543cfc47be2cb5c89138ebc926ca91ce730602060"
+    },
+    {
+      "path": "src/spells_buffs.go",
+      "sha256": "bc221deb15d420508fee0d5c8e4ab6cf41f289eb8b149e7f1844b5d335f35eca"
+    },
+    {
+      "path": "src/spells_dur.go",
+      "sha256": "c0dadfaffbad074bd5a81cd56381f8613722b49a72566dd84a030a7ec54a7fb8"
+    },
+    {
+      "path": "src/springs.go",
+      "sha256": "65e1b743a28e9835e3893aeb96ecd690d5ad5496692fd2acebc0c4bd86ccd8b2"
+    },
+    {
+      "path": "src/strman.go",
+      "sha256": "f62a12505dba43f6bacd8c372260add2f39399890ae6a4b622260e1335389606"
+    },
+    {
+      "path": "src/teams.go",
+      "sha256": "00d733c32293cfce2cc74a1314c37c4395c9540abc04cebdef17098e40adf86d"
+    },
+    {
+      "path": "src/things.go",
+      "sha256": "6ab31e61834ecadea125f5aa551d70e568c2dda0f0de4ff8eceb875a1f92a589"
+    },
+    {
+      "path": "src/timer_imports.go",
+      "sha256": "40c25a10b3ec3f01f0c86a9813334f23c6e970501956ee29b24c882f329c751a"
+    },
+    {
+      "path": "src/unit_ai.go",
+      "sha256": "df354169d3b73c42cdbf59a16f5cb00830fd76913db0d8888b167be2a37750a2"
+    },
+    {
+      "path": "src/unit_ai_path.go",
+      "sha256": "49f877f713faca7700edaad75b440be08d11d71f7f48eba6cfe163e13b45d98f"
+    },
+    {
+      "path": "src/unit_monster.go",
+      "sha256": "fda225fc36a0f8a0573f0c52d35031d409aa38e47415a1c011c77026af96ae0c"
+    },
+    {
+      "path": "src/version.go",
+      "sha256": "160315cf25e7930ba55bbce7baeb7e3f63e8b812a51d7d68226137f8523b08bd"
+    },
+    {
+      "path": "src/video.go",
+      "sha256": "50a687c918bf5b233bf4aebb66eb9826ae8213ab286c1021ef949bd3e4c6b201"
+    },
+    {
+      "path": "src/video_bag.go",
+      "sha256": "020f3a7e3e3acbabff24edb59dfb12f399e5656678a74bc7191efe357444af4f"
+    },
+    {
+      "path": "src/video_cgo.go",
+      "sha256": "1be5d80cb696dbb68bcd2cc6f8ebca00711d889f3b5cee04b02e2dae52c2df47"
+    },
+    {
+      "path": "src/video_client.go",
+      "sha256": "7d586c10b0c8c9e7ac7dac7c4dc859062a731db9d1d7d9f5a2d02e8de76453b6"
+    },
+    {
+      "path": "src/video_highres.go",
+      "sha256": "6aafe8b823f44b6d0626e2d8e0e98aabdd8d41fb896a819ce93751e3068d0470"
+    },
+    {
+      "path": "src/video_vanilla.go",
+      "sha256": "2fe24ecf01b83cfcb6443f6c8846cae16d62e83c95364b61f056ac000650d9ed"
+    },
+    {
+      "path": "src/wall.go",
+      "sha256": "972d7b7f8b3355d2f4aff86976585d6612cef1dc96bf9bab095f1f70a108c6e3"
+    },
+    {
+      "path": "src/waypoint.go",
+      "sha256": "84b101f0d200594bc006082d05ed8c53d7f7e2257aebfa8bd6fcbd44437a4602"
+    },
+    {
+      "path": "src/xfer.go",
+      "sha256": "b8888ed3f2cb8683d516e28555cf2a6e851935574c85e877bf32a11a6b29ba0a"
+    }
+  ]
+}

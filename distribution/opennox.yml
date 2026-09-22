@@ -1,0 +1,7 @@
+video:
+  filtering: true
+  gamma: 1
+  size:
+    width: 960
+    height: 540
+  stretch: true
