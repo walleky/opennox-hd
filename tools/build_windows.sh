@@ -34,7 +34,7 @@ go version -m "$out/opennox-hd-texture2x.exe" > "$out/go-build-info.txt"
   "$CC" --version
   for file in "$out"/*.exe "$out"/*.dll; do
     sha256sum "$file"
-    i686-w64-mingw32-objdump -p "$file" | grep 'DLL Name:'
+    i686-w64-mingw32-objdump -p "$file" | awk '/DLL Name:/ {print; found=1} END {if (!found) print "No imported DLLs"}'
   done
 } > "$out/build-info.txt"
 python3 - "$root" "$out" <<'PY'
