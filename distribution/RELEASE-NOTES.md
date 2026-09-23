@@ -1,11 +1,14 @@
-# OpenNox HD preview 2
+# OpenNox HD preview 3
 
 Unsigned Windows 10/11 preview built from the published source. Requires your
 own complete installation of Nox. Download the **windows-x86.zip** release asset,
 extract it, and run `INSTALL.cmd`. No development tools or administrator account
 are needed. GitHub's source-code ZIP is not the installer.
 
-- Finds common Nox installations and shows copy/verification progress.
+- Finds common Nox installations, verifies the copy and builds a 2× sprite
+  archive locally from the player's own `video.bag` and `video.idx`.
+- `BUILD-HD-SPRITES.cmd` creates a separate 4× archive. The current launcher
+  plays 2×; 4× is export-only. Existing archives are kept unless `-Force` is used.
 - Remembers resolution and sprite choices; use `SETTINGS.cmd` to change them.
 - `UPDATE.cmd` preserves saves, settings and custom files, and keeps a complete
   previous installation for rollback.
@@ -13,9 +16,10 @@ are needed. GitHub's source-code ZIP is not the installer.
 - Source and binary hashes tie the client to its GitHub build. Matching source
   and dependency sources accompany the package.
 
-This downloadable runtime uses the player's original artwork. The optional
-Hybrid 2x artwork archive is not included while its redistribution terms remain
-unresolved. Existing overlays are retained when upgrading.
+The generated art is a Catmull-Rom resize of the player's files, not the
+separately made AI-enhanced artwork. Neither the original game art nor any
+derived sprite archive is distributed through GitHub. Generation takes time
+and extra disk space. Existing overlays are retained when upgrading.
 
 The preview is unsigned: SmartScreen may offer **More info > Run anyway** if you
 trust the download. Smart App Control or managed-device policies may prevent

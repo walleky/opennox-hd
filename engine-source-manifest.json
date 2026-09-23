@@ -556,6 +556,14 @@
       "sha256": "67909c3f18cd0010008228bad39817537163f22cbba1de9cc21c467906cfc103"
     },
     {
+      "path": "src/cmd/hd-sprites/main.go",
+      "sha256": "aa3f16f43d833cbe3dfd92aebb8c56d9c25a392c37a1c6d6b64177c31b71f1b7"
+    },
+    {
+      "path": "src/cmd/hd-sprites/main_test.go",
+      "sha256": "620b22ec47915e1546bf616792878ed623072ba698d41611f60c016f1b6fd97b"
+    },
+    {
       "path": "src/cmd/noxmovie/main.go",
       "sha256": "346d599ba08f53ec9ef2f25b3e4ca1ebf21f67fb2fe2df6cff1b4cd53fca1f5a"
     },

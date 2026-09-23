@@ -8,12 +8,16 @@ Requires your own complete installed copy of Nox. Unofficial community project.
 Download the **windows-x86.zip** asset from
 [Releases](https://github.com/walleky/opennox-hd/releases), extract it completely,
 and double-click `INSTALL.cmd`. Confirm your Nox folder and choose a separate
-installation folder. Start from the desktop shortcut or `START-OPENNOX.cmd`.
+installation folder. The installer makes a local 2× sprite archive from your
+own Nox files; this can take several minutes. Start from the desktop shortcut
+or `START-OPENNOX.cmd`.
 No Python, Go, administrator account or development tools are needed.
 
 Use `SETTINGS.cmd` to change resolution and sprite mode. Choices are remembered.
-The public runtime imports your original game artwork; the optional Hybrid 2x
-artwork archive is not included pending clarification of redistribution terms.
+Run `BUILD-HD-SPRITES.cmd` in the installed folder to generate a separate 4×
+archive too. The current launcher plays 2×; 4× is an export for future builds.
+These locally resized sprites differ from the separately made AI-enhanced pack.
+Neither the original nor generated Nox artwork is hosted on GitHub.
 
 **Unsigned preview:** Windows may show a SmartScreen warning. If you trust the
 release, **More info > Run anyway** may be available. Smart App Control and
@@ -42,7 +46,7 @@ See [playtesting](docs/PLAYTEST.md) for the remaining visual and gameplay checks
 
 ## Build and verification
 
-GitHub Actions builds the Windows x86 client from `engine/` using Go 1.25.0 and
+GitHub Actions builds the Windows x86 client and sprite builder from `engine/` using Go 1.25.0 and
 checksum-pinned SDL/OpenAL SDKs, packages it with matching source, tests the
 installer and renderer, and smoke-loads the client on Windows. Build manifests
 record source and binary hashes. Artifacts are unsigned previews.

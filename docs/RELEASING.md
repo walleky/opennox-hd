@@ -5,7 +5,7 @@ Repository: https://github.com/walleky/opennox-hd
 GitHub Actions builds the published `engine/` source with Go 1.25.0, MinGW x86,
 SDL 2.0.20 and OpenAL Soft 1.20.1. SDK downloads are SHA-256 pinned in
 `tools/build_windows.sh`. The linker enables Large Address Awareness.
-The workflow checks input/renderer behavior, Windows installer behavior and
+The workflow checks input/renderer and sprite-builder behavior, Windows installer behavior and
 actual Windows client/DLL loading. It uploads `windows-client` and
 `unsigned-preview` artifacts. Neither artifact contains original Nox game data.
 
@@ -28,17 +28,19 @@ the SDKs and Go modules download as needed. Use the public Git repository for
 the installer/package tooling and its automated tests.
 
 Optional `--overlay` and `--fonts` inputs produce a local full-artwork candidate.
-Keep that separate from public runtime-only artifacts until redistribution
-terms for the game-derived artwork are clarified. Existing installed overlays
-are preserved by runtime-only updates.
+Do not publish those game-derived assets without permission. The public
+runtime includes only the sprite-builder code; users generate resized 2× and
+4× sprites from their own installation. Existing installed overlays are
+preserved by runtime-only updates.
 
 ## Publish
 
 Use a successful Actions run from the intended source commit. Download its
 `unsigned-preview` artifact and verify `SHA256SUMS.txt`. Attach only its named
 ZIP, checksum, evidence and release-note files to a GitHub prerelease. Publish
-both runtime and matching source. Never upload an installed game, saves, keys,
-logs, caches or original Nox files. Each individual asset must remain under 2 GiB.
+both runtime and matching source. Never upload an installed game, generated
+sprites, saves, keys, logs, caches or original Nox files. Each individual asset
+must remain under 2 GiB.
 
 Signing is optional for this unsigned preview. Explain the SmartScreen warning
 and the possible Smart App Control/enterprise-policy block in release notes.

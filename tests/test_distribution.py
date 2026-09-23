@@ -21,10 +21,10 @@ class ReleaseValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             (root / "main.go").write_text("package main")
-            for name in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll"):
+            for name in ("opennox-hd-texture2x.exe", "OpenNox-SpriteBuilder.exe", "SDL2.dll", "OpenAL32.dll"):
                 (root / name).write_bytes(b"build artifact")
             record = {"format": "opennox-hd-build-v1", "commit": "test", "engine": {"main.go": release.sha256(root / "main.go")},
-                      "binaries": {n: release.sha256(root / n) for n in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll")}}
+                      "binaries": {n: release.sha256(root / n) for n in ("opennox-hd-texture2x.exe", "OpenNox-SpriteBuilder.exe", "SDL2.dll", "OpenAL32.dll")}}
             manifest = root / "build-manifest.json"
             manifest.write_text(json.dumps(record))
             with patch.object(release, "git", return_value="main.go"):
@@ -104,9 +104,9 @@ class WindowsInstallerTests(unittest.TestCase):
         (self.game / "Save/player.plr").write_bytes(b"private save")
         for name in ("server.pem", "nox.cfg", "Game.exe", "video.bag.zip", "default.hd2.fnt"):
             (self.game / name).write_bytes(b"must not import")
-        for name in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll"):
+        for name in ("opennox-hd-texture2x.exe", "OpenNox-SpriteBuilder.exe", "SDL2.dll", "OpenAL32.dll"):
             (self.payload / name).write_bytes(b"fixture runtime - never executed")
-        for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd", "DIAGNOSTICS.cmd", "Collect-Diagnostics.ps1"):
+        for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd", "DIAGNOSTICS.cmd", "Collect-Diagnostics.ps1", "Build-HD-Sprites.ps1", "BUILD-HD-SPRITES.cmd"):
             shutil.copyfile(ROOT / "runtime-profiles" / name, self.payload / name)
         shutil.copyfile(ROOT / "distribution/opennox.yml", self.payload / "opennox.yml")
         shutil.copyfile(ROOT / "distribution/Install-OpenNoxHD.ps1", self.package / "Install-OpenNoxHD.ps1")
@@ -214,6 +214,8 @@ class WindowsInstallerTests(unittest.TestCase):
         result = self.run_installer()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         data = self.destination / "NoxData"
+        self.assertTrue((self.destination / "OpenNox-SpriteBuilder.exe").is_file())
+        self.assertTrue((self.destination / "BUILD-HD-SPRITES.cmd").is_file())
         self.assertTrue((data / "maps/con01a.map").is_file())
         for name in ("server.pem", "Game.exe", "video.bag.zip", "default.hd2.fnt", "Save"):
             self.assertFalse((data / name).exists(), name)

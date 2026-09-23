@@ -123,8 +123,8 @@ def verify_build_manifest(path: Path, source: Path, client: Path, runtime: Path)
     actual = {n: sha256(source / n) for n in names if n and (source / n).is_file()}
     if actual != record["engine"]:
         raise ValueError("Source files do not match the source used for the Windows build")
-    for name in ("opennox-hd-texture2x.exe", "SDL2.dll", "OpenAL32.dll"):
-        binary = client if name.endswith(".exe") else runtime / name
+    for name in ("opennox-hd-texture2x.exe", "OpenNox-SpriteBuilder.exe", "SDL2.dll", "OpenAL32.dll"):
+        binary = client if name == "opennox-hd-texture2x.exe" else runtime / name
         if sha256(binary) != record["binaries"].get(name):
             raise ValueError(f"Build manifest binary mismatch: {name}")
     return {"commit": record["commit"], "manifest_sha256": sha256(path), "source_files_verified": len(actual)}
@@ -193,12 +193,13 @@ def build(args) -> Path:
         shutil.copyfile(source, target)
 
     copy(args.client, "opennox-hd-texture2x.exe")
+    copy(args.runtime / "OpenNox-SpriteBuilder.exe", "OpenNox-SpriteBuilder.exe")
     packaged_client = payload / "opennox-hd-texture2x.exe"
     laa_changed = enable_large_address_aware(packaged_client)
     validate_client(packaged_client, sha256(packaged_client))
     for name in ("SDL2.dll", "OpenAL32.dll"):
         copy(args.runtime / name, name)
-    for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd", "Collect-Diagnostics.ps1", "DIAGNOSTICS.cmd"):
+    for name in ("OpenNox-Launcher.ps1", "START-OPENNOX.cmd", "SETTINGS.cmd", "Collect-Diagnostics.ps1", "DIAGNOSTICS.cmd", "Build-HD-Sprites.ps1", "BUILD-HD-SPRITES.cmd"):
         copy(ROOT / "runtime-profiles" / name, name)
     copy(ROOT / "distribution/opennox.yml", "opennox.yml")
     copy(ROOT / "LICENSE", "licenses/OpenNox-GPL-3.0.txt")

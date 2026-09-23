@@ -4,7 +4,8 @@ param(
     [string]$GamePath = '',
     [string]$Destination = '',
     [switch]$NoShortcut,
-    [switch]$Upgrade
+    [switch]$Upgrade,
+    [switch]$GenerateSprites
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
@@ -101,7 +102,7 @@ foreach ($file in $manifest.files) {
         throw "Package checksum failed: $relative. Download the release again."
     }
 }
-foreach ($required in @('opennox-hd-texture2x.exe', 'SDL2.dll', 'OpenAL32.dll', 'OpenNox-Launcher.ps1', 'START-OPENNOX.cmd', 'opennox.yml')) {
+foreach ($required in @('opennox-hd-texture2x.exe', 'OpenNox-SpriteBuilder.exe', 'SDL2.dll', 'OpenAL32.dll', 'OpenNox-Launcher.ps1', 'START-OPENNOX.cmd', 'Build-HD-Sprites.ps1', 'BUILD-HD-SPRITES.cmd', 'opennox.yml')) {
     if (-not $seen.ContainsKey((Safe-PayloadPath $payload $required))) { throw "Package is incomplete: $required" }
 }
 
@@ -197,7 +198,8 @@ foreach ($folder in @('maps', 'Dialog', 'MOVIES', 'MUSIC', 'window', 'data', 'im
 foreach ($item in $imports) { Assert-NoLinks $item.FullName }
 $bytes = ($imports | Measure-Object -Property Length -Sum).Sum + ($manifest.files | Measure-Object -Property bytes -Sum).Sum
 $drive = New-Object IO.DriveInfo ([IO.Path]::GetPathRoot($Destination))
-if ($drive.AvailableFreeSpace -lt ($bytes + 256MB)) { throw 'Not enough free space on the installation drive.' }
+$spriteReserve = if ($GenerateSprites -and -not $Upgrade -and -not $manifest.includes_overlay) { 2GB } else { 0 }
+if ($drive.AvailableFreeSpace -lt ($bytes + 256MB + $spriteReserve)) { throw 'Not enough free space on the installation drive.' }
 
 $stage = $Destination + '.install-' + [Guid]::NewGuid().ToString('N')
 $backup = $Destination + '.previous-' + (Get-Date).ToString('yyyyMMdd-HHmmss') + '-' + [Guid]::NewGuid().ToString('N').Substring(0, 8)
@@ -223,6 +225,13 @@ try {
         Write-Progress -Activity 'Installing OpenNox HD' -Status "$completed of $total files: $($file.path)" -PercentComplete (100 * $completed / $total)
     }
     Copy-Item -LiteralPath (Join-Path $packageRoot 'package-manifest.json') -Destination (Join-Path $stage 'package-manifest.json')
+    if ($GenerateSprites -and -not $Upgrade -and -not $manifest.includes_overlay) {
+        Write-Host 'Generating 2x artwork from your copied Nox files. This may take a while...'
+        & (Join-Path $stage 'OpenNox-SpriteBuilder.exe') -data (Join-Path $stage 'NoxData') -output (Join-Path $stage 'NoxData\video.bag.zip') -scale 2
+        if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath (Join-Path $stage 'NoxData\video.bag.zip') -PathType Leaf)) {
+            throw "2x sprite generation failed with exit code $LASTEXITCODE."
+        }
+    }
     # Validate real first-run settings before making the install visible.
     & (Join-Path $stage 'OpenNox-Launcher.ps1') -NoLaunch | Out-Null
     if ($Upgrade) {
@@ -256,4 +265,5 @@ if (-not $NoShortcut -and -not $Upgrade) {
 Write-Host "Installed successfully: $Destination"
 Write-Host 'Start with START-OPENNOX.cmd or the desktop shortcut.'
 Write-Host 'Change resolution and sprite choices with SETTINGS.cmd.'
+Write-Host 'Run BUILD-HD-SPRITES.cmd to generate a separate 4x export (the current launcher plays 2x).'
 Write-Host 'To uninstall, close the game and delete this separate folder and its shortcut. Back up NoxData\Save first.'

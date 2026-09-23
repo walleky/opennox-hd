@@ -20,6 +20,7 @@ export CGO_CFLAGS_ALLOW='(-fshort-wchar)|(-fno-strict-aliasing)|(-fno-strict-ove
 export CGO_LDFLAGS="-L$sdl/lib -L$al/libs/Win32 -static-libgcc"
 cd "$root/engine/src"
 go build -mod=readonly -trimpath -tags=highres,guiapp -ldflags='-H windowsgui -extldflags=-Wl,--large-address-aware' -o "$out/opennox-hd-texture2x.exe" ./cmd/opennox
+CGO_ENABLED=0 go build -mod=readonly -trimpath -o "$out/OpenNox-SpriteBuilder.exe" ./cmd/hd-sprites
 cp "$sdl/bin/SDL2.dll" "$out/SDL2.dll"
 cp "$al/bin/Win32/soft_oal.dll" "$out/OpenAL32.dll"
 go version -m "$out/opennox-hd-texture2x.exe" > "$out/go-build-info.txt"
