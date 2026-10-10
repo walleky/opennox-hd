@@ -118,11 +118,54 @@ class WindowsInstallerTests(unittest.TestCase):
     def write_manifest(self):
         (self.package / "package-manifest.json").write_text(json.dumps(self.manifest), encoding="utf-8")
 
-    def run_installer(self, destination=None, upgrade=False):
+    def run_installer(self, destination=None, upgrade=False, refresh=False):
         return subprocess.run(["powershell.exe", "-NoLogo", "-NoProfile", "-NonInteractive",
                                "-ExecutionPolicy", "Bypass", "-File", str(self.package / "Install-OpenNoxHD.ps1"),
                                "-GamePath", str(self.game), "-Destination", str(destination or self.destination),
-                               "-NoShortcut"] + (["-Upgrade"] if upgrade else []), capture_output=True, text=True, timeout=45)
+                               "-NoShortcut"] + (["-Upgrade"] if upgrade else []) +
+                              (["-RefreshGameData"] if refresh else []), capture_output=True, text=True, timeout=45)
+
+    def test_gog_refresh_imports_new_menu_preserving_saves_overlay_and_settings(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        data = self.destination / "NoxData"
+        (data / "Save").mkdir()
+        (data / "Save/player.plr").write_bytes(b"campaign progress")
+        (data / "video.bag.zip").write_bytes(b"existing HD overlay")
+        result = self.launch_settings("-Resolution", "1440p", "-SpriteMode", "original")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        saved = {n: (self.destination / n).read_bytes() for n in
+                 ("NoxData/Save/player.plr", "NoxData/video.bag.zip", "launcher-settings.json", "opennox-user.yml", "NoxData/nox.cfg")}
+        (self.game / "window").mkdir()
+        (self.game / "window/options.wnd").write_bytes(b"new GOG options fixture")
+        (self.game / "nox.csf").write_bytes(b"new GOG text fixture")
+        (self.game / "goggame-1207658964.info").write_text(json.dumps({"gameId": "1207658964", "buildId": "60006743039602457"}))
+        for n in ("ddraw.dll", "dxwrapper.dll", "dxcfg.exe", "dxcfg.ini", "Woldata.key"):
+            (self.game / n).write_bytes(b"GOG-only component fixture")
+        result = self.run_installer(upgrade=True, refresh=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        for n, content in saved.items():
+            self.assertEqual((self.destination / n).read_bytes(), content, n)
+        self.assertEqual((data / "window/options.wnd").read_bytes(), b"new GOG options fixture")
+        self.assertEqual((data / "nox.csf").read_bytes(), b"new GOG text fixture")
+        record = json.loads((self.destination / "source-game.json").read_text())
+        self.assertEqual(record["gog_build_id"], "60006743039602457")
+        self.assertEqual(record["files"]["window/options.wnd"], release.sha256(data / "window/options.wnd"))
+        for n in ("ddraw.dll", "dxwrapper.dll", "dxcfg.exe", "dxcfg.ini", "Woldata.key"):
+            self.assertFalse((data / n).exists(), n)
+            self.assertFalse((self.destination / n).exists(), n)
+        self.assertEqual(len(list(self.root.glob("new game.previous-*"))), 1)
+
+    def test_gog_refresh_rejects_changed_sprite_archive_without_touching_install(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        before = {p.relative_to(self.destination): p.read_bytes() for p in self.destination.rglob("*") if p.is_file()}
+        (self.game / "video.bag").write_bytes(b"different sprites")
+        result = self.run_installer(upgrade=True, refresh=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("sprite archive changed", result.stderr)
+        self.assertEqual(before, {p.relative_to(self.destination): p.read_bytes() for p in self.destination.rglob("*") if p.is_file()})
+        self.assertFalse(list(self.root.glob("new game.previous-*")))
 
     def launch_settings(self, *args):
         return subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File",

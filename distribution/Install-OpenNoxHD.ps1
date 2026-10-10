@@ -5,6 +5,7 @@ param(
     [string]$Destination = '',
     [switch]$NoShortcut,
     [switch]$Upgrade,
+    [switch]$RefreshGameData,
     [switch]$GenerateSprites
 )
 $ErrorActionPreference = 'Stop'
@@ -71,10 +72,8 @@ function Find-NoxInstall {
         if ($base) { $candidates.Add((Join-Path $base 'Nox')); $candidates.Add((Join-Path $base 'GOG Galaxy\Games\Nox')) }
     }
     foreach ($registry in @('HKLM:\SOFTWARE\GOG.com\Games', 'HKLM:\SOFTWARE\WOW6432Node\GOG.com\Games', 'HKCU:\SOFTWARE\GOG.com\Games')) {
-        foreach ($key in @(Get-ChildItem -LiteralPath $registry -ErrorAction SilentlyContinue)) {
-            $values = Get-ItemProperty -LiteralPath $key.PSPath
-            if ($values.PSObject.Properties['path'] -and $values.path) { $candidates.Add([string]$values.path) }
-        }
+        $values = Get-ItemProperty -LiteralPath (Join-Path $registry '1207658964') -ErrorAction SilentlyContinue
+        if ($values -and $values.PSObject.Properties['path'] -and $values.path) { $candidates.Add([string]$values.path) }
     }
     foreach ($path in $candidates) {
         if ((Test-Path -LiteralPath (Join-Path $path 'video.bag')) -or
@@ -84,6 +83,7 @@ function Find-NoxInstall {
 }
 
 $packageRoot = FullPath $PSScriptRoot
+if ($RefreshGameData -and -not $Upgrade) { throw '-RefreshGameData requires -Upgrade.' }
 $payload = Join-Path $packageRoot 'payload'
 $manifest = Get-Content -LiteralPath (Join-Path $packageRoot 'package-manifest.json') -Raw | ConvertFrom-Json
 if ($manifest.format -ne 'opennox-hd-package-v1' -or $manifest.scale -ne 2 -or @($manifest.files).Count -eq 0) {
@@ -123,7 +123,7 @@ if ($Upgrade) {
     if ((Test-Path -LiteralPath $comparisonStage) -and @(Get-ChildItem -LiteralPath $comparisonStage -Recurse -File).Count) {
         throw 'An interrupted sprite comparison needs recovery. Start and close the installed game before updating.'
     }
-    $GamePath = Join-Path $Destination 'NoxData'
+    if (-not $RefreshGameData) { $GamePath = Join-Path $Destination 'NoxData' }
 }
 if ([string]::IsNullOrWhiteSpace($GamePath)) {
     Write-Host 'Select your installed copy of Nox (the folder containing video.bag).'
@@ -150,6 +150,22 @@ if (-not (Test-Path -LiteralPath (Join-Path $GamePath 'maps') -PathType Containe
     @(Get-ChildItem -LiteralPath (Join-Path $GamePath 'maps') -Filter '*.map' -Recurse -File).Count -eq 0) {
     throw "No Nox maps found in $GamePath\maps. Select the complete game installation."
 }
+$sourceRecord = [ordered]@{ format = 'opennox-hd-source-v1'; gog_build_id = ''; files = [ordered]@{} }
+if (-not $Upgrade -or $RefreshGameData) {
+    $info = Join-Path $GamePath 'goggame-1207658964.info'
+    if (-not (Test-Path -LiteralPath $info -PathType Leaf)) { $info = Join-Path (Split-Path -Parent $GamePath) 'goggame-1207658964.info' }
+    if (Test-Path -LiteralPath $info -PathType Leaf) {
+        try {
+            $gog = Get-Content -LiteralPath $info -Raw | ConvertFrom-Json
+            if ($gog.PSObject.Properties['buildId'] -and [string]$gog.buildId -match '^\d{1,30}$') { $sourceRecord.gog_build_id = [string]$gog.buildId }
+        } catch { Write-Warning 'GOG metadata could not be read; game content will still be validated.' }
+    }
+    foreach ($name in @('video.bag', 'video.idx', 'nox.csf', 'window\options.wnd')) {
+        $path = Join-Path $GamePath $name
+        if (Test-Path -LiteralPath $path -PathType Leaf) { $sourceRecord.files[$name.Replace('\', '/')] = File-Sha256 $path }
+    }
+    if ($sourceRecord.gog_build_id) { Write-Host "Importing GOG Nox build $($sourceRecord.gog_build_id)." }
+}
 if ([string]::IsNullOrWhiteSpace($Destination)) {
     $defaultDestination = Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'OpenNox-HD'
     $answer = Read-Host "Install folder [Enter for $defaultDestination]"
@@ -158,7 +174,7 @@ if ([string]::IsNullOrWhiteSpace($Destination)) {
 $Destination = FullPath $Destination
 Assert-NoLinks $Destination
 foreach ($protected in @($GamePath, $packageRoot)) {
-    if ($Upgrade -and $protected -eq $GamePath) { continue }
+    if ($Upgrade -and -not $RefreshGameData -and $protected -eq $GamePath) { continue }
     if ((IsWithin $Destination $protected) -or (IsWithin $protected $Destination)) {
         throw 'Choose a separate install folder outside both the original game and the extracted download.'
     }
@@ -169,6 +185,7 @@ if (-not $Upgrade -and (Test-Path -LiteralPath $Destination)) {
 
 # Import only game content; exclude saves, configs, keys, logs, launchers and DLLs.
 $imports = [Collections.Generic.List[object]]::new()
+$refreshImports = [Collections.Generic.List[object]]::new()
 if ($Upgrade) {
     # Clone the complete existing installation, including saves and custom files.
     # Keep the old directory intact until the replacement is fully verified.
@@ -176,12 +193,15 @@ if ($Upgrade) {
         if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw "Linked installation content is not supported: $($item.FullName)" }
         if (-not $item.PSIsContainer) { $imports.Add($item) }
     }
-} else {
+}
+if (-not $Upgrade -or $RefreshGameData) {
+$gameImports = $imports
+if ($RefreshGameData) { $gameImports = $refreshImports }
 Get-ChildItem -LiteralPath $GamePath -File | Where-Object {
     $_.Extension.ToLowerInvariant() -in @('.bag', '.idx', '.bin', '.csf', '.fnt', '.pal', '.rul') -and
     $_.Name -notlike '*.hd2.fnt'
-} | ForEach-Object { $imports.Add($_) }
-$imports.Add((Get-Item -LiteralPath (Join-Path $GamePath 'default.cfg')))
+} | ForEach-Object { $gameImports.Add($_) }
+$gameImports.Add((Get-Item -LiteralPath (Join-Path $GamePath 'default.cfg')))
 foreach ($folder in @('maps', 'Dialog', 'MOVIES', 'MUSIC', 'window', 'data', 'images')) {
     $path = Join-Path $GamePath $folder
     if (-not (Test-Path -LiteralPath $path -PathType Container)) { continue }
@@ -190,13 +210,21 @@ foreach ($folder in @('maps', 'Dialog', 'MOVIES', 'MUSIC', 'window', 'data', 'im
     foreach ($item in $entries) {
         if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw "Linked game content is not supported: $($item.FullName)" }
         if (-not $item.PSIsContainer -and $item.Extension.ToLowerInvariant() -notin @('.exe', '.dll', '.ps1', '.cmd', '.bat', '.pem', '.key')) {
-            $imports.Add($item)
+            $gameImports.Add($item)
         }
     }
 }
 }
-foreach ($item in $imports) { Assert-NoLinks $item.FullName }
+foreach ($item in @($imports.ToArray()) + @($refreshImports.ToArray())) { Assert-NoLinks $item.FullName }
+if ($RefreshGameData) {
+    foreach ($name in @('video.bag', 'video.idx')) {
+        if ((File-Sha256 (Join-Path $Destination "NoxData\$name")) -ne $sourceRecord.files[$name]) {
+            throw 'The sprite archive changed. Use INSTALL.cmd in a new folder to generate matching HD sprites; this existing installation was not changed.'
+        }
+    }
+}
 $bytes = ($imports | Measure-Object -Property Length -Sum).Sum + ($manifest.files | Measure-Object -Property bytes -Sum).Sum
+if ($refreshImports.Count) { $bytes += ($refreshImports | Measure-Object -Property Length -Sum).Sum }
 $drive = New-Object IO.DriveInfo ([IO.Path]::GetPathRoot($Destination))
 $spriteReserve = if ($GenerateSprites -and -not $Upgrade -and -not $manifest.includes_overlay) { 2GB } else { 0 }
 if ($drive.AvailableFreeSpace -lt ($bytes + 256MB + $spriteReserve)) { throw 'Not enough free space on the installation drive.' }
@@ -208,7 +236,7 @@ try {
     [void][IO.Directory]::CreateDirectory($stage)
     Write-Host 'Copying and verifying Nox data. This can take several minutes...'
     $completed = 0
-    $total = $imports.Count + @($manifest.files).Count
+    $total = $imports.Count + $refreshImports.Count + @($manifest.files).Count
     foreach ($item in $imports) {
         $importRoot = if ($Upgrade) { $Destination } else { $GamePath }
         $targetRoot = if ($Upgrade) { $stage } else { Join-Path $stage 'NoxData' }
@@ -217,6 +245,15 @@ try {
         Copy-Verified $item.FullName $target (File-Sha256 $item.FullName)
         $completed++
         Write-Progress -Activity 'Installing OpenNox HD' -Status "$completed of $total files: $relative" -PercentComplete (100 * $completed / $total)
+    }
+    foreach ($item in $refreshImports) {
+        $relative = $item.FullName.Substring($GamePath.Length).TrimStart('\', '/')
+        Copy-Verified $item.FullName (Safe-PayloadPath (Join-Path $stage 'NoxData') $relative) (File-Sha256 $item.FullName)
+        $completed++
+        Write-Progress -Activity 'Refreshing Nox game content' -Status "$completed of $total files: $relative" -PercentComplete (100 * $completed / $total)
+    }
+    if (-not $Upgrade -or $RefreshGameData) {
+        [IO.File]::WriteAllText((Join-Path $stage 'source-game.json'), ($sourceRecord | ConvertTo-Json -Depth 4), [Text.UTF8Encoding]::new($false))
     }
     Write-Host 'Installing OpenNox HD...'
     foreach ($file in $manifest.files) {

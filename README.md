@@ -3,6 +3,10 @@
 An experimental Windows client and installer for Nox, with a Hybrid 2x renderer.
 Requires your own complete installed copy of Nox. Unofficial community project.
 
+Supports the September 2026 GOG Preservation update (1.2 gog v2). OpenNox uses
+its own engine and renderer with your installed game content. See
+[GOG compatibility](docs/GOG-COMPATIBILITY.md) for the tested build and update steps.
+
 ## Download and install
 
 Download the **windows-x86.zip** asset from
@@ -32,6 +36,10 @@ GitHub's **Code > Download ZIP** contains source, not the player installer.
 Close OpenNox, extract the next release and run `UPDATE.cmd`. Select the existing
 OpenNox HD folder. The updater verifies a complete replacement before switching,
 preserves saves/settings/custom files, and keeps the previous folder for rollback.
+After updating your original GOG copy, run `UPDATE-FROM-GOG.cmd` instead. Select
+the OpenNox HD folder and the updated GOG folder. It also refreshes game content,
+keeping HD sprites when the original sprite archives match. If a future GOG
+update changes those archives, install into a new folder to rebuild the sprites.
 To roll back, close the game, rename the new folder, then rename the
 `.previous-...` folder to the original name. Preserve any newer saves separately.
 

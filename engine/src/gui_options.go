@@ -121,8 +121,9 @@ func guiEnhanceOptions(root *gui.Window) {
 	// change resolution options to a new ones
 	// if you decide to change these, check carefully in other places, especially in C
 	resOpts := getResolutionOptions()
-	// exactly 3 options in the menu (321-323)
-	for i := 0; i < 3; i++ {
+	// GOG's September 2026 update adds a fourth legacy option (324).
+	// Hide it too before placing OpenNox's replacement resolution controls.
+	for i := 0; i < 4; i++ {
 		if w := root.ChildByID(uint(321 + i)); w != nil {
 			w.Hide()
 		}

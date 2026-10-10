@@ -2,6 +2,7 @@ OpenNox HD - Windows preview
 
 Requires Windows 10/11 and your own complete installed copy of Nox.
 No Python, Go, administrator account, or development tools are needed to play.
+Supports the September 2026 GOG Preservation update (1.2 gog v2).
 
 1. Extract the ENTIRE windows-x86.zip into a folder. Do not run inside the ZIP.
 2. Double-click INSTALL.cmd.
@@ -18,6 +19,9 @@ GOG installers and game executables are not imported. The new game's saves live
 in its NoxData\Save folder. Keep that folder when moving or removing the game.
 To upgrade, close the game, extract the new download, run UPDATE.cmd and select
 your installed OpenNox HD folder. Saves, settings and custom files are preserved.
+After updating the original GOG copy, use UPDATE-FROM-GOG.cmd instead and select
+both folders. It refreshes game content and keeps matching HD sprites. If a future
+update changes the original sprite archives, install into a new folder to rebuild.
 The complete previous installation is kept beside it as <folder>.previous-<id>.
 For rollback, close the game, rename the new folder, then rename the previous
 folder to the original name. Keep newer saves separately before rolling back.

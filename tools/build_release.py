@@ -221,7 +221,7 @@ def build(args) -> Path:
             copy(args.fonts / name, "NoxData/" + name)
         copy(args.overlay, "NoxData/video.bag.zip")
         write_json(payload / "overlay-manifest.json", overlay)
-    for name in ("INSTALL.cmd", "UPDATE.cmd", "Install-OpenNoxHD.ps1", "README.txt"):
+    for name in ("INSTALL.cmd", "UPDATE.cmd", "UPDATE-FROM-GOG.cmd", "Install-OpenNoxHD.ps1", "README.txt"):
         shutil.copyfile(ROOT / "distribution" / name, package / name)
     files = [{"path": p.relative_to(payload).as_posix(), "bytes": p.stat().st_size, "sha256": sha256(p)}
              for p in sorted(payload.rglob("*")) if p.is_file()]

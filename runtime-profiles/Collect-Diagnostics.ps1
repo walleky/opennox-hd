@@ -13,6 +13,15 @@ foreach ($name in @('opennox-hd-texture2x.exe', 'SDL2.dll', 'OpenAL32.dll')) {
     }
 }
 $report.binaries = $binaries
+$sourcePath = Join-Path $root 'source-game.json'
+if (Test-Path -LiteralPath $sourcePath -PathType Leaf) {
+    try {
+        $source = Get-Content -LiteralPath $sourcePath -Raw | ConvertFrom-Json
+        if ($source.format -eq 'opennox-hd-source-v1') {
+            $report.source_game = @{ gog_build_id = $source.gog_build_id; files = $source.files }
+        }
+    } catch { $report.source_game = 'unreadable' }
+}
 foreach ($name in @('package-manifest.json', 'launcher-settings.json')) {
     $path = Join-Path $root $name
     if (Test-Path -LiteralPath $path) {
