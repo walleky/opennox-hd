@@ -2,6 +2,7 @@ package noxrender
 
 import (
 	"encoding/binary"
+	"fmt"
 	"image"
 	"image/color"
 	"runtime"
@@ -357,62 +358,66 @@ func TestTextureDensityNRGBA2xFastPathMatchesGeneric(t *testing.T) {
 }
 
 func TestTextureDensityDirtyPresentationMatchesFullReplay(t *testing.T) {
-	baseColor := uint16(noxcolor.RGB5551Color(0, 0, 255))
-	logicalSprite := uint16(noxcolor.RGB5551Color(255, 0, 0))
-	src := image.NewNRGBA(image.Rect(0, 0, 2, 2))
-	for i := 0; i < len(src.Pix); i += 4 {
-		src.Pix[i+0] = 255
-		src.Pix[i+3] = 128
-	}
-	makeRenderer := func() *NoxRender {
-		r := NewRender(nil, nil)
-		d, free := NewRenderData()
-		t.Cleanup(free)
-		r.SetData(d)
-		r.texturePresentationScale = 2
-		r.SetPixBuffer(noximage.NewImage16(image.Rect(0, 0, 48, 16)))
-		for i := range r.PixBuffer().Pix {
-			r.PixBuffer().Pix[i] = baseColor
-		}
-		r.textureOwners = make([]uint32, len(r.PixBuffer().Pix))
-		return r
-	}
-	queueSprite := func(r *NoxRender) {
-		r.PixBuffer().Pix[0] = logicalSprite
-		r.textureDensity = append(r.textureDensity, textureDensityDraw{
-			src:        src,
-			srcBounds:  src.Rect,
-			scale:      2,
-			logical:    image.Pt(1, 1),
-			snapshot:   []uint16{logicalSprite},
-			owners:     []uint32{0},
-			background: []uint16{baseColor},
-		})
-	}
-	dirty := makeRenderer()
-	full := makeRenderer()
-	queueSprite(dirty)
-	queueSprite(full)
-	dirty.CopyPresentationBuffer()
-	full.CopyPresentationBuffer()
+	for _, scale := range []int{2, 4} {
+		t.Run(fmt.Sprint(scale), func(t *testing.T) {
+			baseColor := uint16(noxcolor.RGB5551Color(0, 0, 255))
+			logicalSprite := uint16(noxcolor.RGB5551Color(255, 0, 0))
+			src := image.NewNRGBA(image.Rect(0, 0, scale, scale))
+			for i := 0; i < len(src.Pix); i += 4 {
+				src.Pix[i+0] = 255
+				src.Pix[i+3] = 128
+			}
+			makeRenderer := func() *NoxRender {
+				r := NewRender(nil, nil)
+				d, free := NewRenderData()
+				t.Cleanup(free)
+				r.SetData(d)
+				r.texturePresentationScale = scale
+				r.SetPixBuffer(noximage.NewImage16(image.Rect(0, 0, 48, 16)))
+				for i := range r.PixBuffer().Pix {
+					r.PixBuffer().Pix[i] = baseColor
+				}
+				r.textureOwners = make([]uint32, len(r.PixBuffer().Pix))
+				return r
+			}
+			queueSprite := func(r *NoxRender) {
+				r.PixBuffer().Pix[0] = logicalSprite
+				r.textureDensity = append(r.textureDensity, textureDensityDraw{
+					src:        src,
+					srcBounds:  src.Rect,
+					scale:      scale,
+					logical:    image.Pt(1, 1),
+					snapshot:   []uint16{logicalSprite},
+					owners:     []uint32{0},
+					background: []uint16{baseColor},
+				})
+			}
+			dirty := makeRenderer()
+			full := makeRenderer()
+			queueSprite(dirty)
+			queueSprite(full)
+			dirty.CopyPresentationBuffer()
+			full.CopyPresentationBuffer()
 
-	// A later logical primitive claims the sprite's pixel without changing its
-	// RGB555 value. Ownership alone must dirty the tile and suppress the old HD
-	// replay, exactly as a full presentation rebuild does.
-	dirty.textureOwners[0] = 1
-	full.textureOwners[0] = 1
-	queueSprite(dirty)
-	queueSprite(full)
-	if regions, redraw := dirty.textureDensityDirtyRegions(dirty.PixBuffer(), 2); redraw || len(regions) != 1 {
-		t.Fatalf("dirty plan = %d regions, full=%v; want one partial tile", len(regions), redraw)
-	}
-	dirtyOut := dirty.CopyPresentationBuffer()
-	full.texturePresentationValid = false
-	fullOut := full.CopyPresentationBuffer()
-	for i := range dirtyOut.Pix {
-		if dirtyOut.Pix[i] != fullOut.Pix[i] {
-			t.Fatalf("dirty output pixel %d = %x, full replay = %x", i, dirtyOut.Pix[i], fullOut.Pix[i])
-		}
+			// A later logical primitive claims the sprite's pixel without changing its
+			// RGB555 value. Ownership alone must dirty the tile and suppress the old HD
+			// replay, exactly as a full presentation rebuild does.
+			dirty.textureOwners[0] = 1
+			full.textureOwners[0] = 1
+			queueSprite(dirty)
+			queueSprite(full)
+			if regions, redraw := dirty.textureDensityDirtyRegions(dirty.PixBuffer(), scale); redraw || len(regions) != 1 {
+				t.Fatalf("dirty plan = %d regions, full=%v; want one partial tile", len(regions), redraw)
+			}
+			dirtyOut := dirty.CopyPresentationBuffer()
+			full.texturePresentationValid = false
+			fullOut := full.CopyPresentationBuffer()
+			for i := range dirtyOut.Pix {
+				if dirtyOut.Pix[i] != fullOut.Pix[i] {
+					t.Fatalf("dirty output pixel %d = %x, full replay = %x", i, dirtyOut.Pix[i], fullOut.Pix[i])
+				}
+			}
+		})
 	}
 }
 

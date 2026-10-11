@@ -226,7 +226,8 @@ def build(args) -> Path:
     files = [{"path": p.relative_to(payload).as_posix(), "bytes": p.stat().st_size, "sha256": sha256(p)}
              for p in sorted(payload.rglob("*")) if p.is_file()]
     write_json(package / "package-manifest.json", {"format": "opennox-hd-package-v1", "version": args.version,
-               "scale": 2, "channel": "preview", "includes_overlay": bool(overlay), "files": files})
+               "scale": 2, "sprite_scales": [2, 4], "default_sprite_scale": 4,
+               "channel": "preview", "includes_overlay": bool(overlay), "files": files})
     source_zip = output / f"opennox-hd-{args.version}-source.zip"
     source = source_snapshot(args.source, source_zip, modules)
     binary_zip = output / f"opennox-hd-{args.version}-windows-x86.zip"

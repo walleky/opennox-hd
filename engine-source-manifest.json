@@ -428,6 +428,10 @@
       "sha256": "274eb7737f8501d5e74fdcd77f3de8d78eb446f97b925d1ed5fa93238c49c36f"
     },
     {
+      "path": "src/client/noxrender/archive_selection_test.go",
+      "sha256": "e832c2de33524bd2a480d7a98b85c9e9d67ed1ac2211e21ea622026d80ad4db8"
+    },
+    {
       "path": "src/client/noxrender/color.go",
       "sha256": "896c7572b2c5501b1099edc5be38606b98bb2d689749a1d24012ff5ef5a128c1"
     },
@@ -437,7 +441,7 @@
     },
     {
       "path": "src/client/noxrender/hdperf.go",
-      "sha256": "66dffb5367795070b77cbb4feed9b3a1adbf009406dac8cbf705c0575e710f52"
+      "sha256": "cc2fdf7964527d04f0a65d6a55f82f24877609b2c7430c336b1ab7d370d87694"
     },
     {
       "path": "src/client/noxrender/hdperf_test.go",
@@ -481,7 +485,7 @@
     },
     {
       "path": "src/client/noxrender/sprites.go",
-      "sha256": "8ff48aced16d67e329bcbf18f0a3eebdbf844e6edd6abdaa7e2597fb025e5eb9"
+      "sha256": "ab382029b6ff8379b5946ad05deccb36dde5d2ab55d080a19e4999539eb90b17"
     },
     {
       "path": "src/client/noxrender/text.go",
@@ -489,11 +493,11 @@
     },
     {
       "path": "src/client/noxrender/texture_density.go",
-      "sha256": "643e49c1a637b792f43101d4ed2803fffb51c3a687b7170b7e62a2bdc893d8ca"
+      "sha256": "33ef46261e38daad5c55900b94d877b3f37492491a005bab8306d20803855fe2"
     },
     {
       "path": "src/client/noxrender/texture_density_test.go",
-      "sha256": "38024a33614394f7c771954be6a0351c92f87ea9c5fb98f353242eac5e337e7e"
+      "sha256": "a37082ebc011cc16b91824f281dc6739fbd779fd3ade1c1bde2428f09eccf1b5"
     },
     {
       "path": "src/client/noxrender/viewport.go",
@@ -3173,7 +3177,7 @@
     },
     {
       "path": "src/perfmon.go",
-      "sha256": "58a328f714c71fea08a3291ebe3f9f7e275b5aa1b0a9d154def1a5d7801ca936"
+      "sha256": "7e726421aba21a95449d229880402cc2051f26d99ac47b17eed5d38c8a6cf6fc"
     },
     {
       "path": "src/platform.go",

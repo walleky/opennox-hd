@@ -226,7 +226,7 @@ if ($RefreshGameData) {
 $bytes = ($imports | Measure-Object -Property Length -Sum).Sum + ($manifest.files | Measure-Object -Property bytes -Sum).Sum
 if ($refreshImports.Count) { $bytes += ($refreshImports | Measure-Object -Property Length -Sum).Sum }
 $drive = New-Object IO.DriveInfo ([IO.Path]::GetPathRoot($Destination))
-$spriteReserve = if ($GenerateSprites -and -not $Upgrade -and -not $manifest.includes_overlay) { 2GB } else { 0 }
+$spriteReserve = if ($GenerateSprites -and -not $manifest.includes_overlay) { 4GB } else { 0 }
 if ($drive.AvailableFreeSpace -lt ($bytes + 256MB + $spriteReserve)) { throw 'Not enough free space on the installation drive.' }
 
 $stage = $Destination + '.install-' + [Guid]::NewGuid().ToString('N')
@@ -262,11 +262,14 @@ try {
         Write-Progress -Activity 'Installing OpenNox HD' -Status "$completed of $total files: $($file.path)" -PercentComplete (100 * $completed / $total)
     }
     Copy-Item -LiteralPath (Join-Path $packageRoot 'package-manifest.json') -Destination (Join-Path $stage 'package-manifest.json')
-    if ($GenerateSprites -and -not $Upgrade -and -not $manifest.includes_overlay) {
-        Write-Host 'Generating 2x artwork from your copied Nox files. This may take a while...'
-        & (Join-Path $stage 'OpenNox-SpriteBuilder.exe') -data (Join-Path $stage 'NoxData') -output (Join-Path $stage 'NoxData\video.bag.zip') -scale 2
-        if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath (Join-Path $stage 'NoxData\video.bag.zip') -PathType Leaf)) {
-            throw "2x sprite generation failed with exit code $LASTEXITCODE."
+    if ($GenerateSprites -and -not $manifest.includes_overlay) {
+        $fourArchive = Join-Path $stage 'generated-sprites\4x\video.bag.zip'
+        if (-not (Test-Path -LiteralPath $fourArchive -PathType Leaf)) {
+            Write-Host 'Generating playable 4x artwork from your copied Nox files. This may take a while...'
+            & (Join-Path $stage 'OpenNox-SpriteBuilder.exe') -data (Join-Path $stage 'NoxData') -output $fourArchive -scale 4
+            if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $fourArchive -PathType Leaf)) {
+                throw "4x sprite generation failed with exit code $LASTEXITCODE."
+            }
         }
     }
     # Validate real first-run settings before making the install visible.
@@ -302,5 +305,5 @@ if (-not $NoShortcut -and -not $Upgrade) {
 Write-Host "Installed successfully: $Destination"
 Write-Host 'Start with START-OPENNOX.cmd or the desktop shortcut.'
 Write-Host 'Change resolution and sprite choices with SETTINGS.cmd.'
-Write-Host 'Run BUILD-HD-SPRITES.cmd to generate a separate 4x export (the current launcher plays 2x).'
+Write-Host '4x sprites are playable. BUILD-HD-SPRITES.cmd builds/selects 4x; use -Scale 2 for a lighter 2x option.'
 Write-Host 'To uninstall, close the game and delete this separate folder and its shortcut. Back up NoxData\Save first.'

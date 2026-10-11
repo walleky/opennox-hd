@@ -1,7 +1,7 @@
 #requires -Version 5.1
 [CmdletBinding()]
 param(
-    [ValidateSet('2', '4', 'Both')][string]$Scale = 'Both',
+    [ValidateSet('2', '4', 'Both')][string]$Scale = '4',
     [switch]$Force
 )
 $ErrorActionPreference = 'Stop'
@@ -35,4 +35,6 @@ foreach ($factor in $scales) {
     if ($LASTEXITCODE -ne 0) { throw "${factor}x sprite generation failed with exit code $LASTEXITCODE." }
     if (-not (Test-Path -LiteralPath $output -PathType Leaf)) { throw "${factor}x archive is missing after generation." }
 }
-Write-Host '2x sprites are playable in OpenNox HD. The 4x archive is an export for future builds; the current launcher runs at 2x.'
+$activeScale = if ($Scale -eq '2') { '2' } else { '4' }
+& (Join-Path $root 'OpenNox-Launcher.ps1') -TextureScale $activeScale -SpriteMode upscaled -NoLaunch | Out-Null
+Write-Host "${activeScale}x sprites are ready and selected for the next game launch. SETTINGS.cmd changes detail and resolution."

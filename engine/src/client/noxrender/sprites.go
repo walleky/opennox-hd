@@ -661,13 +661,53 @@ func (b *RenderSprites) loadAndIndexVideoBag() error {
 }
 
 func (b *RenderSprites) openVideoZip() error {
-	zf, err := zip.OpenReader(datapath.Data("video.bag.zip"))
-	if os.IsNotExist(err) {
+	name := os.Getenv("NOX_SPRITE_ARCHIVE")
+	if name == "none" {
 		return nil
+	}
+	explicit := name != ""
+	if !explicit {
+		name = datapath.Data("video.bag.zip")
+	}
+	zf, err := zip.OpenReader(name)
+	if os.IsNotExist(err) {
+		if !explicit {
+			return nil
+		}
+		return fmt.Errorf("selected sprite archive is missing: %w", err)
 	} else if err != nil {
 		return err
 	}
+	// An explicit selection must match the requested renderer density. Check
+	// one sidecar before loading sprites, so selecting a 2x pack as 4x fails
+	// visibly instead of silently falling back to logical-resolution sprites.
+	if scale := configuredTextureDensityScale(); explicit && supportedTextureScale(scale) {
+		matched := false
+		for _, f := range zf.File {
+			if !strings.HasSuffix(f.Name, ".json") {
+				continue
+			}
+			stream, err := f.Open()
+			if err != nil {
+				zf.Close()
+				return err
+			}
+			meta, err := io.ReadAll(io.LimitReader(stream, 65536))
+			stream.Close()
+			if err != nil || parseTextureScale(meta) != scale {
+				zf.Close()
+				return fmt.Errorf("selected sprite archive does not contain %dx metadata", scale)
+			}
+			matched = true
+			break
+		}
+		if !matched {
+			zf.Close()
+			return fmt.Errorf("selected sprite archive has no texture metadata")
+		}
+	}
 	b.zip = zf
+	imgLog.Printf("loaded sprite archive: %s (density: %dx)", name, configuredTextureDensityScale())
 	return nil
 }
 

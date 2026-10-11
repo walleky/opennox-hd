@@ -1,47 +1,36 @@
-# OpenNox HD preview 4
+# OpenNox HD preview 5
 
-Unsigned Windows 10/11 preview built from the published source. Requires your
-own complete installation of Nox. Download the **windows-x86.zip** release asset,
-extract it, and run `INSTALL.cmd`. No development tools or administrator account
-are needed. GitHub's source-code ZIP is not the installer.
+Playable 4× sprites with the September 2026 GOG Preservation update, Nox
+**1.2 gog v2**, build `60006743039602457`. Requires your own complete Nox
+installation. Download **windows-x86.zip**, extract it, and run `INSTALL.cmd`.
+No developer tools or administrator account are needed.
 
-Targets the September 2026 GOG Preservation update, **1.2 gog v2**, build
-`60006743039602457`. See [GOG's announcement](https://www.gog.com/en/news/nox_joins_the_gog_preservation_program_following_the_second_patron_vote).
+- Fresh installation generates and selects 4× sprites locally. Updates generate
+  missing 4× sprites while retaining existing 2× sprites, saves and settings.
+- `SETTINGS.cmd` remembers 2×/4× detail and original/upgraded mode. Detail changes
+  preserve HUD size and the visible world; the renderer fits the composed frame
+  to your display. 4× requires more memory and rendering time.
+- `BUILD-HD-SPRITES.cmd -Scale 4` builds/selects 4×; use `-Scale 2` for a lighter
+  2× option, or `-Scale Both` to create both. Packs remain separate on your PC.
+- The client explicitly selects the chosen archive and rejects mismatched density
+  metadata. Original mode disables archive loading. Native-sprite counters in
+  diagnostics help confirm that 4× sprites are actually entering the renderer.
+- Partial-frame presentation now supports 4×, with output checked against full
+  redraws. Existing clipping, native-sample and material replay tests remain.
+- Includes Preview 4's GOG Options-menu fix and `UPDATE-FROM-GOG.cmd` content
+  refresh, source-build diagnostics and complete installation rollback.
 
-- Fixes the extra GOG resolution button overlapping OpenNox's resolution controls.
-- New `UPDATE-FROM-GOG.cmd` refreshes an existing HD installation from your updated
-  GOG copy, preserving saves, settings and matching HD sprites with a full rollback.
-  Changed original sprite archives require a fresh installation into another folder.
-- Installation discovery tolerates inaccessible registry entries. Diagnostics record
-  the source build and content hashes without recording its original folder path.
-- GOG's DirectX wrapper and original executables stay in the original installation;
-  OpenNox uses its own engine and renderer.
-- `INSTALL.cmd` builds a 2× sprite archive locally from your own game files.
-- `BUILD-HD-SPRITES.cmd` creates a separate 4× archive. The current launcher
-  plays 2×; 4× is export-only. Existing archives are kept unless `-Force` is used.
-- Remembers resolution and sprite choices; use `SETTINGS.cmd` to change them.
-- `UPDATE.cmd` updates OpenNox alone and also preserves saves, settings and custom
-  files with a complete previous installation for rollback.
-- `DIAGNOSTICS.cmd` saves a report locally for troubleshooting.
-- Source and binary hashes tie the client to its GitHub build. Matching source
-  and dependency sources accompany the package.
+The public sprite builder resizes your own game files with Catmull-Rom filtering.
+The existing local enhanced artwork remains separate. Original and derived Nox
+artwork is not included on GitHub. The generated 4× archive is approximately
+2.6 GB for this tested game data; allow at least 4 GB extra free space during
+installation, and more for existing packs and rollback copies.
 
-The generated art is a Catmull-Rom resize of the player's files, not the
-separately made AI-enhanced artwork. Neither the original game art nor any
-derived sprite archive is distributed through GitHub. Generation takes time
-and extra disk space. Existing overlays are retained when upgrading.
+The Windows package is a player client. The experimental `-serveronly` flag is
+unsupported. Extended gameplay, audio, campaign save/load and multiplayer
+acceptance remain pending; automated checks and brief runtime tests do not
+establish long-session stability.
 
-A comparison of 1,622 game-content files found only the text table (`nox.csf`)
-and Options menu (`window/options.wnd`) changed. The original sprite archives
-are identical, so existing generated sprites remain usable. Installer regression
-tests cover importing the new menu while retaining saves, settings and overlays,
-and rejecting mismatched sprite archives before modifying the installation.
-
-The preview is unsigned: SmartScreen may offer **More info > Run anyway** if you
-trust the download. Smart App Control or managed-device policies may prevent
-running it. A signing certificate is not required to offer an unsigned download.
-See [Microsoft's guidance](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/smartscreen-reputation).
-
-Separate-PC gameplay, audio, save/load, menu sparks, mixed text rendering and
-long-session and multiplayer acceptance remain pending. Automated checks are not gameplay
-acceptance; no unmeasured performance gain is claimed.
+This preview is unsigned. SmartScreen may offer **More info > Run anyway** when
+you trust the release. Smart App Control or managed-device policies can block
+it. See [Microsoft's guidance](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/smartscreen-reputation).

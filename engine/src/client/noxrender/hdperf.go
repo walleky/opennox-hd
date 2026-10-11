@@ -8,9 +8,11 @@ import (
 	"time"
 )
 
-// TextureDensityMetrics is a read-only snapshot of the optional 2x replay
+// TextureDensityMetrics is a read-only snapshot of the optional 2x/4x replay
 // monitor. Counters are cumulative; frame timings use a bounded recent window.
 type TextureDensityMetrics struct {
+	NativeScale                                                              int
+	SpritesQueued                                                            uint64
 	Frames, DecodeMisses, DecodeFailures, CacheEvictions, SurfaceRecreations uint64
 	CacheBytes, CacheHighWater                                               int64
 	QueueCount, QueueBytes, QueueRejected, FontFallbacks                     uint64
@@ -20,6 +22,7 @@ type TextureDensityMetrics struct {
 }
 
 type textureDensityPerf struct {
+	spritesQueued                                     uint64
 	enabled                                           bool
 	frames                                            []time.Duration
 	frameAt                                           int
@@ -59,6 +62,7 @@ func (r *NoxRender) TextureDensityMetrics() TextureDensityMetrics {
 	}
 	p := r.hdPerf
 	m := TextureDensityMetrics{
+		NativeScale: r.texturePresentationScale, SpritesQueued: p.spritesQueued,
 		Frames: p.frameCount, DecodeMisses: p.decodeMisses, DecodeFailures: p.decodeFailures,
 		CacheEvictions: p.cacheEvictions, CacheBytes: p.cacheBytes, CacheHighWater: p.cacheHighWater,
 		QueueRejected: p.queueRejected, FontFallbacks: p.fontFallbacks,

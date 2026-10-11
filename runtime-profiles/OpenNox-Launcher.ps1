@@ -4,6 +4,8 @@ param(
     [string]$Resolution = 'saved',
     [ValidateSet('saved', 'upscaled', 'original', 'prompt')]
     [string]$SpriteMode = 'saved',
+    [ValidateSet('saved', '2', '4', 'prompt')]
+    [Alias('TextureScale')][string]$SpriteScale = 'saved',
     [string]$ConfigPath = '',
     [switch]$NoLaunch,
     [switch]$Settings
@@ -11,7 +13,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $runtimeRoot = $PSScriptRoot
-if ($Settings) { $Resolution = 'prompt'; $SpriteMode = 'prompt'; $NoLaunch = $true }
+if ($Settings) { $Resolution = 'prompt'; $SpriteMode = 'prompt'; $SpriteScale = 'prompt'; $NoLaunch = $true }
 if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
     $ConfigPath = Join-Path $runtimeRoot 'opennox-user.yml'
 }
@@ -23,7 +25,7 @@ function Get-ActiveTextureScale {
         try {
             $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
             $scale = [int]$manifest.scale
-            if ($scale -ne 2) { throw "Unsupported texture scale: $scale. Install the Hybrid 2x package." }
+            if ($scale -notin @(2, 4)) { throw "Unsupported texture scale: $scale." }
         } catch { throw "Invalid active overlay manifest: $($_.Exception.Message)" }
     }
     return 2
@@ -292,6 +294,7 @@ if (Get-Process -Name 'opennox', 'opennox-hd', 'opennox-hd-texture2x' -ErrorActi
 $preferencesPath = Join-Path $runtimeRoot 'launcher-settings.json'
 $savedResolution = 'auto'
 $savedSprites = 'upscaled'
+$savedScale = if (Test-Path -LiteralPath (Join-Path $runtimeRoot 'generated-sprites\4x\video.bag.zip') -PathType Leaf) { '4' } else { [string](Get-ActiveTextureScale) }
 if (Test-Path -LiteralPath $preferencesPath -PathType Leaf) {
     try {
         $preferences = Get-Content -LiteralPath $preferencesPath -Raw | ConvertFrom-Json
@@ -299,12 +302,17 @@ if (Test-Path -LiteralPath $preferencesPath -PathType Leaf) {
             $preferences.sprites -notin @('upscaled', 'original')) { throw 'Unknown setting' }
         $savedResolution = $preferences.resolution
         $savedSprites = $preferences.sprites
+        if ($preferences.PSObject.Properties['texture_scale']) {
+            if ([string]$preferences.texture_scale -notin @('2', '4')) { throw 'Unknown sprite scale' }
+            $savedScale = [string]$preferences.texture_scale
+        }
     } catch {
         Write-Warning 'Saved launcher settings could not be read. Using automatic resolution and upgraded sprites.'
     }
 }
 if ($Resolution -eq 'saved') { $Resolution = $savedResolution }
 if ($SpriteMode -eq 'saved') { $SpriteMode = $savedSprites }
+if ($SpriteScale -eq 'saved') { $SpriteScale = $savedScale }
 if (-not (Test-Path -LiteralPath $ConfigPath -PathType Leaf)) {
     $baseConfig = Join-Path $runtimeRoot 'opennox.yml'
     if (-not (Test-Path -LiteralPath $baseConfig -PathType Leaf)) {
@@ -320,16 +328,30 @@ if (-not $NoLaunch) {
     }
     $recoveredComparisonAssets = Restore-OriginalSpriteComparisonAssets -RuntimeRoot $runtimeRoot
 }
-$textureScale = Get-ActiveTextureScale
+$fourArchive = Join-Path $runtimeRoot 'generated-sprites\4x\video.bag.zip'
+if ($SpriteScale -eq 'prompt') {
+    Write-Host ''
+    Write-Host 'Sprite detail'
+    Write-Host '  1. 2x (lower memory and rendering cost)'
+    Write-Host '  2. 4x (higher detail; requires a generated 4x archive)'
+    $answer = Read-Host "Choose 1-2 [Enter keeps ${savedScale}x]"
+    $SpriteScale = switch ($answer) { '' { $savedScale }; '1' { '2' }; '2' { '4' }; default { throw "Invalid choice: $answer" } }
+}
+$textureScale = [int]$SpriteScale
+# Sprite detail and view size are independent: switching 2x/4x keeps the HUD
+# and visible world at the same readable size. OpenGL fits the composed frame.
+$viewScale = 2
 $current = Get-VideoSize -Path $ConfigPath
 $display = Get-PrimaryDisplaySize
-$recommended = Get-ScaledInternalSize -Width $display.Width -Height $display.Height -Scale $textureScale
+$recommended = Get-ScaledInternalSize -Width $display.Width -Height $display.Height -Scale $viewScale
 $overlayArchive = Join-Path $runtimeRoot 'NoxData\video.bag.zip'
+if ($textureScale -eq 4 -and (Test-Path -LiteralPath $fourArchive -PathType Leaf)) { $overlayArchive = $fourArchive }
+elseif ($textureScale -eq 4 -and (Get-ActiveTextureScale) -ne 4) { $overlayArchive = $fourArchive }
 $overlayInstalled = Test-Path -LiteralPath $overlayArchive -PathType Leaf
 if ($SpriteMode -eq 'prompt') {
     Write-Host ''
     Write-Host 'Sprite comparison mode'
-    Write-Host '  1. Upgraded 2x sprites and HD font sprites [recommended]'
+    Write-Host "  1. Upgraded ${textureScale}x sprites [recommended]"
     Write-Host '  2. Original sprites and original fonts (same layout and display size)'
     $answer = Read-Host 'Choose 1-2'
     $SpriteMode = switch ($answer) {
@@ -340,10 +362,16 @@ if ($SpriteMode -eq 'prompt') {
     }
 }
 $usingUpscaledSprites = $overlayInstalled -and $SpriteMode -eq 'upscaled'
-$size1080p = Get-ScaledInternalSize -Width 1920 -Height 1080 -Scale $textureScale
-$size1440p = Get-ScaledInternalSize -Width 2560 -Height 1440 -Scale $textureScale
-$size4k = Get-ScaledInternalSize -Width 3840 -Height 2160 -Scale $textureScale
-$sizeOriginal = Get-ScaledInternalSize -Width (640 * $textureScale) -Height (480 * $textureScale) -Scale $textureScale
+if ($SpriteMode -eq 'upscaled' -and $textureScale -eq 4 -and -not $overlayInstalled) {
+    throw '4x sprites are missing. Close the game and run BUILD-HD-SPRITES.cmd -Scale 4, then try again.'
+}
+if ($SpriteMode -eq 'upscaled' -and $textureScale -eq 2 -and (Test-Path -LiteralPath $fourArchive) -and -not $overlayInstalled) {
+    throw '2x sprites are missing. Close the game and run BUILD-HD-SPRITES.cmd -Scale 2, then try again.'
+}
+$size1080p = Get-ScaledInternalSize -Width 1920 -Height 1080 -Scale $viewScale
+$size1440p = Get-ScaledInternalSize -Width 2560 -Height 1440 -Scale $viewScale
+$size4k = Get-ScaledInternalSize -Width 3840 -Height 2160 -Scale $viewScale
+$sizeOriginal = Get-ScaledInternalSize -Width 1280 -Height 960 -Scale $viewScale
 $presets = @{
     '1080p' = @($size1080p.Width, $size1080p.Height)
     '1440p' = @($size1440p.Width, $size1440p.Height)
@@ -354,8 +382,7 @@ if ($Resolution -eq 'prompt') {
     Write-Host ''
     Write-Host 'OpenNox readable display preset'
     Write-Host "Detected primary display: $($display.Width)x$($display.Height)"
-    Write-Host "OpenNox does not scale its HUD. These presets render at ${textureScale}x density"
-    Write-Host "and present fullscreen at ${textureScale}x so menus, HUD, and the world stay readable."
+    Write-Host "These presets keep the HUD and world readable with either 2x or 4x sprites."
     Write-Host ''
     Write-Host "  1. Auto for this display ($($recommended.Width)x$($recommended.Height) internal) [recommended]"
     Write-Host "  2. 1920x1080 display ($($presets['1080p'][0])x$($presets['1080p'][1]) internal)"
@@ -400,7 +427,7 @@ if (-not (Test-Path -LiteralPath $legacyConfig -PathType Leaf)) {
 Set-LegacyVideoMode -Path $legacyConfig -Width $requested.Width -Height $requested.Height
 Set-LegacyIntegerOption -Path $legacyConfig -Name 'Stretched' -Value 1
 Set-LegacyIntegerOption -Path $legacyConfig -Name 'TexturedFloors' -Value 1
-$settingsJson = @{ resolution = $Resolution; sprites = $SpriteMode } | ConvertTo-Json
+$settingsJson = @{ resolution = $Resolution; sprites = $SpriteMode; texture_scale = $textureScale } | ConvertTo-Json
 $settingsStage = $preferencesPath + '.stage'
 [IO.File]::WriteAllText($settingsStage, $settingsJson, [Text.UTF8Encoding]::new($false))
 if (Test-Path -LiteralPath $preferencesPath) {
@@ -431,6 +458,8 @@ if ($NoLaunch) {
         target_display_width = $targetDisplay.Width
         target_display_height = $targetDisplay.Height
         texture_scale = $textureScale
+        view_scale = $viewScale
+        sprite_archive = if ($usingUpscaledSprites) { $overlayArchive } else { 'none' }
         sprite_mode = $SpriteMode
         internal_width = $requested.Width
         internal_height = $requested.Height
@@ -455,6 +484,7 @@ if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) {
 $env:NOX_DATA = Join-Path $runtimeRoot 'NoxData'
 $env:NOX_TEXTURE_CACHE_MB = '512'
 $env:NOX_TEXTURE_DENSITY_SCALE = [string]$textureScale
+$env:NOX_SPRITE_ARCHIVE = if ($usingUpscaledSprites) { $overlayArchive } else { 'none' }
 $startedAt = Get-Date
 $logDir = Join-Path $runtimeRoot 'logs'
 [System.IO.Directory]::CreateDirectory($logDir) | Out-Null

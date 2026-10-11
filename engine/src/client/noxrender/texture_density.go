@@ -499,6 +499,9 @@ func (r *NoxRender) queueTextureDensity(img *Image, pos image.Point, background 
 		r.hdPerf.traceAccepted++
 	}
 	r.textureDensityScale = scale
+	if r.hdPerf != nil {
+		r.hdPerf.spritesQueued++
+	}
 	r.textureDensityBytes += recordBytes
 }
 
@@ -771,7 +774,7 @@ func (r *NoxRender) markTexturePresentationDirty(dirty []bool, tilesX int, rc im
 // deliberately invalidated every frame: it is small, avoids assuming bitmap
 // face identity, and preserves all existing text fallback semantics.
 func (r *NoxRender) textureDensityDirtyRegions(base *noximage.Image16, scale int) ([]image.Rectangle, bool) {
-	if r == nil || base == nil || scale != 2 || !r.texturePresentationValid || r.texturePresentation == nil || r.texturePresentationBaseRect != base.Rect || r.texturePresentationBaseStride != base.Stride || len(r.texturePresentationBase) != len(base.Pix) || len(r.textureOwners) != len(r.texturePresentationOwners) {
+	if r == nil || base == nil || !supportedTextureScale(scale) || !r.texturePresentationValid || r.texturePresentation == nil || r.texturePresentationBaseRect != base.Rect || r.texturePresentationBaseStride != base.Stride || len(r.texturePresentationBase) != len(base.Pix) || len(r.textureOwners) != len(r.texturePresentationOwners) {
 		return nil, true
 	}
 	w, h := base.Rect.Dx(), base.Rect.Dy()

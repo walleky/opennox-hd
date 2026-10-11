@@ -1,6 +1,6 @@
 # GOG Preservation compatibility
 
-Preview 4 targets Nox **1.2 gog v2**, GOG build `60006743039602457`, released
+Preview 5 targets Nox **1.2 gog v2**, GOG build `60006743039602457`, released
 September 10, 2026. OpenNox reads the updated game content using its own engine.
 Your original GOG installation stays available separately.
 
@@ -12,10 +12,12 @@ before placing its own resolution controls.
 ## Install or refresh
 
 - New installation: extract the release and run `INSTALL.cmd`; select your updated
-  GOG folder. The installer builds 2× sprites locally.
+  GOG folder. The installer builds playable 4× sprites locally.
 - Existing HD installation: close the game, extract Preview 4 and run
   `UPDATE-FROM-GOG.cmd`. Select your HD folder and updated GOG folder. Saves,
   settings and matching HD sprites survive; the complete previous folder is kept.
+  Missing 4× sprites are generated locally. Existing 2× archives remain available;
+  `SETTINGS.cmd` chooses detail, or `BUILD-HD-SPRITES.cmd -Scale 4` builds/selects 4×.
 - OpenNox-only update: use `UPDATE.cmd` without refreshing original game content.
 
 If a later GOG update changes `video.bag` or `video.idx`, refresh stops before

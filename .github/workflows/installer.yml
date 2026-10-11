@@ -24,7 +24,7 @@ jobs:
       - name: Package unsigned preview and matching source
         shell: bash
         run: >-
-          python tools/build_release.py --version 0.1.0-preview.4 --output artifacts/release
+          python tools/build_release.py --version 0.1.0-preview.5 --output artifacts/release
           --client artifacts/windows/opennox-hd-texture2x.exe
           --client-sha256 "$(sha256sum artifacts/windows/opennox-hd-texture2x.exe | cut -d' ' -f1)"
           --runtime artifacts/windows --source engine --module-cache "$(go env GOMODCACHE)"

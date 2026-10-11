@@ -85,10 +85,11 @@ func (m *Perfmon) LogHD(c *Client) {
 		hs.UploadTime = hw.UploadTime
 		hs.SurfaceRecreations = hw.SurfaceRecreations
 	}
-	m.logger.Printf("[hdperf] frames=%d avg=%s p95=%s max=%s decode=%d/%d/%s cache=%d/%d evict=%d expand=%s replay=%s upload=%s q=%d/%d reject=%d reasons=%v surfaces=%d fonts=%d input=mouse:%d/%d/%s/%s key:%d/%d/%s/%s\n",
+	m.logger.Printf("[hdperf] frames=%d avg=%s p95=%s max=%s decode=%d/%d/%s cache=%d/%d evict=%d expand=%s replay=%s upload=%s q=%d/%d reject=%d reasons=%v surfaces=%d fonts=%d scale=%d sprites=%d input=mouse:%d/%d/%s/%s key:%d/%d/%s/%s\n",
 		hs.Frames, hs.FrameAverage, hs.FrameP95, hs.FrameMax, hs.DecodeMisses, hs.DecodeFailures, hs.DecodeTime,
 		hs.CacheBytes, hs.CacheHighWater, hs.CacheEvictions, hs.ExpansionTime, hs.ReplayTime, hs.UploadTime,
 		hs.QueueCount, hs.QueueBytes, hs.QueueRejected, hs.QueueRejects, hs.SurfaceRecreations, hs.FontFallbacks,
+		hs.NativeScale, hs.SpritesQueued,
 		im.MouseDrops, im.MouseAgeCount, im.MouseAgeAverage, im.MouseAgeMax, im.KeyDrops, im.KeyAgeCount, im.KeyAgeAverage, im.KeyAgeMax)
 }
 

@@ -28,7 +28,10 @@ foreach ($name in @('package-manifest.json', 'launcher-settings.json')) {
         try {
             $value = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
             if ($name -eq 'package-manifest.json') { $report.version = $value.version }
-            else { $report.resolution = $value.resolution; $report.sprites = $value.sprites }
+            else {
+                $report.resolution = $value.resolution; $report.sprites = $value.sprites
+                if ($value.PSObject.Properties['texture_scale']) { $report.texture_scale = $value.texture_scale }
+            }
         } catch { $report[$name] = 'unreadable' }
     }
 }

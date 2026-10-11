@@ -8,6 +8,7 @@ import struct
 import subprocess
 import tempfile
 import unittest
+import zipfile
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -184,6 +185,45 @@ class WindowsInstallerTests(unittest.TestCase):
         self.assertEqual(report["selection"], "1440p")
         self.assertEqual(report["sprite_mode"], "original")
         self.assertEqual(before, list(self.destination.glob("opennox-user.yml.before-*")))
+
+    def test_4x_selection_persists_without_changing_view_size_or_2x_archive(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        legacy = self.destination / "NoxData/video.bag.zip"
+        legacy.write_bytes(b"existing 2x pack")
+        archive = self.destination / "generated-sprites/4x/video.bag.zip"
+        archive.parent.mkdir(parents=True)
+        with zipfile.ZipFile(archive, "w") as z:
+            z.writestr("sprite.json", '{"texture_scale":4}')
+        before = {p: p.read_bytes() for p in (legacy, archive)}
+        result = self.launch_settings("-Resolution", "1440p", "-TextureScale", "4")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["texture_scale"], 4)
+        self.assertEqual(Path(report["sprite_archive"]), archive)
+        self.assertTrue(report["upscaled_sprite_overlay_used"])
+        self.assertEqual((report["internal_width"], report["internal_height"]), (1280, 720))
+        result = self.launch_settings()
+        self.assertEqual(json.loads(result.stdout)["texture_scale"], 4)
+        result = self.launch_settings("-TextureScale", "2")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(Path(report["sprite_archive"]), legacy)
+        self.assertEqual((report["internal_width"], report["internal_height"]), (1280, 720))
+        result = self.launch_settings("-TextureScale", "4", "-SpriteMode", "original")
+        report = json.loads(result.stdout)
+        self.assertEqual(report["sprite_archive"], "none")
+        self.assertFalse(report["upscaled_sprite_overlay_used"])
+        self.assertEqual(before, {p: p.read_bytes() for p in before})
+
+    def test_missing_4x_archive_fails_before_overwriting_saved_choices(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        before = (self.destination / "launcher-settings.json").read_bytes()
+        result = self.launch_settings("-TextureScale", "4")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("4x sprites are missing", result.stderr)
+        self.assertEqual((self.destination / "launcher-settings.json").read_bytes(), before)
 
     def test_upgrade_preserves_saves_settings_custom_files_and_complete_rollback(self):
         result = self.run_installer()

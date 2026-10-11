@@ -1,6 +1,6 @@
 # OpenNox HD
 
-An experimental Windows client and installer for Nox, with a Hybrid 2x renderer.
+An experimental Windows client and installer for Nox, with playable 2× and 4× sprites.
 Requires your own complete installed copy of Nox. Unofficial community project.
 
 Supports the September 2026 GOG Preservation update (1.2 gog v2). OpenNox uses
@@ -12,14 +12,16 @@ its own engine and renderer with your installed game content. See
 Download the **windows-x86.zip** asset from
 [Releases](https://github.com/walleky/opennox-hd/releases), extract it completely,
 and double-click `INSTALL.cmd`. Confirm your Nox folder and choose a separate
-installation folder. The installer makes a local 2× sprite archive from your
+installation folder. The installer makes a playable local 4× sprite archive from your
 own Nox files; this can take several minutes. Start from the desktop shortcut
 or `START-OPENNOX.cmd`.
 No Python, Go, administrator account or development tools are needed.
 
 Use `SETTINGS.cmd` to change resolution and sprite mode. Choices are remembered.
-Run `BUILD-HD-SPRITES.cmd` in the installed folder to generate a separate 4×
-archive too. The current launcher plays 2×; 4× is an export for future builds.
+4× is selected on a new installation. The 2× and 4× choices keep the same HUD
+and gameplay view; 4× costs more memory and rendering time. Use
+`BUILD-HD-SPRITES.cmd -Scale 2` for a lighter 2× option, or `-Scale 4` to build
+and select 4×. `SETTINGS.cmd` remembers your sprite detail choice.
 These locally resized sprites differ from the separately made AI-enhanced pack.
 Neither the original nor generated Nox artwork is hosted on GitHub.
 
@@ -36,6 +38,7 @@ GitHub's **Code > Download ZIP** contains source, not the player installer.
 Close OpenNox, extract the next release and run `UPDATE.cmd`. Select the existing
 OpenNox HD folder. The updater verifies a complete replacement before switching,
 preserves saves/settings/custom files, and keeps the previous folder for rollback.
+It generates playable 4× sprites if they are missing, retaining the existing 2× pack.
 After updating your original GOG copy, run `UPDATE-FROM-GOG.cmd` instead. Select
 the OpenNox HD folder and the updated GOG folder. It also refreshes game content,
 keeping HD sprites when the original sprite archives match. If a future GOG
